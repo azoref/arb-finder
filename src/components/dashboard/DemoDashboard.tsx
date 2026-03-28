@@ -226,6 +226,7 @@ export default function DemoDashboard() {
                       <div className="text-green-400 mt-0.5">
                         +${((arb.stake_a + arb.stake_b) * arb.profit_margin / 100).toFixed(2)}
                       </div>
+
                     </td>
                     <td className="px-4 py-3 text-right text-xs text-[#6b6b80]">
                       {timeAgo(arb.created_at)}
