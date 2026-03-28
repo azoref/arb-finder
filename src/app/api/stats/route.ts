@@ -9,7 +9,7 @@ export async function GET() {
     const since = new Date()
     since.setHours(0, 0, 0, 0)
 
-    const [todayResult, marginResult, allTimeResult] = await Promise.all([
+    const [todayResult, todayMarginResult, allTimeResult] = await Promise.all([
       supabase
         .from('arbs')
         .select('*', { count: 'exact', head: true })
@@ -20,21 +20,26 @@ export async function GET() {
         .gte('created_at', since.toISOString()),
       supabase
         .from('arbs')
-        .select('*', { count: 'exact', head: true }),
+        .select('profit_margin'),
     ])
 
-    const arbs = marginResult.data ?? []
-    const avgMargin = arbs.length > 0
-      ? arbs.reduce((sum, a) => sum + a.profit_margin, 0) / arbs.length
+    const todayArbs = todayMarginResult.data ?? []
+    const avgMargin = todayArbs.length > 0
+      ? todayArbs.reduce((sum, a) => sum + a.profit_margin, 0) / todayArbs.length
       : 0
 
-    const books = new Set(arbs.flatMap(a => [a.book_a, a.book_b]))
+    const books = new Set(todayArbs.flatMap(a => [a.book_a, a.book_b]))
+
+    // Hypothetical profit: $1,000 bankroll on every arb ever found
+    const allArbs = allTimeResult.data ?? []
+    const totalProfit = allArbs.reduce((sum, a) => sum + (1000 * a.profit_margin / 100), 0)
 
     return NextResponse.json({
       today: todayResult.count ?? 0,
       avgMargin: parseFloat(avgMargin.toFixed(2)),
-      booksMonitored: Math.max(books.size, 12), // show at least 12 even if no arbs today
-      allTime: allTimeResult.count ?? 0,
+      booksMonitored: Math.max(books.size, 12),
+      allTime: allArbs.length,
+      totalProfit: parseFloat(totalProfit.toFixed(2)),
     })
   } catch {
     return NextResponse.json({ today: 0, avgMargin: 0, booksMonitored: 12, allTime: 0 })

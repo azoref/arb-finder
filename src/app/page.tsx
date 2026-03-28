@@ -8,6 +8,7 @@ import MathCard from '@/components/landing/MathCard'
 import BlinkingCursor from '@/components/landing/BlinkingCursor'
 import ComparisonTable from '@/components/landing/ComparisonTable'
 import TelegramPreview from '@/components/landing/TelegramPreview'
+import ProfitMeter from '@/components/landing/ProfitMeter'
 
 export const dynamic = 'force-dynamic'
 
@@ -86,6 +87,9 @@ export default async function LandingPage() {
 
       {/* Arb ticker */}
       <ArbTicker />
+
+      {/* Profit meter */}
+      <ProfitMeter />
 
       {/* How it works */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-[#2a2a32]">
