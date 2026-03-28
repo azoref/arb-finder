@@ -6,7 +6,7 @@ export async function GET() {
     return NextResponse.json({ count: 0 })
   }
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     const since = new Date()
     since.setHours(0, 0, 0, 0)
     const { count } = await supabase

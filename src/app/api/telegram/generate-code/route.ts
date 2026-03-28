@@ -3,13 +3,13 @@ import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { randomBytes } from 'crypto'
 
 export async function POST() {
-  const supabase = createClient()
+  const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const code = randomBytes(4).toString('hex').toUpperCase() // e.g. "A1B2C3D4"
 
-  const serviceClient = createServiceClient()
+  const serviceClient = await createServiceClient()
   // Expire any existing unused codes for this user
   await serviceClient
     .from('telegram_link_codes')

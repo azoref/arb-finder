@@ -11,7 +11,7 @@ export default async function LandingPage() {
 
   if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     try {
-      const supabase = createClient()
+      const supabase = await createClient()
       const { data: { user: authUser } } = await supabase.auth.getUser()
       user = authUser
       if (user) {
