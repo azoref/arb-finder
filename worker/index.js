@@ -141,7 +141,7 @@ async function expireArbs(sport, detectedKeys) {
 async function main() {
   console.log(`
   ╔══════════════════════════════════════╗
-  ║     ArbFinder Worker Starting        ║
+  ║     SharpBet Worker Starting        ║
   ║     Poll interval: ${(POLL_INTERVAL_MS / 1000).toString().padEnd(6)}s          ║
   ║     Sports: ${SPORTS.join(', ').padEnd(22)}║
   ╚══════════════════════════════════════╝

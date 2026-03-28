@@ -60,7 +60,7 @@ export default function TelegramPreview() {
                   AF
                 </div>
                 <div>
-                  <p className="text-white text-sm font-medium leading-none">ArbFinder</p>
+                  <p className="text-white text-sm font-medium leading-none">SharpBet</p>
                   <p className="text-[#6b6b80] text-[10px] mt-0.5">bot</p>
                 </div>
               </div>

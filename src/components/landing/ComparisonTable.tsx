@@ -20,7 +20,7 @@ export default function ComparisonTable() {
   return (
     <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-[#2a2a32]">
       <div className="text-center mb-12">
-        <h2 className="text-2xl font-semibold mb-3">Why ArbFinder</h2>
+        <h2 className="text-2xl font-semibold mb-3">Why SharpBet</h2>
         <p className="text-[#6b6b80] max-w-xl mx-auto text-sm">
           Other tools make you watch a screen. We send the alert to your pocket.
         </p>
@@ -33,7 +33,7 @@ export default function ComparisonTable() {
               <th className="text-left px-5 py-4 text-xs text-[#4a4a55] uppercase tracking-wider font-medium w-1/2">Feature</th>
               <th className="px-5 py-4 text-center">
                 <div className="flex flex-col items-center gap-1">
-                  <span className="text-green-400 font-semibold text-sm">ArbFinder</span>
+                  <span className="text-green-400 font-semibold text-sm">SharpBet</span>
                   <span className="text-[10px] text-[#4a4a55] font-normal font-mono">YOU ARE HERE</span>
                 </div>
               </th>

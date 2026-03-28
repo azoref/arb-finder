@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'ArbFinder — Real-Time NBA Arbitrage Opportunities',
-  description: 'Find cross-sportsbook arbitrage opportunities for NBA games in real time. Guaranteed profit on every bet.',
+  title: 'SharpBet — Real-Time NBA Arbitrage Opportunities',
+  description: 'Find cross-sportsbook arbitrage opportunities for NBA games in real time. Guaranteed profit, no edge required.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

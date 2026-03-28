@@ -26,8 +26,8 @@ export default function Nav({ user, isPremium }: NavProps) {
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-green-500 font-mono font-bold text-lg">ARB</span>
-              <span className="text-[#e8e8f0] font-semibold">Finder</span>
+              <span className="text-green-500 font-mono font-bold text-lg">SHARP</span>
+              <span className="text-[#e8e8f0] font-semibold">Bet</span>
             </Link>
             {user && (
               <div className="hidden sm:flex items-center gap-6">

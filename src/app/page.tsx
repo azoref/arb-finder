@@ -42,7 +42,7 @@ export default async function LandingPage() {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/5 text-green-400 text-xs font-mono mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              LIVE · NBA ARBITRAGE SCANNER
+              LIVE · SHARPBET · NBA ARBITRAGE
             </div>
 
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight mb-5">
@@ -51,7 +51,7 @@ export default async function LandingPage() {
             </h1>
 
             <p className="text-[#9999aa] text-lg leading-relaxed mb-8">
-              ArbFinder watches every major US sportsbook around the clock.
+              SharpBet watches every major US sportsbook around the clock.
               When the math lines up, we text you. You act. Guaranteed profit, no edge required.
             </p>
 
@@ -139,7 +139,7 @@ export default async function LandingPage() {
                 Arb windows close fast — sometimes in minutes. The only way to catch them is to be watching constantly. Nobody has time for that.
               </p>
               <p className="text-[#6b6b80] leading-relaxed">
-                That&apos;s why ArbFinder sends a Telegram alert the moment an opportunity appears — with the exact books, odds, and stakes you need to act. You&apos;re in, you&apos;re out, you&apos;re profitable.
+                That&apos;s why SharpBet sends a Telegram alert the moment an opportunity appears — with the exact books, odds, and stakes you need to act. You&apos;re in, you&apos;re out, you&apos;re profitable.
               </p>
             </div>
             <div className="space-y-3">
@@ -293,7 +293,7 @@ export default async function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-[#2a2a32] py-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#4a4a55]">
-          <p>© {new Date().getFullYear()} ArbFinder</p>
+          <p>© {new Date().getFullYear()} SharpBet</p>
           <p className="text-center">
             For informational purposes only. Not financial advice. Check local laws regarding sports betting.
             Arbitrage opportunities are time-sensitive and not guaranteed to remain available.

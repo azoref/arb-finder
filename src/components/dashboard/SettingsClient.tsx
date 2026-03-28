@@ -113,7 +113,7 @@ export default function SettingsClient({ profile, prefs }: SettingsClientProps) 
               </p>
               <ol className="text-sm text-[#9999aa] list-decimal list-inside space-y-1">
                 <li>Click "Generate code" below</li>
-                <li>Open Telegram and message <span className="text-[#e8e8f0] font-mono">@ArbFinderBot</span></li>
+                <li>Open Telegram and message <span className="text-[#e8e8f0] font-mono">@ArbFinderAlerts_bot</span></li>
                 <li>Send: <span className="text-[#e8e8f0] font-mono">/link YOUR_CODE</span></li>
               </ol>
               <button

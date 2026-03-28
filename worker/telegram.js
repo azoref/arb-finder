@@ -95,7 +95,7 @@ function setupCommands() {
 
   b.onText(/\/start/, async (msg) => {
     await b.sendMessage(msg.chat.id,
-      `Welcome to ArbFinder! 🎯\n\nI send real-time arbitrage alerts to premium subscribers.\n\n` +
+      `Welcome to SharpBet! 🎯\n\nI send real-time arbitrage alerts to premium subscribers.\n\n` +
       `To link your account:\n1. Go to your settings at ${process.env.NEXT_PUBLIC_APP_URL}/settings\n` +
       `2. Generate a link code\n3. Send me: /link <code>\n\n` +
       `/status — Check your subscription\n/settings — Manage alert preferences`
