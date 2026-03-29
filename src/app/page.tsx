@@ -217,15 +217,14 @@ export default async function LandingPage() {
             ].map(({ tag, icon, title, body }) => (
               <div
                 key={title}
-                className="relative bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 overflow-hidden group"
+                className="relative bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 group"
               >
-                {/* Frosted overlay */}
-                <div className="absolute inset-0 bg-[#080808]/60 backdrop-blur-[1px] flex items-center justify-center rounded-xl z-10">
-                  <span className="px-3 py-1 rounded-full border border-[#2a2a32] bg-[#0d0d10] text-[#4a4a55] text-xs font-mono tracking-widest">
+                <div className="flex items-start justify-between mb-4">
+                  <span className="text-2xl">{icon}</span>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono tracking-widest border border-[#2a2a32] text-[#4a4a55]">
                     COMING SOON
                   </span>
                 </div>
-                <div className="text-2xl mb-4">{icon}</div>
                 <div className="text-[10px] font-mono text-green-500/50 tracking-widest mb-2">{tag}</div>
                 <h3 className="font-semibold text-[#e8e8f0] mb-2">{title}</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">{body}</p>
@@ -234,7 +233,7 @@ export default async function LandingPage() {
           </div>
 
           <p className="text-center text-xs text-[#3a3a45] mt-10 font-mono">
-            Want early access? <a href="/auth/signup" className="text-green-500/60 hover:text-green-400 transition-colors underline underline-offset-2">Sign up free</a> and you&apos;ll be first to know.
+            Want early access?{' '}<a href="/auth/signup" className="text-green-500/60 hover:text-green-400 transition-colors underline underline-offset-2">Sign up free</a>{' '}and you&apos;ll be first to know.
           </p>
         </div>
       </section>
