@@ -6,7 +6,6 @@ import ArbTicker from '@/components/landing/ArbTicker'
 import BookStrip from '@/components/landing/BookStrip'
 import DashboardPreview from '@/components/landing/DashboardPreview'
 import BlinkingCursor from '@/components/landing/BlinkingCursor'
-import ComparisonTable from '@/components/landing/ComparisonTable'
 import TelegramPreview from '@/components/landing/TelegramPreview'
 import ProfitMeter from '@/components/landing/ProfitMeter'
 
@@ -175,9 +174,6 @@ export default async function LandingPage() {
 
       {/* Telegram preview */}
       <TelegramPreview />
-
-      {/* Comparison table */}
-      <ComparisonTable />
 
       {/* Books strip */}
       <BookStrip />
