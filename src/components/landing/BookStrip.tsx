@@ -1,16 +1,18 @@
+import Image from 'next/image'
+
 const BOOKS = [
-  { name: 'DraftKings', color: '#53d337', bg: '#0d1f0a', abbr: 'DK' },
-  { name: 'FanDuel', color: '#1493ff', bg: '#091520', abbr: 'FD' },
-  { name: 'BetMGM', color: '#c8a96e', bg: '#1a1510', abbr: 'MGM' },
-  { name: 'Caesars', color: '#b8973a', bg: '#181410', abbr: 'CZR' },
-  { name: 'PointsBet', color: '#ff3b3b', bg: '#1a0909', abbr: 'PB' },
-  { name: 'WynnBET', color: '#c9a84c', bg: '#181510', abbr: 'WYN' },
-  { name: 'Barstool', color: '#e8e8f0', bg: '#111114', abbr: 'BST' },
-  { name: 'BetOnline', color: '#00c46e', bg: '#091a12', abbr: 'BOL' },
-  { name: 'Bovada', color: '#f5a623', bg: '#1a1409', abbr: 'BOV' },
-  { name: 'MyBookie', color: '#7b68ee', bg: '#110f1e', abbr: 'MB' },
-  { name: 'BetRivers', color: '#00b4d8', bg: '#091518', abbr: 'BR' },
-  { name: 'Hard Rock', color: '#e8222a', bg: '#1a0909', abbr: 'HR' },
+  { name: 'DraftKings',  domain: 'draftkings.com',  color: '#53d337' },
+  { name: 'FanDuel',     domain: 'fanduel.com',     color: '#1493ff' },
+  { name: 'BetMGM',      domain: 'betmgm.com',      color: '#c8a96e' },
+  { name: 'Caesars',     domain: 'caesars.com',      color: '#b8973a' },
+  { name: 'PointsBet',   domain: 'pointsbet.com',   color: '#ff3b3b' },
+  { name: 'WynnBET',     domain: 'wynnbet.com',     color: '#c9a84c' },
+  { name: 'Barstool',    domain: 'barstoolsports.com', color: '#e8e8f0' },
+  { name: 'BetOnline',   domain: 'betonline.ag',    color: '#00c46e' },
+  { name: 'Bovada',      domain: 'bovada.lv',       color: '#f5a623' },
+  { name: 'MyBookie',    domain: 'mybookie.ag',     color: '#7b68ee' },
+  { name: 'BetRivers',   domain: 'betrivers.com',   color: '#00b4d8' },
+  { name: 'Hard Rock',   domain: 'hardrock.bet',    color: '#e8222a' },
 ]
 
 export default function BookStrip() {
@@ -23,20 +25,24 @@ export default function BookStrip() {
         {BOOKS.map(book => (
           <div
             key={book.name}
-            className="flex items-center gap-2.5 px-3 py-2 rounded-lg border transition-all hover:scale-105"
-            style={{
-              borderColor: `${book.color}30`,
-              backgroundColor: book.bg,
-            }}
+            className="flex items-center gap-2.5 px-3.5 py-2 rounded-lg border border-[#1e1e24] bg-[#0d0d10] hover:border-[#2a2a32] transition-all hover:scale-105 group"
           >
-            {/* Logo mark */}
             <div
-              className="w-6 h-6 rounded flex items-center justify-center text-[9px] font-bold font-mono shrink-0"
-              style={{ backgroundColor: `${book.color}20`, color: book.color }}
+              className="w-6 h-6 rounded-md overflow-hidden flex items-center justify-center shrink-0 bg-[#1a1a1f]"
+              style={{ boxShadow: `0 0 8px ${book.color}22` }}
             >
-              {book.abbr}
+              <Image
+                src={`https://www.google.com/s2/favicons?domain=${book.domain}&sz=64`}
+                alt={book.name}
+                width={20}
+                height={20}
+                className="w-5 h-5 object-contain"
+                unoptimized
+              />
             </div>
-            <span className="text-sm font-medium text-[#9999aa]">{book.name}</span>
+            <span className="text-sm font-medium text-[#6b6b80] group-hover:text-[#9999aa] transition-colors">
+              {book.name}
+            </span>
           </div>
         ))}
       </div>

@@ -33,10 +33,13 @@ export async function GET() {
     // Hypothetical profit: $1,000 bankroll on every arb ever found
     const allArbs = allTimeResult.data ?? []
     const totalProfit = allArbs.reduce((sum, a) => sum + (1000 * a.profit_margin / 100), 0)
+    const allTimeAvgMargin = allArbs.length > 0
+      ? allArbs.reduce((sum, a) => sum + a.profit_margin, 0) / allArbs.length
+      : 0
 
     return NextResponse.json({
       today: todayResult.count ?? 0,
-      avgMargin: parseFloat(avgMargin.toFixed(2)),
+      avgMargin: parseFloat(allTimeAvgMargin.toFixed(2)),
       booksMonitored: Math.max(books.size, 12),
       allTime: allArbs.length,
       totalProfit: parseFloat(totalProfit.toFixed(2)),

@@ -7,6 +7,7 @@ interface Stats {
   avgMargin: number
   booksMonitored: number
   allTime: number
+  totalProfit: number
 }
 
 export default function LiveStatsBar() {
@@ -30,8 +31,8 @@ export default function LiveStatsBar() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-6 overflow-x-auto">
         <div className="flex items-center gap-8 shrink-0">
           <Stat
-            label="Arbs found today"
-            value={stats ? stats.today.toLocaleString() : '—'}
+            label="Arbs found"
+            value={stats ? stats.allTime.toLocaleString() : '—'}
             accent
           />
           <Stat
@@ -41,11 +42,11 @@ export default function LiveStatsBar() {
           />
           <Stat
             label="Books monitored"
-            value={stats ? `${stats.booksMonitored}` : '—'}
+            value={stats ? `${stats.booksMonitored}` : '12'}
           />
           <Stat
-            label="All-time arbs"
-            value={stats ? stats.allTime.toLocaleString() : '—'}
+            label="All-time profit"
+            value={stats ? `$${stats.totalProfit.toLocaleString(undefined, { maximumFractionDigits: 0 })}` : '—'}
           />
         </div>
         <div className="flex items-center gap-1.5 shrink-0 text-xs text-[#3a3a45]">
