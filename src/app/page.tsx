@@ -114,7 +114,7 @@ export default async function LandingPage() {
             {
               num: '01',
               title: 'We scan every book',
-              body: 'Our worker polls 12+ US sportsbooks every 60 seconds — moneylines, spreads, and totals across all NBA games.',
+              body: 'Our worker polls 12+ US sportsbooks every 60 seconds: moneylines, spreads, and totals across all NBA games.',
             },
             {
               num: '02',
@@ -124,7 +124,7 @@ export default async function LandingPage() {
             {
               num: '03',
               title: 'You get the alert',
-              body: 'A Telegram message hits your phone with exact stakes to place on each book. You bet, you profit — no matter the outcome.',
+              body: 'A Telegram message hits your phone with exact stakes to place on each book. You bet, you profit. No matter the outcome.',
             },
           ].map(({ num, title, body }) => (
             <div key={num} className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 hover:border-[#3a3a45] transition-colors">
@@ -146,10 +146,10 @@ export default async function LandingPage() {
                 <span className="text-green-400">We don&apos;t.</span>
               </h2>
               <p className="text-[#6b6b80] leading-relaxed mb-6">
-                Arb windows close fast — sometimes in minutes. The only way to catch them is to be watching constantly. Nobody has time for that.
+                Arb windows close fast, sometimes in minutes. The only way to catch them is to be watching constantly. Nobody has time for that.
               </p>
               <p className="text-[#6b6b80] leading-relaxed">
-                That&apos;s why SharpBet sends a Telegram alert the moment an opportunity appears — with the exact books, odds, and stakes you need to act. You&apos;re in, you&apos;re out, you&apos;re profitable.
+                That&apos;s why SharpBet sends a Telegram alert the moment an opportunity appears, with the exact books, odds, and stakes you need to act. You&apos;re in, you&apos;re out, you&apos;re profitable.
               </p>
             </div>
             <div className="space-y-3">
@@ -193,7 +193,7 @@ export default async function LandingPage() {
             },
             {
               q: 'How fast do arb windows close?',
-              a: 'It varies — some last minutes, some hours. Line movements can close an arb quickly, which is why instant Telegram alerts matter.',
+              a: 'It varies. Some last minutes, some hours. Line movements can close an arb quickly, which is why instant Telegram alerts matter.',
             },
             {
               q: 'How much can I realistically make?',
@@ -259,7 +259,7 @@ export default async function LandingPage() {
             </div>
             <ul className="space-y-2.5 text-sm text-[#9999aa]">
               {[
-                'Real-time arbs — no delay',
+                'Real-time arbs, no delay',
                 'All book names revealed',
                 'Unlimited arbs',
                 'Telegram alerts instantly',
@@ -292,7 +292,7 @@ export default async function LandingPage() {
             href="/auth/signup"
             className="inline-block px-8 py-3.5 bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 rounded-full text-base font-semibold transition-all shadow-lg shadow-green-900/30"
           >
-            Get started — it&apos;s free
+            Get started free
           </Link>
         </div>
       </section>

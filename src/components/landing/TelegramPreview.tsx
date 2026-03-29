@@ -16,7 +16,7 @@ export default function TelegramPreview() {
           </h2>
           <p className="text-[#6b6b80] leading-relaxed mb-6">
             No spreadsheets. No refreshing tabs. No mental math.
-            The moment we detect an arb, your Telegram lights up with everything you need —
+            The moment we detect an arb, your Telegram lights up with everything you need:
             which books, which lines, exactly how much to bet on each side.
           </p>
           <ul className="space-y-3 text-sm text-[#9999aa]">
