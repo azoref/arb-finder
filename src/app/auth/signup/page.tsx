@@ -65,7 +65,7 @@ export default function SignUpPage() {
             <span className="text-[#e8e8f0] font-semibold text-xl">Finder</span>
           </Link>
           <h1 className="text-2xl font-semibold">Create account</h1>
-          <p className="text-[#6b6b80] text-sm mt-1">Free tier — no credit card required</p>
+          <p className="text-[#6b6b80] text-sm mt-1">Free tier · no credit card required</p>
         </div>
 
         <div className="bg-[#111114] border border-[#2a2a32] rounded-lg p-6 space-y-4">

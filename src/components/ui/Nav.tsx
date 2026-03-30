@@ -29,19 +29,24 @@ export default function Nav({ user, isPremium }: NavProps) {
               <span className="text-green-500 font-mono font-bold text-lg">SHARP</span>
               <span className="text-[#e8e8f0] font-semibold">Bet</span>
             </Link>
-            {user && (
-              <div className="hidden sm:flex items-center gap-6">
-                <Link href="/dashboard" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
-                  Dashboard
-                </Link>
-                <Link href="/tracker" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
-                  Tracker
-                </Link>
-                <Link href="/calculator" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
-                  Calculator
-                </Link>
-              </div>
-            )}
+            <div className="hidden sm:flex items-center gap-6">
+              {user && (
+                <>
+                  <Link href="/dashboard" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
+                    Dashboard
+                  </Link>
+                  <Link href="/tracker" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
+                    Tracker
+                  </Link>
+                  <Link href="/calculator" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
+                    Calculator
+                  </Link>
+                </>
+              )}
+              <Link href="/pricing" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
+                Pricing
+              </Link>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">
@@ -67,12 +72,6 @@ export default function Nav({ user, isPremium }: NavProps) {
               </>
             ) : (
               <>
-                <Link
-                  href="/pricing"
-                  className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors"
-                >
-                  Pricing
-                </Link>
                 <Link
                   href="/auth/signin"
                   className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors"

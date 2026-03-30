@@ -586,7 +586,7 @@ export default function DemoDashboard() {
             <div>
               <p className="font-semibold text-[#e8e8f0]">Ready for real opportunities?</p>
               <p className="text-sm text-[#9999aa] mt-1">
-                Sign up free — get 5-minute delayed arbs instantly. Upgrade for real-time Telegram alerts.
+                Sign up free. Get 5-minute delayed arbs instantly. Upgrade for real-time Telegram alerts.
               </p>
             </div>
             <Link

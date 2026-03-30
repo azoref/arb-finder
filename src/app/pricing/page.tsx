@@ -45,11 +45,11 @@ const COMPARISON = [
 const FAQS = [
   {
     q: 'What are whale signals?',
-    a: "Whale signals are trades placed by large-volume wallets on Polymarket — the on-chain prediction market. Because sportsbooks can't limit these wallets like they do sharp bettors, their trades reflect the sharpest information available. When a whale puts $20K+ on a team, we detect it in real time.",
+    a: "Whale signals are trades placed by large-volume wallets on Polymarket, the on-chain prediction market. Because sportsbooks can't limit these wallets like they do sharp bettors, their trades reflect the sharpest information available. When a whale puts $20K+ on a team, we detect it in real time.",
   },
   {
     q: 'What is the divergence score?',
-    a: 'The divergence score shows the gap between Polymarket\'s implied probability for an outcome and the equivalent sportsbook moneyline. A +12pt score means Polymarket has the team 12 percentage points more likely to win than DraftKings does. That gap is the edge — it often closes within hours as books adjust.',
+    a: 'The divergence score shows the gap between Polymarket\'s implied probability for an outcome and the equivalent sportsbook moneyline. A +12pt score means Polymarket has the team 12 percentage points more likely to win than DraftKings does. That gap is the edge. It often closes within hours as books adjust.',
   },
   {
     q: 'Is arbitrage betting legal?',
@@ -57,11 +57,11 @@ const FAQS = [
   },
   {
     q: 'Will my accounts get limited?',
-    a: 'Sharp bettors sometimes get limited by sportsbooks. Keeping bet sizes reasonable, using multiple books, and rotating helps. Polymarket cannot limit accounts — it is a public smart contract.',
+    a: 'Sharp bettors sometimes get limited by sportsbooks. Keeping bet sizes reasonable, using multiple books, and rotating helps. Polymarket cannot limit accounts. It is a public smart contract.',
   },
   {
     q: 'How fast do arb windows close?',
-    a: 'It varies — minutes to hours. Whale signal windows are usually longer since sportsbooks update manually. Instant alerts help you act before lines adjust.',
+    a: 'It varies. Anywhere from minutes to hours. Whale signal windows are usually longer since sportsbooks update manually. Instant alerts help you act before lines adjust.',
   },
   {
     q: 'Where is this heading?',
@@ -106,7 +106,7 @@ export default async function PricingPage() {
             </span>
           </h1>
           <p className="text-[#6b6b80] text-lg max-w-xl mx-auto leading-relaxed">
-            Free access to live odds and limited signals. Upgrade to unlock the full prediction market edge — real-time whale feeds, divergence scores, and wallet profiles.
+            Free access to live odds and limited signals. Upgrade to unlock the full prediction market edge: real-time whale feeds, divergence scores, and wallet profiles.
           </p>
         </div>
       </section>
@@ -196,7 +196,7 @@ export default async function PricingPage() {
           <div className="text-center mb-12">
             <h2 className="text-2xl font-semibold mb-3">The Pro edge, explained</h2>
             <p className="text-[#6b6b80] text-sm max-w-lg mx-auto">
-              Three features that make Pro meaningfully different from Free — built around prediction market intelligence, not just arb scraping.
+              Three features that make Pro meaningfully different from Free, built around prediction market intelligence rather than just arb scraping.
             </p>
           </div>
 
@@ -206,7 +206,7 @@ export default async function PricingPage() {
                 icon: '🐋',
                 tag: 'WHALE SIGNALS',
                 title: 'Live signal feed',
-                body: 'Every trade $10K+ on a sports market hits your feed within 60 seconds. Side, outcome, size, and the wallet behind it — all verified on-chain.',
+                body: 'Every trade $10K+ on a sports market hits your feed within 60 seconds. Side, outcome, size, and the wallet behind it. All verified on-chain.',
               },
               {
                 icon: '📊',
@@ -295,7 +295,7 @@ export default async function PricingPage() {
             <span className="text-green-400">trades on-chain.</span>
           </h2>
           <p className="text-[#6b6b80] mb-8 max-w-md mx-auto leading-relaxed">
-            No account limits. No restrictions. Start free and see the feed — upgrade when you want to act on it.
+            No account limits. No restrictions. Start free and see the feed. Upgrade when you want to act on it.
           </p>
           <div className="flex items-center justify-center gap-3 flex-wrap">
             <Link

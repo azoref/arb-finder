@@ -360,7 +360,7 @@ export default async function LandingPage() {
             <p className="text-xs font-mono text-[#4a4a55] uppercase tracking-widest mb-2">Pricing</p>
             <h2 className="text-2xl font-semibold mb-2">Start free. Go pro when ready.</h2>
             <p className="text-[#6b6b80] text-sm max-w-md leading-relaxed">
-              Free gives you limited signals and delayed arbs. SharpBet Pro unlocks real-time whale feeds, divergence scores, wallet profiles, and instant alerts — everything you need to act before the line moves.
+              Free gives you limited signals and delayed arbs. SharpBet Pro unlocks real-time whale feeds, divergence scores, wallet profiles, and instant alerts. Everything you need to act before the line moves.
             </p>
             <div className="flex items-center gap-6 mt-4 text-xs text-[#4a4a55]">
               <span>✓ Free forever plan</span>
