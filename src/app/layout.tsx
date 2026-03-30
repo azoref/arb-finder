@@ -4,15 +4,15 @@ import './globals.css'
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://getsharpbet.com'
 
 export const metadata: Metadata = {
-  title: 'SharpBet — Follow the Smart Money',
-  description: 'SharpBet tracks whale activity on Polymarket, surfaces arbitrage across 12+ sportsbooks, and alerts you the moment an edge appears. Follow the smart money.',
+  title: 'SharpBet — Prediction Market Intelligence',
+  description: 'SharpBet is the intelligence layer for prediction markets. Track whale wallets on Polymarket, follow proven traders, and act on edges before the market catches up.',
   metadataBase: new URL(APP_URL),
   verification: {
     google: 'N6Vln7FN8HorEoPhzTcVrGMGZW9BxQuDjgaCJaqxn2Y',
   },
   openGraph: {
-    title: 'SharpBet — Follow the Smart Money',
-    description: 'Whale signals from Polymarket. Arbitrage across 12+ sportsbooks. Alerts straight to you before the lines move.',
+    title: 'SharpBet — Prediction Market Intelligence',
+    description: 'Whale signals, wallet profiles, and divergence scores from Polymarket. Follow the smart money before the lines move.',
     url: APP_URL,
     siteName: 'SharpBet',
     images: [
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         url: '/api/og',
         width: 1200,
         height: 630,
-        alt: 'SharpBet — Follow the Smart Money',
+        alt: 'SharpBet — Prediction Market Intelligence',
       },
     ],
     locale: 'en_US',
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SharpBet — Follow the Smart Money',
-    description: 'Whale signals from Polymarket. Arbitrage across 12+ sportsbooks. Never miss an edge.',
+    title: 'SharpBet — Prediction Market Intelligence',
+    description: 'Track whale wallets on Polymarket. Follow proven traders. Act before the market catches up.',
     images: ['/api/og'],
   },
 }

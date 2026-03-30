@@ -49,7 +49,7 @@ export default async function LandingPage() {
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/5 text-green-400 text-xs font-mono mb-8">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                LIVE · SHARPBET · SMART MONEY INTELLIGENCE
+                LIVE · PREDICTION MARKET INTELLIGENCE
               </div>
 
               <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
@@ -60,7 +60,7 @@ export default async function LandingPage() {
               </h1>
 
               <p className="text-[#9999aa] text-lg leading-relaxed mb-10 max-w-md">
-                SharpBet tracks whale activity on Polymarket, surfaces arbitrage across 12+ sportsbooks, and alerts you the moment an edge appears.
+                SharpBet is the intelligence layer for prediction markets. Track whale wallets on Polymarket, follow proven traders, and act on edges before the market catches up.
               </p>
 
               <div className="flex items-center gap-3 flex-wrap">
@@ -104,7 +104,7 @@ export default async function LandingPage() {
         <div className="text-center mb-14">
           <h2 className="text-2xl font-semibold mb-3">How it works</h2>
           <p className="text-[#6b6b80] max-w-xl mx-auto">
-            Smart money moves first. SharpBet watches where it goes: prediction markets, sportsbooks, and on-chain. It tells you before the lines catch up.
+            Prediction markets are the most efficient price discovery mechanism in the world. SharpBet surfaces the signal inside them.
           </p>
         </div>
 
@@ -113,17 +113,17 @@ export default async function LandingPage() {
             {
               num: '01',
               title: 'We watch the whales',
-              body: 'Polymarket is fully on-chain. Every trade is public. We track wallets that consistently beat the market and alert you when they make a big move.',
+              body: 'Polymarket is fully on-chain. Every trade is public. We track wallets that consistently beat the market and alert you the moment they make a significant move.',
             },
             {
               num: '02',
-              title: 'We find the gaps',
-              body: 'When Polymarket prices a team at 62% and a sportsbook has them at +145 (40%), that\'s an edge. We surface it instantly across 12+ books.',
+              title: 'We score the signal',
+              body: 'Not all whale trades are equal. We weight each signal by wallet win rate, trade size, and market divergence to surface the ones that actually matter.',
             },
             {
               num: '03',
-              title: 'You act first',
-              body: 'You get the signal before the sportsbook adjusts the line. Place the bet, lock the edge, move on. No math, no monitoring required.',
+              title: 'You act with conviction',
+              body: 'You see who moved, how much, their track record, and the gap between Polymarket and sportsbook lines. The edge is clear before you place a cent.',
             },
           ].map(({ num, title, body }) => (
             <div key={num} className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 hover:border-[#3a3a45] transition-colors">
@@ -153,10 +153,10 @@ export default async function LandingPage() {
             </div>
             <div className="space-y-3">
               {[
-                { emoji: '🐋', label: 'Whale tracker', sub: 'Tracks $500+ sports trades on Polymarket in real time' },
-                { emoji: '📡', label: 'Scans 12+ books', sub: 'Arbitrage detection every 60 seconds' },
-                { emoji: '📊', label: 'Prediction market edge', sub: 'Polymarket vs sportsbook gap analysis' },
-                { emoji: '⚡', label: 'Instant Discord alerts', sub: 'Signal fires before the line moves' },
+                { emoji: '🐋', label: 'Whale signal feed', sub: 'Every $500+ sports trade on Polymarket, live' },
+                { emoji: '👤', label: 'Wallet profiles', sub: 'Full on-chain trade history for any wallet' },
+                { emoji: '📊', label: 'Divergence score', sub: 'Polymarket implied prob vs sportsbook gap' },
+                { emoji: '⚡', label: 'Instant Discord alerts', sub: 'Signal fires the moment a whale moves' },
               ].map(({ emoji, label, sub }) => (
                 <div key={label} className="flex items-center gap-4 p-4 bg-[#0d0d10] border border-[#1e1e24] rounded-lg">
                   <span className="text-2xl">{emoji}</span>
@@ -256,54 +256,100 @@ export default async function LandingPage() {
       {/* Books strip */}
       <BookStrip />
 
-      {/* Coming Soon */}
+      {/* Roadmap */}
       <section className="border-t border-[#2a2a32]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2a2a32] bg-[#0d0d10] text-[#4a4a55] text-xs font-mono mb-6">
               ROADMAP
             </div>
-            <h2 className="text-2xl font-semibold mb-3">What&apos;s coming next</h2>
+            <h2 className="text-2xl font-semibold mb-3">Building the prediction market intelligence stack</h2>
             <p className="text-[#6b6b80] max-w-md mx-auto text-sm">
-              The platform is expanding. Here&apos;s what we&apos;re building.
+              We started with whale signals. Here is everything we are building on top.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-5">
             {[
               {
-                tag: 'SIGNALS',
+                tag: 'LIVE NOW',
                 icon: '🐋',
-                title: 'Whale signal tracker',
-                body: 'Track top-performing Polymarket wallets in real time. When smart money moves on a game, you\'ll know before the sportsbook adjusts.',
-                soon: true,
+                title: 'Whale signal feed',
+                body: 'Every $500+ sports trade on Polymarket surfaces in real time. Side, size, wallet, implied probability, and Discord alert.',
+                live: true,
               },
               {
-                tag: 'MORE SPORTS',
-                icon: '🏈',
-                title: 'NFL, MLB, NHL + more',
-                body: 'The same arb detection and signal tracking across football, baseball, hockey, soccer, and college sports.',
-                soon: true,
+                tag: 'LIVE NOW',
+                icon: '👤',
+                title: 'Wallet profiles',
+                body: 'Click any whale pseudonym to see their full on-chain trade history, volume, buy/sell ratio, and top markets traded.',
+                live: true,
               },
               {
-                tag: 'MIDDLES',
+                tag: 'LIVE NOW',
+                icon: '📊',
+                title: 'Divergence score',
+                body: 'Each signal shows the gap between Polymarket implied probability and the closest sportsbook line. The bigger the gap, the bigger the edge.',
+                live: true,
+              },
+              {
+                tag: 'COMING SOON',
+                icon: '🏆',
+                title: 'Wallet leaderboard',
+                body: 'Every whale wallet ranked by ROI, win rate, and total volume. See who is actually sharp before you follow their trades.',
+                live: false,
+              },
+              {
+                tag: 'COMING SOON',
                 icon: '🎯',
-                title: 'Middle opportunities',
-                body: 'Bet both sides at different point spreads. If the result lands in the middle, you win both bets. Higher upside than standard arbs.',
-                soon: true,
+                title: 'Signal strength score',
+                body: 'A single 1-10 score per signal combining wallet accuracy, trade size, and market divergence. Know which signals are worth acting on.',
+                live: false,
               },
-            ].map(({ tag, icon, title, body }) => (
+              {
+                tag: 'COMING SOON',
+                icon: '🔔',
+                title: 'Follow a wallet',
+                body: 'Subscribe to any specific wallet. Get a Discord alert the instant they make a move, filtered to your minimum trade size.',
+                live: false,
+              },
+              {
+                tag: 'COMING SOON',
+                icon: '📈',
+                title: 'Market movers',
+                body: 'When a Polymarket price moves 5%+ in under an hour, something happened. Surface these fast-moving markets before the public notices.',
+                live: false,
+              },
+              {
+                tag: 'COMING SOON',
+                icon: '🧠',
+                title: 'Smart money consensus',
+                body: 'When three or more independent whale wallets pile into the same side within a few hours, surface it as a high-conviction play.',
+                live: false,
+              },
+              {
+                tag: 'COMING SOON',
+                icon: '⚖️',
+                title: 'Kalshi cross-reference',
+                body: 'When Polymarket and Kalshi price the same event differently, that gap is itself a signal. Two markets, one edge.',
+                live: false,
+              },
+            ].map(({ tag, icon, title, body, live }) => (
               <div
                 key={title}
-                className="relative bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 group"
+                className={`relative bg-[#0d0d10] border rounded-xl p-6 ${live ? 'border-green-500/20' : 'border-[#2a2a32]'}`}
               >
                 <div className="flex items-start justify-between mb-4">
                   <span className="text-2xl">{icon}</span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono tracking-widest border border-[#2a2a32] text-[#4a4a55]">
-                    COMING SOON
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-mono tracking-widest border ${
+                    live
+                      ? 'border-green-500/30 bg-green-500/10 text-green-400'
+                      : 'border-[#2a2a32] text-[#4a4a55]'
+                  }`}>
+                    {tag}
                   </span>
                 </div>
-                <div className="text-[10px] font-mono text-green-500/50 tracking-widest mb-2">{tag}</div>
+                <div className={`text-[10px] font-mono tracking-widest mb-2 ${live ? 'text-green-500/60' : 'text-[#3a3a45]'}`}>{tag}</div>
                 <h3 className="font-semibold text-[#e8e8f0] mb-2">{title}</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">{body}</p>
               </div>
@@ -311,7 +357,7 @@ export default async function LandingPage() {
           </div>
 
           <p className="text-center text-xs text-[#3a3a45] mt-10 font-mono">
-            Want early access?{' '}<a href="/auth/signup" className="text-green-500/60 hover:text-green-400 transition-colors underline underline-offset-2">Sign up free</a>{' '}and you&apos;ll be first to know.
+            Want early access to new features?{' '}<a href="/auth/signup" className="text-green-500/60 hover:text-green-400 transition-colors underline underline-offset-2">Sign up free</a>{' '}and you&apos;ll be first to know.
           </p>
         </div>
       </section>
@@ -389,10 +435,11 @@ export default async function LandingPage() {
       <section className="border-t border-[#2a2a32] bg-[#080808]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center py-20">
           <h2 className="text-3xl font-bold mb-4">
-            The math doesn&apos;t care<br />who wins the game.
+            The sharpest money in the world<br />
+            <span className="text-green-400">trades in the open.</span>
           </h2>
-          <p className="text-[#9999aa] mb-8">
-            Stop picking sides. Start exploiting the spread between books.
+          <p className="text-[#9999aa] mb-8 max-w-md mx-auto">
+            On-chain, public, verifiable. SharpBet reads it in real time so you can act before anyone else does.
           </p>
           <Link
             href="/auth/signup"
