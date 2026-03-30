@@ -104,7 +104,7 @@ export default async function LandingPage() {
         <div className="text-center mb-14">
           <h2 className="text-2xl font-semibold mb-3">How it works</h2>
           <p className="text-[#6b6b80] max-w-xl mx-auto">
-            Smart money moves first. SharpBet watches where it goes — across prediction markets, sportsbooks, and on-chain — and tells you before the lines catch up.
+            Smart money moves first. SharpBet watches where it goes: prediction markets, sportsbooks, and on-chain. It tells you before the lines catch up.
           </p>
         </div>
 
@@ -145,7 +145,7 @@ export default async function LandingPage() {
                 <span className="text-green-400">leave footprints.</span>
               </h2>
               <p className="text-[#6b6b80] leading-relaxed mb-6">
-                Prediction markets like Polymarket aggregate information from the smartest traders globally — including people with genuine informational edges. Sportsbooks can't limit them. The signal is public.
+                Prediction markets like Polymarket aggregate information from the smartest traders globally, including people with genuine informational edges. Sportsbooks can't limit them. The signal is public.
               </p>
               <p className="text-[#6b6b80] leading-relaxed">
                 SharpBet reads those footprints in real time, cross-references them against sportsbook lines, and alerts you the moment the gap is wide enough to act on.
@@ -166,6 +166,85 @@ export default async function LandingPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The Thesis */}
+      <section className="border-t border-[#2a2a32] bg-[#080808]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#2a2a32] bg-[#0d0d10] text-[#4a4a55] text-xs font-mono mb-6">
+              THE THESIS
+            </div>
+            <h2 className="text-2xl font-semibold mb-3">Why prediction markets change everything</h2>
+            <p className="text-[#6b6b80] max-w-xl mx-auto text-sm">
+              Sportsbooks are closed systems. Polymarket is open. That difference is the edge.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left — the problem */}
+            <div className="space-y-6">
+              <div className="border-l-2 border-red-500/30 pl-5">
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">The problem with sportsbooks</h3>
+                <p className="text-sm text-[#6b6b80] leading-relaxed">
+                  Sportsbooks protect themselves. The moment you win consistently, they limit your account: cut your max bet to $50, then $20, then nothing. Sharp bettors get exiled. The market never fully reflects their information.
+                </p>
+              </div>
+              <div className="border-l-2 border-green-500/30 pl-5">
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">Prediction markets can&apos;t do that</h3>
+                <p className="text-sm text-[#6b6b80] leading-relaxed">
+                  Polymarket is a smart contract on a public blockchain. There are no accounts to limit, no managers to call, no restrictions on bet size. A hedge fund and a college student trade at the same price. The sharpest bettors in the world are free to trade at full size.
+                </p>
+              </div>
+              <div className="border-l-2 border-yellow-500/30 pl-5">
+                <h3 className="font-semibold text-[#e8e8f0] mb-2">The result: better prices</h3>
+                <p className="text-sm text-[#6b6b80] leading-relaxed">
+                  Because sharp money flows freely, Polymarket prices are often more accurate than sportsbook lines. When Polymarket says a team has a 63% chance and the sportsbook is still pricing them at +150 (40%), one of them is wrong. It&apos;s almost never Polymarket.
+                </p>
+              </div>
+            </div>
+
+            {/* Right — the opportunity */}
+            <div className="bg-[#0d0d10] border border-[#2a2a32] rounded-2xl p-6 space-y-5">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                <span className="text-xs font-mono text-[#4a4a55] uppercase tracking-widest">The opportunity</span>
+              </div>
+
+              {[
+                {
+                  step: '01',
+                  title: 'Whale takes a position',
+                  body: 'A wallet with a strong track record buys $40K of Team A on Polymarket at 61%. On-chain, public, verifiable.',
+                },
+                {
+                  step: '02',
+                  title: 'Sportsbook hasn\'t moved',
+                  body: 'DraftKings still has Team A at +155 (39% implied). The books are slow. They aggregate public data, not on-chain signals.',
+                },
+                {
+                  step: '03',
+                  title: 'You see it first',
+                  body: 'SharpBet detects the divergence and alerts you. You place the bet at the sportsbook before the line adjusts. That\'s the edge.',
+                },
+              ].map(({ step, title, body }) => (
+                <div key={step} className="flex gap-4">
+                  <div className="font-mono text-lg text-green-500/30 font-bold shrink-0 w-6">{step}</div>
+                  <div>
+                    <p className="text-sm font-semibold text-[#e8e8f0] mb-1">{title}</p>
+                    <p className="text-xs text-[#6b6b80] leading-relaxed">{body}</p>
+                  </div>
+                </div>
+              ))}
+
+              <div className="border-t border-[#1a1a1f] pt-4 mt-2">
+                <p className="text-[11px] text-[#4a4a55] font-mono">
+                  All trades are public on Polygon blockchain · No accounts · No limits · $8B+ Polymarket volume in 2024
+                </p>
+              </div>
             </div>
           </div>
         </div>

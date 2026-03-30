@@ -94,6 +94,21 @@ export default function SignalsTab() {
   return (
     <div className="space-y-5">
 
+      {/* Thesis explainer */}
+      <div className="bg-[#0a0a10] border border-[#1c1c2e] rounded-xl p-5">
+        <div className="flex items-start gap-4">
+          <div className="shrink-0 w-8 h-8 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400 text-sm">
+            ◎
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-[#e8e8f0] mb-1">Why on-chain signals matter</p>
+            <p className="text-xs text-[#6b6b80] leading-relaxed">
+              Sportsbooks limit sharp bettors. Polymarket cannot. Every trade is a smart contract on a public blockchain: no account limits, no restrictions. The sharpest money in the world flows freely here, which means Polymarket prices are often ahead of sportsbook lines. When a whale moves size, the sportsbook has not caught up yet. That window is the edge.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* KPI Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
