@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState, useMemo } from 'react'
+import Link from 'next/link'
 
 interface Signal {
   wallet: string
@@ -331,14 +332,12 @@ export default function SignalsTab() {
                     </span>
                     <div className="flex items-center gap-1.5">
                       <WalletAvatar name={signal.pseudonym} />
-                      <a
-                        href={`https://polymarket.com/profile/${signal.wallet}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[11px] text-[#6b7280] hover:text-[#9999aa] transition-colors font-mono"
+                      <Link
+                        href={`/whale/${signal.wallet}`}
+                        className="text-[11px] text-[#a78bfa] hover:text-[#c4b5fd] transition-colors font-mono hover:underline underline-offset-2"
                       >
                         {signal.pseudonym}
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="text-right">
