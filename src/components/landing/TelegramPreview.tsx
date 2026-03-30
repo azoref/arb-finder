@@ -54,6 +54,38 @@ export default function DiscordPreview() {
               {/* Channel area */}
               <div className="px-4 py-4 space-y-4 min-h-[320px]">
 
+                {/* Whale signal embed */}
+                <div className="flex gap-3">
+                  <div className="w-9 h-9 rounded-full bg-[#7c3aed] flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5">
+                    SB
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-white text-sm font-semibold">SharpBet</span>
+                      <span className="text-[10px] bg-[#5865F2] text-white px-1 py-0.5 rounded text-[9px] font-medium">APP</span>
+                      <span className="text-[#72767d] text-xs">{timeStr}</span>
+                    </div>
+                    <div className="bg-[#2b2d31] rounded border-l-4 border-[#7c3aed] p-3">
+                      <p className="text-white text-xs font-semibold mb-2">🐋 Whale Signal · ↑ BUY</p>
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px]">
+                        <div className="col-span-2">
+                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Market</p>
+                          <p className="text-[#dbdee1]">NBA Finals 2026 — Celtics win?</p>
+                        </div>
+                        <div>
+                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Size</p>
+                          <p className="text-green-400 font-bold">$28K</p>
+                        </div>
+                        <div>
+                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Polymarket</p>
+                          <p className="text-white font-bold">58%</p>
+                        </div>
+                      </div>
+                      <p className="text-[#72767d] text-[9px] mt-2">SharpBet · Polymarket on-chain</p>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Arb alert embed */}
                 <div className="flex gap-3">
                   {/* Bot avatar */}
@@ -94,38 +126,6 @@ export default function DiscordPreview() {
                         <p className="text-[11px] mt-1">Profit: <span className="text-green-400 font-bold font-mono">$14.20</span> guaranteed</p>
                       </div>
                       <p className="text-[#72767d] text-[9px] mt-2">SharpBet · getsharpbet.com</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Whale signal embed */}
-                <div className="flex gap-3">
-                  <div className="w-9 h-9 rounded-full bg-[#7c3aed] flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5">
-                    SB
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline gap-2 mb-1">
-                      <span className="text-white text-sm font-semibold">SharpBet</span>
-                      <span className="text-[10px] bg-[#5865F2] text-white px-1 py-0.5 rounded text-[9px] font-medium">APP</span>
-                      <span className="text-[#72767d] text-xs">{timeStr}</span>
-                    </div>
-                    <div className="bg-[#2b2d31] rounded border-l-4 border-[#7c3aed] p-3">
-                      <p className="text-white text-xs font-semibold mb-2">🐋 Whale Signal · ↑ BUY</p>
-                      <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px]">
-                        <div className="col-span-2">
-                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Market</p>
-                          <p className="text-[#dbdee1]">NBA Finals 2026 — Celtics win?</p>
-                        </div>
-                        <div>
-                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Size</p>
-                          <p className="text-green-400 font-bold">$28K</p>
-                        </div>
-                        <div>
-                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Polymarket</p>
-                          <p className="text-white font-bold">58%</p>
-                        </div>
-                      </div>
-                      <p className="text-[#72767d] text-[9px] mt-2">SharpBet · Polymarket on-chain</p>
                     </div>
                   </div>
                 </div>
