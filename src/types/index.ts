@@ -26,7 +26,7 @@ export interface User {
   is_premium: boolean
   stripe_customer_id: string | null
   stripe_subscription_id: string | null
-  telegram_chat_id: string | null
+  discord_webhook_url: string | null
 }
 
 export interface AlertPreference {

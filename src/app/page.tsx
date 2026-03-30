@@ -6,7 +6,7 @@ import ArbTicker from '@/components/landing/ArbTicker'
 import BookStrip from '@/components/landing/BookStrip'
 import DashboardPreview from '@/components/landing/DashboardPreview'
 import BlinkingCursor from '@/components/landing/BlinkingCursor'
-import TelegramPreview from '@/components/landing/TelegramPreview'
+import DiscordPreview from '@/components/landing/TelegramPreview'
 import ProfitMeter from '@/components/landing/ProfitMeter'
 
 export const dynamic = 'force-dynamic'
@@ -156,7 +156,7 @@ export default async function LandingPage() {
                 { emoji: '🐋', label: 'Whale tracker', sub: 'Tracks $500+ sports trades on Polymarket in real time' },
                 { emoji: '📡', label: 'Scans 12+ books', sub: 'Arbitrage detection every 60 seconds' },
                 { emoji: '📊', label: 'Prediction market edge', sub: 'Polymarket vs sportsbook gap analysis' },
-                { emoji: '⚡', label: 'Instant alerts', sub: 'Signal fires before the line moves' },
+                { emoji: '⚡', label: 'Instant Discord alerts', sub: 'Signal fires before the line moves' },
               ].map(({ emoji, label, sub }) => (
                 <div key={label} className="flex items-center gap-4 p-4 bg-[#0d0d10] border border-[#1e1e24] rounded-lg">
                   <span className="text-2xl">{emoji}</span>
@@ -250,8 +250,8 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      {/* Telegram preview */}
-      <TelegramPreview />
+      {/* Discord preview */}
+      <DiscordPreview />
 
       {/* Books strip */}
       <BookStrip />
@@ -331,7 +331,7 @@ export default async function LandingPage() {
             },
             {
               q: 'How fast do arb windows close?',
-              a: 'It varies. Some last minutes, some hours. Line movements can close an arb quickly, which is why instant Telegram alerts matter.',
+              a: 'It varies. Some last minutes, some hours. Line movements can close an arb quickly, which is why instant Discord alerts matter.',
             },
             {
               q: 'How much can I realistically make?',

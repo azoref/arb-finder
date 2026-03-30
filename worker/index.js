@@ -5,7 +5,7 @@ require('dotenv').config({ path: '../.env.local' })
 const { createClient } = require('@supabase/supabase-js')
 const { fetchOdds, getApiUsage, SPORTS } = require('./odds')
 const { detectArbs } = require('./arb')
-const { getBot, sendAlerts } = require('./telegram')
+const { sendAlerts } = require('./discord')
 const { pollSignals } = require('./signals')
 
 const POLL_INTERVAL_MS = parseInt(process.env.POLL_INTERVAL_MS ?? '60000')
@@ -164,9 +164,6 @@ async function main() {
       process.exit(1)
     }
   }
-
-  // Initialize Telegram bot immediately so commands work from startup
-  getBot()
 
   // Run arb poll immediately, then on interval
   await poll()

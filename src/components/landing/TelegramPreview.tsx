@@ -1,4 +1,4 @@
-export default function TelegramPreview() {
+export default function DiscordPreview() {
   const now = new Date()
   const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 
@@ -11,19 +11,18 @@ export default function TelegramPreview() {
             📲 WHAT YOU ACTUALLY GET
           </div>
           <h2 className="text-2xl font-semibold mb-4">
-            The alert hits your phone.<br />
+            The alert hits your Discord.<br />
             <span className="text-green-400">You place the bets. Done.</span>
           </h2>
           <p className="text-[#6b6b80] leading-relaxed mb-6">
             No spreadsheets. No refreshing tabs. No mental math.
-            The moment we detect an arb, your Telegram lights up with everything you need:
-            which books, which lines, exactly how much to bet on each side.
+            The moment we detect an arb or whale signal, your Discord channel gets a rich embed with everything you need: which books, which lines, exactly how much to bet on each side.
           </p>
           <ul className="space-y-3 text-sm text-[#9999aa]">
             {[
               'Fires within seconds of detection',
               'Exact dollar amounts for your bankroll',
-              'Guaranteed profit shown upfront',
+              'Whale signals with Polymarket implied probability',
               'Direct link to the arb in the dashboard',
             ].map(item => (
               <li key={item} className="flex items-center gap-2">
@@ -34,98 +33,114 @@ export default function TelegramPreview() {
           </ul>
         </div>
 
-        {/* Phone mockup */}
+        {/* Discord mockup */}
         <div className="flex justify-center lg:justify-end">
-          <div className="relative">
-            {/* Phone shell */}
-            <div className="w-[280px] bg-[#1a1a1f] rounded-[2.5rem] border-[6px] border-[#2a2a32] shadow-2xl overflow-hidden">
-              {/* Status bar */}
-              <div className="bg-[#0d0d10] px-5 pt-3 pb-2 flex items-center justify-between">
-                <span className="text-[10px] text-[#6b6b80] font-medium">{timeStr}</span>
-                <div className="flex items-center gap-1">
-                  <div className="flex gap-0.5 items-end h-3">
-                    {[2, 3, 4, 5].map(h => (
-                      <div key={h} className="w-1 bg-[#6b6b80] rounded-sm" style={{ height: `${h * 3}px` }} />
-                    ))}
-                  </div>
-                  <div className="w-5 h-2.5 rounded-sm border border-[#6b6b80] ml-1">
-                    <div className="w-3 h-full bg-green-400 rounded-sm" />
-                  </div>
+          <div className="relative w-[340px]">
+            {/* Discord window */}
+            <div className="bg-[#313338] rounded-xl overflow-hidden shadow-2xl border border-[#1e1f22]">
+
+              {/* Title bar */}
+              <div className="bg-[#1e1f22] px-4 py-2.5 flex items-center gap-3">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                  <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+                </div>
+                <div className="flex items-center gap-2 ml-2">
+                  <span className="text-[#6b6b80] text-xs">#</span>
+                  <span className="text-[#e0e0e0] text-xs font-semibold">sharp-alerts</span>
                 </div>
               </div>
 
-              {/* Telegram header */}
-              <div className="bg-[#17212b] px-4 py-3 flex items-center gap-3 border-b border-[#0d1621]">
-                <div className="w-8 h-8 rounded-full bg-[#2AABEE] flex items-center justify-center text-white text-xs font-bold">
-                  AF
-                </div>
-                <div>
-                  <p className="text-white text-sm font-medium leading-none">SharpBet</p>
-                  <p className="text-[#6b6b80] text-[10px] mt-0.5">bot</p>
-                </div>
-              </div>
+              {/* Channel area */}
+              <div className="px-4 py-4 space-y-4 min-h-[320px]">
 
-              {/* Chat area */}
-              <div className="bg-[#0e1621] px-3 py-4 min-h-[360px]">
-                {/* Bot message bubble */}
-                <div className="flex justify-start mb-2">
-                  <div className="max-w-[230px] bg-[#182533] rounded-2xl rounded-tl-sm px-3.5 py-3 text-xs leading-relaxed">
-                    <p className="text-[#2AABEE] font-semibold mb-2">🔔 NEW ARB FOUND</p>
-
-                    <div className="space-y-1.5 text-[#aab8c5]">
-                      <p><span className="text-[#6b6b80]">Event:</span> Celtics vs Heat</p>
-                      <p><span className="text-[#6b6b80]">Market:</span> Moneyline</p>
-                      <div className="border-t border-[#0d1621] my-2" />
-                      <p>
-                        <span className="text-[#6b6b80]">DraftKings</span>
-                        <span className="text-white"> Celtics </span>
-                        <span className="text-green-400 font-mono">+108</span>
-                      </p>
-                      <p>
-                        <span className="text-[#6b6b80]">FanDuel</span>
-                        <span className="text-white"> Heat </span>
-                        <span className="text-green-400 font-mono">+106</span>
-                      </p>
-                      <div className="border-t border-[#0d1621] my-2" />
-                      <p><span className="text-[#6b6b80]">Margin:</span> <span className="text-green-400 font-semibold">+1.42%</span></p>
-                      <div className="border-t border-[#0d1621] my-2" />
-                      <p className="text-[#6b6b80] text-[10px] font-medium uppercase tracking-wide">Stakes ($1,000)</p>
-                      <p>DraftKings: <span className="text-white font-mono">$481</span></p>
-                      <p>FanDuel: <span className="text-white font-mono">$486</span></p>
-                      <p className="mt-1">
-                        Profit: <span className="text-green-400 font-semibold font-mono">$14.20</span> guaranteed
-                      </p>
+                {/* Arb alert embed */}
+                <div className="flex gap-3">
+                  {/* Bot avatar */}
+                  <div className="w-9 h-9 rounded-full bg-[#22c55e] flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5">
+                    SB
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-white text-sm font-semibold">SharpBet</span>
+                      <span className="text-[10px] bg-[#5865F2] text-white px-1 py-0.5 rounded text-[9px] font-medium">APP</span>
+                      <span className="text-[#72767d] text-xs">{timeStr}</span>
                     </div>
 
-                    <p className="text-[#4a5568] text-[9px] mt-2.5 text-right">
-                      {timeStr} ✓✓
-                    </p>
+                    {/* Embed card */}
+                    <div className="bg-[#2b2d31] rounded border-l-4 border-[#22c55e] p-3">
+                      <p className="text-white text-xs font-semibold mb-2">🔔 New Arb Detected</p>
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px]">
+                        <div>
+                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Event</p>
+                          <p className="text-[#dbdee1]">Celtics vs Heat</p>
+                        </div>
+                        <div>
+                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Margin</p>
+                          <p className="text-green-400 font-bold">+1.42%</p>
+                        </div>
+                        <div>
+                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">DraftKings</p>
+                          <p className="text-[#dbdee1]">Celtics <span className="text-green-400">+108</span></p>
+                        </div>
+                        <div>
+                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">FanDuel</p>
+                          <p className="text-[#dbdee1]">Heat <span className="text-green-400">+106</span></p>
+                        </div>
+                      </div>
+                      <div className="border-t border-[#3f4147] mt-2.5 pt-2.5">
+                        <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium mb-1">Stakes ($1,000)</p>
+                        <p className="text-[11px] text-[#dbdee1]">DraftKings: <span className="text-white font-mono">$481</span> · FanDuel: <span className="text-white font-mono">$486</span></p>
+                        <p className="text-[11px] mt-1">Profit: <span className="text-green-400 font-bold font-mono">$14.20</span> guaranteed</p>
+                      </div>
+                      <p className="text-[#72767d] text-[9px] mt-2">SharpBet · getsharpbet.com</p>
+                    </div>
                   </div>
                 </div>
 
-                {/* Notification badge effect */}
-                <div className="flex justify-center mt-4">
-                  <span className="text-[9px] text-[#3a4a5a] bg-[#182533] px-3 py-1 rounded-full">
-                    Today
-                  </span>
+                {/* Whale signal embed */}
+                <div className="flex gap-3">
+                  <div className="w-9 h-9 rounded-full bg-[#7c3aed] flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5">
+                    SB
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-baseline gap-2 mb-1">
+                      <span className="text-white text-sm font-semibold">SharpBet</span>
+                      <span className="text-[10px] bg-[#5865F2] text-white px-1 py-0.5 rounded text-[9px] font-medium">APP</span>
+                      <span className="text-[#72767d] text-xs">{timeStr}</span>
+                    </div>
+                    <div className="bg-[#2b2d31] rounded border-l-4 border-[#7c3aed] p-3">
+                      <p className="text-white text-xs font-semibold mb-2">🐋 Whale Signal · ↑ BUY</p>
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-[11px]">
+                        <div className="col-span-2">
+                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Market</p>
+                          <p className="text-[#dbdee1]">NBA Finals 2026 — Celtics win?</p>
+                        </div>
+                        <div>
+                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Size</p>
+                          <p className="text-green-400 font-bold">$28K</p>
+                        </div>
+                        <div>
+                          <p className="text-[#72767d] uppercase text-[9px] tracking-wide font-medium">Polymarket</p>
+                          <p className="text-white font-bold">58%</p>
+                        </div>
+                      </div>
+                      <p className="text-[#72767d] text-[9px] mt-2">SharpBet · Polymarket on-chain</p>
+                    </div>
+                  </div>
                 </div>
+
               </div>
 
               {/* Input bar */}
-              <div className="bg-[#17212b] px-3 py-2 flex items-center gap-2 border-t border-[#0d1621]">
-                <div className="flex-1 bg-[#0e1621] rounded-full px-3 py-1.5 text-[10px] text-[#4a5568]">
-                  Message
-                </div>
-                <div className="w-7 h-7 rounded-full bg-[#2AABEE] flex items-center justify-center">
-                  <svg className="w-3 h-3 text-white fill-current" viewBox="0 0 24 24">
-                    <path d="M2 21l21-9L2 3v7l15 2-15 2v7z" />
-                  </svg>
-                </div>
+              <div className="bg-[#383a40] mx-4 mb-4 rounded-lg px-3 py-2.5 flex items-center gap-2">
+                <span className="flex-1 text-[#72767d] text-xs">Message #sharp-alerts</span>
               </div>
             </div>
 
             {/* Glow */}
-            <div className="absolute inset-0 rounded-[2.5rem] bg-green-500/5 blur-xl -z-10 scale-110" />
+            <div className="absolute inset-0 rounded-xl bg-[#5865F2]/5 blur-xl -z-10 scale-110" />
           </div>
         </div>
       </div>

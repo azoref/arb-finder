@@ -1,6 +1,6 @@
 const FEATURES = [
   { label: 'Real-time arb detection',      us: true,  manual: false, others: true  },
-  { label: 'Telegram / phone alerts',       us: true,  manual: false, others: false },
+  { label: 'Discord alerts',                 us: true,  manual: false, others: false },
   { label: 'Auto-calculated stakes',        us: true,  manual: false, others: false },
   { label: 'No dashboard babysitting',      us: true,  manual: false, others: false },
   { label: 'NBA + spreads + totals',        us: true,  manual: false, others: true  },

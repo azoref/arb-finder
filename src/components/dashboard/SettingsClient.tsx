@@ -15,9 +15,10 @@ export default function SettingsClient({ profile, prefs }: SettingsClientProps) 
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
 
-  const [linkCode, setLinkCode] = useState<string | null>(null)
-  const [linkExpiry, setLinkExpiry] = useState<string | null>(null)
-  const [generating, setGenerating] = useState(false)
+  const [webhookUrl, setWebhookUrl] = useState(profile?.discord_webhook_url ?? '')
+  const [savingWebhook, setSavingWebhook] = useState(false)
+  const [webhookSaved, setWebhookSaved] = useState(false)
+  const [webhookError, setWebhookError] = useState('')
 
   const isPremium = profile?.is_premium ?? false
 
@@ -45,13 +46,27 @@ export default function SettingsClient({ profile, prefs }: SettingsClientProps) 
     setTimeout(() => setSaved(false), 2000)
   }
 
-  async function handleGenerateCode() {
-    setGenerating(true)
-    const res = await fetch('/api/telegram/generate-code', { method: 'POST' })
+  async function handleSaveWebhook() {
+    setSavingWebhook(true)
+    setWebhookError('')
+    const res = await fetch('/api/discord/webhook', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ webhook_url: webhookUrl }),
+    })
     const data = await res.json()
-    setLinkCode(data.code)
-    setLinkExpiry(data.expires_at)
-    setGenerating(false)
+    setSavingWebhook(false)
+    if (data.ok) {
+      setWebhookSaved(true)
+      setTimeout(() => setWebhookSaved(false), 2000)
+    } else {
+      setWebhookError(data.error ?? 'Failed to save')
+    }
+  }
+
+  async function handleRemoveWebhook() {
+    await fetch('/api/discord/webhook', { method: 'DELETE' })
+    setWebhookUrl('')
   }
 
   function toggleMarket(market: string) {
@@ -71,7 +86,7 @@ export default function SettingsClient({ profile, prefs }: SettingsClientProps) 
           <div>
             <p className="font-medium">{isPremium ? 'SharpBet Pro' : 'Free'}</p>
             <p className="text-sm text-[#6b6b80] mt-0.5">
-              {isPremium ? 'Real-time arbs, full book names, Telegram alerts' : '5-min delay, limited to 5 arbs, book names hidden'}
+              {isPremium ? 'Real-time arbs, full book names, Discord alerts' : '5-min delay, limited to 5 arbs, book names hidden'}
             </p>
           </div>
           {isPremium ? (
@@ -92,45 +107,55 @@ export default function SettingsClient({ profile, prefs }: SettingsClientProps) 
         </div>
       </section>
 
-      {/* Telegram */}
+      {/* Discord */}
       <section className="bg-[#111114] border border-[#2a2a32] rounded-lg p-5 space-y-4">
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-[#6b6b80]">Telegram Alerts</h2>
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-[#6b6b80]">Discord Alerts</h2>
         {!isPremium && (
           <p className="text-sm text-yellow-500/80 bg-yellow-500/5 border border-yellow-500/20 rounded px-3 py-2">
-            Telegram alerts are available on SharpBet Pro.
+            Discord alerts are available on SharpBet Pro.
           </p>
         )}
-        <div>
-          {profile?.telegram_chat_id ? (
+        <div className="space-y-3">
+          <p className="text-sm text-[#9999aa]">
+            Paste a Discord webhook URL to receive arb and whale signal alerts in any channel.
+          </p>
+          <ol className="text-sm text-[#9999aa] list-decimal list-inside space-y-1">
+            <li>Open Discord and go to your server</li>
+            <li>Server Settings → Integrations → Webhooks → New Webhook</li>
+            <li>Choose a channel, copy the webhook URL, paste it below</li>
+          </ol>
+          <input
+            type="url"
+            value={webhookUrl}
+            onChange={e => setWebhookUrl(e.target.value)}
+            placeholder="https://discord.com/api/webhooks/..."
+            disabled={!isPremium}
+            className="w-full px-3 py-2 bg-[#1a1a1f] border border-[#2a2a32] rounded-md text-sm font-mono text-[#e8e8f0] placeholder-[#4a4a55] focus:outline-none focus:border-[#5865F2]/50 disabled:opacity-40"
+          />
+          {webhookError && (
+            <p className="text-xs text-red-400">{webhookError}</p>
+          )}
+          <div className="flex gap-2">
+            <button
+              onClick={handleSaveWebhook}
+              disabled={savingWebhook || !isPremium || !webhookUrl}
+              className="text-sm px-3 py-1.5 bg-[#5865F2] hover:bg-[#4752c4] disabled:opacity-40 rounded-md font-medium text-white transition-colors"
+            >
+              {webhookSaved ? 'Saved!' : savingWebhook ? 'Saving...' : 'Save webhook'}
+            </button>
+            {webhookUrl && (
+              <button
+                onClick={handleRemoveWebhook}
+                className="text-sm px-3 py-1.5 border border-[#2a2a32] rounded-md text-[#6b6b80] hover:text-red-400 hover:border-red-500/30 transition-colors"
+              >
+                Remove
+              </button>
+            )}
+          </div>
+          {profile?.discord_webhook_url && (
             <div className="flex items-center gap-2 text-green-400 text-sm">
               <span className="w-2 h-2 rounded-full bg-green-400 inline-block" />
-              Telegram connected
-            </div>
-          ) : (
-            <div className="space-y-3">
-              <p className="text-sm text-[#9999aa]">
-                Link your Telegram account to receive arb alerts.
-              </p>
-              <ol className="text-sm text-[#9999aa] list-decimal list-inside space-y-1">
-                <li>Click "Generate code" below</li>
-                <li>Open Telegram and message <span className="text-[#e8e8f0] font-mono">@ArbFinderAlerts_bot</span></li>
-                <li>Send: <span className="text-[#e8e8f0] font-mono">/link YOUR_CODE</span></li>
-              </ol>
-              <button
-                onClick={handleGenerateCode}
-                disabled={generating || !isPremium}
-                className="text-sm px-3 py-1.5 border border-[#2a2a32] rounded-md hover:bg-[#1a1a1f] disabled:opacity-40 transition-colors"
-              >
-                {generating ? 'Generating...' : 'Generate code'}
-              </button>
-              {linkCode && (
-                <div className="font-mono text-lg text-green-400 tracking-widest bg-green-500/5 border border-green-500/20 rounded px-4 py-3 text-center">
-                  {linkCode}
-                  <p className="text-xs text-[#6b6b80] font-sans mt-1">
-                    Expires {linkExpiry ? new Date(linkExpiry).toLocaleTimeString() : 'in 15 minutes'}
-                  </p>
-                </div>
-              )}
+              Discord webhook connected
             </div>
           )}
         </div>
