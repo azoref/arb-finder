@@ -22,48 +22,39 @@ function formatOdds(odds: number) {
   return odds > 0 ? `+${odds}` : `${odds}`
 }
 
-function ResultBadge({ result, id, onUpdate }: { result: string; id: string; onUpdate: () => void }) {
-  const [open, setOpen] = useState(false)
+function ResultSelect({ result, id, onUpdate }: { result: string; id: string; onUpdate: () => void }) {
   const [loading, setLoading] = useState(false)
 
-  const colors: Record<string, string> = {
-    pending: 'text-[#6b6b80] border-[#2a2a32]',
-    win: 'text-green-400 border-green-500/30 bg-green-500/10',
-    loss: 'text-red-400 border-red-500/30 bg-red-500/10',
-    push: 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10',
+  const colorClass: Record<string, string> = {
+    pending: 'text-[#6b6b80]',
+    win: 'text-green-400',
+    loss: 'text-red-400',
+    push: 'text-yellow-400',
   }
 
-  async function setResult(newResult: string) {
+  async function handleChange(newResult: string) {
     setLoading(true)
     await fetch(`/api/bets/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ result: newResult }),
     })
-    setOpen(false)
     setLoading(false)
     onUpdate()
   }
 
   return (
-    <div className="relative">
-      <button
-        onClick={() => setOpen(!open)}
-        className={`px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-widest border ${colors[result]} hover:opacity-80 transition-opacity`}
-      >
-        {loading ? '...' : result}
-      </button>
-      {open && (
-        <div className="absolute right-0 top-6 z-10 bg-[#0d0d10] border border-[#2a2a32] rounded-lg overflow-hidden shadow-xl">
-          {['win', 'loss', 'push', 'pending'].map(r => (
-            <button key={r} onClick={() => setResult(r)}
-              className="block w-full px-4 py-2 text-xs text-left hover:bg-[#1a1a1f] text-[#9999aa] hover:text-[#e8e8f0] transition-colors capitalize">
-              {r}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+    <select
+      value={result}
+      disabled={loading}
+      onChange={e => handleChange(e.target.value)}
+      className={`bg-[#111114] border border-[#2a2a32] rounded px-2 py-1 text-[11px] font-mono uppercase tracking-widest focus:outline-none focus:border-green-500/50 cursor-pointer disabled:opacity-50 ${colorClass[result]}`}
+    >
+      <option value="pending">Pending</option>
+      <option value="win">Win</option>
+      <option value="loss">Loss</option>
+      <option value="push">Push</option>
+    </select>
   )
 }
 
@@ -190,7 +181,7 @@ export default function BetTracker() {
                       }
                     </td>
                     <td className="px-4 py-3">
-                      <ResultBadge result={bet.result} id={bet.id} onUpdate={fetchBets} />
+                      <ResultSelect result={bet.result} id={bet.id} onUpdate={fetchBets} />
                     </td>
                     <td className="px-4 py-3">
                       <button onClick={() => deleteBet(bet.id)}
