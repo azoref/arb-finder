@@ -224,7 +224,7 @@ export default function SignalsTab() {
           <div className="text-4xl mb-3">🐋</div>
           <p className="text-[#4a4a55] text-sm font-mono mb-1">No whale signals detected</p>
           <p className="text-[#3a3a45] text-xs max-w-sm">
-            Signals appear when a wallet trades $10K+ on an active sports market on Polymarket. Check back when games are live.
+            Signals appear when a wallet trades $500+ on an active sports market on Polymarket. Check back when games are live.
           </p>
         </div>
       ) : (

@@ -2,12 +2,12 @@
 
 // Polymarket whale signal harvester.
 // Called every ~60s by the main worker loop.
-// Fetches the most recent 1000 trades from Polymarket's global trades feed,
-// filters for sports markets with $10K+ USD size, and upserts into Supabase.
+// Fetches the most recent 2000 trades from Polymarket's global trades feed,
+// filters for sports markets with $500+ USD size, and upserts into Supabase.
 // Deduplication is handled by the unique `tx_hash` constraint.
 
 const DATA_API = 'https://data-api.polymarket.com'
-const WHALE_THRESHOLD_USD = 10000
+const WHALE_THRESHOLD_USD = 500
 
 const SPORTS_INCLUDE = [
   'nba', 'nfl', 'nhl', 'mlb', 'mls', 'ufc', 'pga', 'ncaa', 'wnba',
@@ -36,7 +36,7 @@ function isSportsTrade(title) {
 
 async function pollSignals(supabase) {
   try {
-    const res = await fetch(`${DATA_API}/trades?limit=1000`, {
+    const res = await fetch(`${DATA_API}/trades?limit=2000`, {
       headers: { 'Accept': 'application/json' },
       signal: AbortSignal.timeout(15000),
     })
@@ -91,8 +91,8 @@ async function pollSignals(supabase) {
       console.log(`[signals] Stored ${records.length} whale signal(s): ${records.map(r => `$${r.usd_size.toLocaleString()} ${r.side} "${r.title?.slice(0, 40)}"`).join(' | ')}`)
     }
 
-    // Prune signals older than 48 hours to keep the table lean
-    const cutoff = new Date(Date.now() - 48 * 3600 * 1000).toISOString()
+    // Prune signals older than 7 days to keep the table lean but historically rich
+    const cutoff = new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString()
     await supabase.from('whale_signals').delete().lt('traded_at', cutoff)
 
   } catch (err) {

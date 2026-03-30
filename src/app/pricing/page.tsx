@@ -206,7 +206,7 @@ export default async function PricingPage() {
                 icon: '🐋',
                 tag: 'WHALE SIGNALS',
                 title: 'Live signal feed',
-                body: 'Every trade $10K+ on a sports market hits your feed within 60 seconds. Side, outcome, size, and the wallet behind it. All verified on-chain.',
+                body: 'Every $500+ sports trade on Polymarket hits your feed within 60 seconds. Side, outcome, size, and the wallet behind it. All verified on-chain.',
               },
               {
                 icon: '📊',

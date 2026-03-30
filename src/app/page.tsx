@@ -153,7 +153,7 @@ export default async function LandingPage() {
             </div>
             <div className="space-y-3">
               {[
-                { emoji: '🐋', label: 'Whale tracker', sub: 'Follows top Polymarket wallets in real time' },
+                { emoji: '🐋', label: 'Whale tracker', sub: 'Tracks $500+ sports trades on Polymarket in real time' },
                 { emoji: '📡', label: 'Scans 12+ books', sub: 'Arbitrage detection every 60 seconds' },
                 { emoji: '📊', label: 'Prediction market edge', sub: 'Polymarket vs sportsbook gap analysis' },
                 { emoji: '⚡', label: 'Instant alerts', sub: 'Signal fires before the line moves' },
