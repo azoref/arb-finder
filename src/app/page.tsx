@@ -367,6 +367,7 @@ export default async function LandingPage() {
           </p>
           <div className="flex gap-4">
             <Link href="/calculator" className="hover:text-[#6b6b80]">Calculator</Link>
+            <Link href="/tracker" className="hover:text-[#6b6b80]">Tracker</Link>
             <Link href="/dashboard" className="hover:text-[#6b6b80]">Dashboard</Link>
           </div>
         </div>
