@@ -66,6 +66,18 @@ async function postToWebhook(webhookUrl, payload) {
 async function sendAlerts(supabase, newArbs) {
   if (newArbs.length === 0) return
 
+  // Always fire to the admin webhook (your personal Discord) for every alert
+  const adminWebhook = process.env.DISCORD_ADMIN_WEBHOOK
+  if (adminWebhook) {
+    for (const arb of newArbs) {
+      try {
+        await postToWebhook(adminWebhook, arbEmbed(arb))
+      } catch (err) {
+        console.error('[discord] Admin webhook error:', err.message)
+      }
+    }
+  }
+
   const { data: prefs } = await supabase
     .from('alert_preferences')
     .select('user_id, min_profit_margin, markets, enabled')

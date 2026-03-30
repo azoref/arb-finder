@@ -1,5 +1,7 @@
 'use strict'
 
+const { postToWebhook, whaleEmbed } = require('./discord')
+
 // Polymarket whale signal harvester.
 // Called every ~60s by the main worker loop.
 // Fetches the most recent 2000 trades from Polymarket's global trades feed,
@@ -89,6 +91,18 @@ async function pollSignals(supabase) {
       console.error('[signals] Supabase upsert error:', error.message)
     } else {
       console.log(`[signals] Stored ${records.length} whale signal(s): ${records.map(r => `$${r.usd_size.toLocaleString()} ${r.side} "${r.title?.slice(0, 40)}"`).join(' | ')}`)
+
+      // Fire admin Discord webhook for each new signal
+      const adminWebhook = process.env.DISCORD_ADMIN_WEBHOOK
+      if (adminWebhook) {
+        for (const record of records) {
+          try {
+            await postToWebhook(adminWebhook, whaleEmbed(record))
+          } catch (err) {
+            console.error('[signals] Admin webhook error:', err.message)
+          }
+        }
+      }
     }
 
     // Prune signals older than 7 days to keep the table lean but historically rich
