@@ -95,7 +95,9 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
         <div>
           <h1 className="text-xl font-semibold">Dashboard</h1>
           <p className="text-[#6b6b80] text-sm mt-0.5">
-            {tab === 'arbs'
+            {tab === 'signals'
+              ? 'Live whale activity on Polymarket sports markets'
+              : tab === 'arbs'
               ? (loading ? 'Loading...' : `${arbs.length} active arbs · refreshed ${formatDistanceToNow(lastRefresh, { addSuffix: true })}`)
               : 'Live odds across all major US sportsbooks'}
           </p>
@@ -126,13 +128,13 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
           onClick={() => setTab('arbs')}
           className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
             tab === 'arbs'
-              ? 'border-green-500 text-green-400'
-              : 'border-transparent text-[#6b6b80] hover:text-[#e8e8f0]'
+              ? 'border-[#4a4a55] text-[#9999aa]'
+              : 'border-transparent text-[#4a4a55] hover:text-[#6b6b80]'
           }`}
         >
-          🎯 Arbs
+          Arbs
           {arbs.length > 0 && (
-            <span className="ml-2 px-1.5 py-0.5 rounded text-xs bg-green-500/10 text-green-400 font-mono">
+            <span className="ml-2 px-1.5 py-0.5 rounded text-xs bg-[#1c1c2e] text-[#6b6b80] font-mono">
               {arbs.length}
             </span>
           )}
@@ -141,11 +143,11 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
           onClick={() => setTab('odds')}
           className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px ${
             tab === 'odds'
-              ? 'border-green-500 text-green-400'
-              : 'border-transparent text-[#6b6b80] hover:text-[#e8e8f0]'
+              ? 'border-[#4a4a55] text-[#9999aa]'
+              : 'border-transparent text-[#4a4a55] hover:text-[#6b6b80]'
           }`}
         >
-          📊 Live Odds
+          Live Odds
         </button>
       </div>
 

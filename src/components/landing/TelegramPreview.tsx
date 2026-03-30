@@ -15,15 +15,14 @@ export default function DiscordPreview() {
             <span className="text-green-400">You place the bets. Done.</span>
           </h2>
           <p className="text-[#6b6b80] leading-relaxed mb-6">
-            No spreadsheets. No refreshing tabs. No mental math.
-            The moment we detect an arb or whale signal, your Discord channel gets a rich embed with everything you need: which books, which lines, exactly how much to bet on each side.
+            No refreshing tabs. No monitoring dashboards. The moment a whale makes a significant move on Polymarket, your Discord channel gets a rich embed with the wallet, the market, the size, and the implied probability — everything you need to decide in seconds.
           </p>
           <ul className="space-y-3 text-sm text-[#9999aa]">
             {[
-              'Fires within seconds of detection',
-              'Exact dollar amounts for your bankroll',
-              'Whale signals with Polymarket implied probability',
-              'Direct link to the arb in the dashboard',
+              'Fires within 60 seconds of on-chain detection',
+              'Wallet pseudonym, trade size, and implied probability',
+              'Polymarket vs sportsbook divergence included',
+              'Direct link to the full wallet profile',
             ].map(item => (
               <li key={item} className="flex items-center gap-2">
                 <span className="text-green-400 font-mono">→</span>

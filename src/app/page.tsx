@@ -368,24 +368,24 @@ export default async function LandingPage() {
         <div className="space-y-4">
           {[
             {
-              q: 'Is arbitrage betting legal?',
-              a: 'Yes. Arbitrage betting is legal in every US state where sports betting is permitted. Sportsbooks don\'t love it, but it\'s completely within the rules.',
+              q: 'What is a whale signal?',
+              a: 'A whale signal is a large trade ($500+) placed on a sports market on Polymarket, the on-chain prediction market. Because Polymarket cannot limit sharp bettors the way sportsbooks can, these trades reflect some of the most informed money in the world.',
             },
             {
-              q: 'Will my accounts get limited?',
-              a: 'Sharp bettors do sometimes get limited by sportsbooks. Keeping bet sizes reasonable, using multiple accounts, and rotating books helps reduce this risk.',
+              q: 'Why does Polymarket price matter?',
+              a: 'Polymarket is a free market with no account restrictions. The sharpest bettors trade at full size, which means Polymarket prices tend to be ahead of sportsbook lines. When Polymarket has a team at 62% and a sportsbook has them at +150 (40%), one of them is wrong.',
             },
             {
-              q: 'How fast do arb windows close?',
-              a: 'It varies. Some last minutes, some hours. Line movements can close an arb quickly, which is why instant Discord alerts matter.',
+              q: 'How accurate are whale wallets?',
+              a: 'It varies by wallet. Some are directional bettors with strong track records, others are market makers or hedgers. That\'s why we\'re building wallet ROI and win-rate tracking — so you can see the history before you follow a trade.',
             },
             {
-              q: 'How much can I realistically make?',
-              a: 'Margins are typically 0.5–3%. On a $1,000 bankroll bet repeatedly, experienced arbers can generate $500–2,000/month in guaranteed profit depending on volume and speed.',
+              q: 'How do Discord alerts work?',
+              a: 'Pro users paste a Discord webhook URL into their settings. The moment a whale signal or edge is detected, SharpBet posts a rich embed directly to their Discord channel with the wallet, market, size, and implied probability.',
             },
             {
-              q: 'Do I need accounts at all the sportsbooks?',
-              a: 'You only need accounts at the two books involved in each specific arb. We show you exactly which books are involved for every opportunity.',
+              q: 'Is this only for sports?',
+              a: 'Right now yes — we filter for sports markets specifically. Longer term we plan to cover all Polymarket categories including politics, economics, and entertainment as the platform expands.',
             },
           ].map(({ q, a }) => (
             <details key={q} className="group border border-[#2a2a32] rounded-lg">
@@ -406,7 +406,7 @@ export default async function LandingPage() {
             <p className="text-xs font-mono text-[#4a4a55] uppercase tracking-widest mb-2">Pricing</p>
             <h2 className="text-2xl font-semibold mb-2">Start free. Go pro when ready.</h2>
             <p className="text-[#6b6b80] text-sm max-w-md leading-relaxed">
-              Free gives you limited signals and delayed arbs. SharpBet Pro unlocks real-time whale feeds, divergence scores, wallet profiles, and instant alerts. Everything you need to act before the line moves.
+              Free gives you a delayed signal feed and limited history. SharpBet Pro unlocks real-time whale signals, divergence scores, wallet profiles, and instant Discord alerts. Everything you need to act before the market catches up.
             </p>
             <div className="flex items-center gap-6 mt-4 text-xs text-[#4a4a55]">
               <span>✓ Free forever plan</span>
@@ -455,8 +455,7 @@ export default async function LandingPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#4a4a55]">
           <p>© {new Date().getFullYear()} SharpBet</p>
           <p className="text-center">
-            For informational purposes only. Not financial advice. Check local laws regarding sports betting.
-            Arbitrage opportunities are time-sensitive and not guaranteed to remain available.
+            For informational purposes only. Not financial advice. Prediction market prices are not guaranteed to reflect future outcomes.
           </p>
           <div className="flex gap-4">
             <Link href="/pricing" className="hover:text-[#6b6b80]">Pricing</Link>
