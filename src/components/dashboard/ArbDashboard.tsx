@@ -316,7 +316,7 @@ export default function ArbDashboard({ isPremium }: ArbDashboardProps) {
         <div className="mt-4 text-center py-6 border border-dashed border-[#2a2a32] rounded-lg text-[#6b6b80] text-sm">
           {arbs.length - FREE_TIER.maxArbs} more arbs hidden.{' '}
           <Link href="/settings" className="text-green-400 hover:text-green-300">
-            Upgrade to Premium
+            Upgrade to Pro
           </Link>{' '}
           for full access.
         </div>

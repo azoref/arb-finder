@@ -383,15 +383,15 @@ export default async function LandingPage() {
             </Link>
           </div>
 
-          {/* Premium */}
+          {/* SharpBet Pro */}
           <div className="bg-[#0d0d10] border border-green-500/30 rounded-xl p-6 space-y-5 relative overflow-hidden">
             <div className="absolute top-4 right-4">
               <span className="px-2 py-0.5 rounded text-xs font-mono font-medium bg-green-500/10 text-green-400 border border-green-500/20">
-                PREMIUM
+                PRO
               </span>
             </div>
             <div>
-              <h3 className="font-semibold text-lg">Premium</h3>
+              <h3 className="font-semibold text-lg">SharpBet Pro</h3>
               <p className="text-3xl font-bold mt-1 text-green-400">$29<span className="text-base font-normal text-[#9999aa]">/mo</span></p>
               <p className="text-xs text-[#4a4a55] mt-1">cancel anytime</p>
             </div>

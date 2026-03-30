@@ -69,7 +69,7 @@ export default function SettingsClient({ profile, prefs }: SettingsClientProps) 
         <h2 className="text-sm font-semibold uppercase tracking-wider text-[#6b6b80]">Subscription</h2>
         <div className="flex items-center justify-between">
           <div>
-            <p className="font-medium">{isPremium ? 'Premium' : 'Free'}</p>
+            <p className="font-medium">{isPremium ? 'SharpBet Pro' : 'Free'}</p>
             <p className="text-sm text-[#6b6b80] mt-0.5">
               {isPremium ? 'Real-time arbs, full book names, Telegram alerts' : '5-min delay, limited to 5 arbs, book names hidden'}
             </p>
@@ -86,7 +86,7 @@ export default function SettingsClient({ profile, prefs }: SettingsClientProps) 
               onClick={handleUpgrade}
               className="text-sm px-3 py-1.5 bg-green-600 hover:bg-green-500 rounded-md font-medium text-white transition-colors"
             >
-              Upgrade to Premium
+              Upgrade to Pro
             </button>
           )}
         </div>
@@ -97,7 +97,7 @@ export default function SettingsClient({ profile, prefs }: SettingsClientProps) 
         <h2 className="text-sm font-semibold uppercase tracking-wider text-[#6b6b80]">Telegram Alerts</h2>
         {!isPremium && (
           <p className="text-sm text-yellow-500/80 bg-yellow-500/5 border border-yellow-500/20 rounded px-3 py-2">
-            Telegram alerts are available on the Premium plan.
+            Telegram alerts are available on SharpBet Pro.
           </p>
         )}
         <div>

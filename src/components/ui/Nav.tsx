@@ -49,7 +49,7 @@ export default function Nav({ user, isPremium }: NavProps) {
               <>
                 {isPremium && (
                   <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-mono font-medium bg-green-500/10 text-green-400 border border-green-500/20">
-                    PREMIUM
+                    PRO
                   </span>
                 )}
                 <Link
