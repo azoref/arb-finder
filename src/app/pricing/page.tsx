@@ -309,10 +309,10 @@ export default async function PricingPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#4a4a55]">
           <p>© {new Date().getFullYear()} SharpBet</p>
           <p className="text-center">
-            For informational purposes only. Not financial advice. Check local laws regarding sports betting.
+            For informational purposes only. Not financial advice. Prediction market prices are not guaranteed to reflect future outcomes.
           </p>
           <div className="flex gap-4">
-            <Link href="/tracker" className="hover:text-[#6b6b80]">Tracker</Link>
+            <Link href="/tracker" className="hover:text-[#6b6b80]">Journal</Link>
             <Link href="/demo" className="hover:text-[#6b6b80]">Demo</Link>
             <Link href="/dashboard" className="hover:text-[#6b6b80]">Dashboard</Link>
           </div>
