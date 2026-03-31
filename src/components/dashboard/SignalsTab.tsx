@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState, useMemo } from 'react'
 import Link from 'next/link'
+import HotMarkets from './HotMarkets'
 
 interface Signal {
   wallet: string
@@ -143,6 +144,9 @@ export default function SignalsTab({ isPremium }: { isPremium?: boolean }) {
 
   return (
     <div className="space-y-5">
+
+      {/* Hot Markets */}
+      <HotMarkets />
 
       {/* Thesis explainer */}
       <div className="bg-[#0a0a10] border border-[#1c1c2e] rounded-xl p-5">
