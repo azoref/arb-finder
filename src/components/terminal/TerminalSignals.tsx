@@ -38,10 +38,21 @@ function formatSize(n: number) {
   return `$${n}`
 }
 
+type CategoryFilter = 'all' | 'POL' | 'CRY' | 'SPT' | 'OTH'
+
+const CATEGORIES: { id: CategoryFilter; label: string; color: string }[] = [
+  { id: 'all', label: 'ALL',  color: '#a78bfa' },
+  { id: 'POL', label: 'POL',  color: '#f59e0b' },
+  { id: 'CRY', label: 'CRY',  color: '#06b6d4' },
+  { id: 'SPT', label: 'SPT',  color: '#22c55e' },
+  { id: 'OTH', label: 'OTH',  color: '#9999aa' },
+]
+
 export default function TerminalSignals({ isPremium, followedWallets }: { isPremium?: boolean; followedWallets?: Set<string> }) {
   const [signals, setSignals] = useState<Signal[]>([])
   const [loading, setLoading] = useState(true)
   const [side, setSide] = useState<'all' | 'buy' | 'sell'>('all')
+  const [category, setCategory] = useState<CategoryFilter>('all')
 
   useEffect(() => {
     fetch('/api/signals').then(r => r.json()).then(d => { setSignals(d.signals ?? []); setLoading(false) }).catch(() => setLoading(false))
@@ -54,8 +65,9 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
   const filtered = useMemo(() => {
     let r = [...signals]
     if (side !== 'all') r = r.filter(s => s.side === side.toUpperCase())
+    if (category !== 'all') r = r.filter(s => inferCategory(s.title).short === category)
     return r
-  }, [signals, side])
+  }, [signals, side, category])
 
   if (loading) return (
     <div className="flex items-center justify-center h-full text-[#4a4a55] font-mono text-sm animate-pulse">
@@ -66,18 +78,38 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
   return (
     <div className="flex flex-col h-full">
       {/* Filter bar */}
-      <div className="flex items-center gap-2 px-3 py-2 border-b border-[#1a1a1f] shrink-0 bg-[#0a0a0e]">
-        {(['all', 'buy', 'sell'] as const).map(f => (
-          <button key={f} onClick={() => setSide(f)}
-            className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded transition-colors ${side === f
-              ? f === 'buy' ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-              : f === 'sell' ? 'bg-red-500/20 text-red-400 border border-red-500/30'
-              : 'bg-[#2a2a3e] text-[#a78bfa] border border-[#7c3aed]/30'
-              : 'text-[#4a4a55] hover:text-[#9999aa] border border-transparent'}`}>
-            {f === 'all' ? 'ALL' : f === 'buy' ? '▲ BUY' : '▼ SELL'}
-          </button>
-        ))}
-        <span className="ml-auto text-[10px] font-mono text-[#3a3a45]">{filtered.length} signals · 24h</span>
+      <div className="flex flex-col gap-0 border-b border-[#1a1a1f] shrink-0 bg-[#0a0a0e]">
+        {/* Row 1: side + count */}
+        <div className="flex items-center gap-2 px-3 pt-2 pb-1.5">
+          {(['all', 'buy', 'sell'] as const).map(f => (
+            <button key={f} onClick={() => setSide(f)}
+              className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded transition-colors ${side === f
+                ? f === 'buy' ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                : f === 'sell' ? 'bg-red-500/20 text-red-400 border border-red-500/30'
+                : 'bg-[#2a2a3e] text-[#a78bfa] border border-[#7c3aed]/30'
+                : 'text-[#4a4a55] hover:text-[#9999aa] border border-transparent'}`}>
+              {f === 'all' ? 'ALL' : f === 'buy' ? '▲ BUY' : '▼ SELL'}
+            </button>
+          ))}
+          <span className="ml-auto text-[10px] font-mono text-[#3a3a45]">{filtered.length} signals · 24h</span>
+        </div>
+        {/* Row 2: category toggles */}
+        <div className="flex items-center gap-1.5 px-3 pb-2">
+          {CATEGORIES.map(c => {
+            const active = category === c.id
+            return (
+              <button key={c.id} onClick={() => setCategory(c.id)}
+                style={active && c.id !== 'all' ? { color: c.color, background: c.color + '18', borderColor: c.color + '40' } : {}}
+                className={`text-[10px] font-mono px-2 py-0.5 rounded border transition-colors ${
+                  active
+                    ? c.id === 'all' ? 'bg-[#2a2a3e] text-[#a78bfa] border-[#7c3aed]/30' : 'border'
+                    : 'text-[#4a4a55] hover:text-[#9999aa] border-transparent'
+                }`}>
+                {c.label}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* Signal rows */}
