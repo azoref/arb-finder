@@ -312,11 +312,11 @@ export default async function LandingPage() {
                 live: true,
               },
               {
-                tag: 'COMING SOON',
+                tag: 'LIVE NOW',
                 icon: '📈',
                 title: 'Market movers',
-                body: 'When a Polymarket price moves 5%+ in under an hour, something happened. Surface these fast-moving markets before the public notices.',
-                live: false,
+                body: 'Markets ranked by whale volume in the last 24 hours. See where smart money is flowing right now across all Polymarket categories.',
+                live: true,
               },
               {
                 tag: 'COMING SOON',
@@ -457,6 +457,7 @@ export default async function LandingPage() {
           </p>
           <div className="flex gap-4">
             <Link href="/leaderboard" className="hover:text-[#6b6b80]">Leaderboard</Link>
+            <Link href="/movers" className="hover:text-[#6b6b80]">Movers</Link>
             <Link href="/tracker" className="hover:text-[#6b6b80]">Journal</Link>
             <Link href="/pricing" className="hover:text-[#6b6b80]">Pricing</Link>
             <Link href="/demo" className="hover:text-[#6b6b80]">Demo</Link>

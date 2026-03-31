@@ -38,6 +38,9 @@ export default function Nav({ user, isPremium }: NavProps) {
               <Link href="/leaderboard" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
                 Leaderboard
               </Link>
+              <Link href="/movers" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
+                Movers
+              </Link>
               {user && (
                 <Link href="/tracker" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
                   Journal
