@@ -14,6 +14,29 @@ export default function SettingsClient({ profile }: SettingsClientProps) {
   const [webhookSaved, setWebhookSaved] = useState(false)
   const [webhookError, setWebhookError] = useState('')
 
+  const [polyWallet, setPolyWallet] = useState(profile?.polymarket_wallet ?? '')
+  const [savingWallet, setSavingWallet] = useState(false)
+  const [walletSaved, setWalletSaved] = useState(false)
+  const [walletError, setWalletError] = useState('')
+
+  async function handleSaveWallet() {
+    setSavingWallet(true)
+    setWalletError('')
+    const res = await fetch('/api/profile/wallet', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ wallet: polyWallet }),
+    })
+    const data = await res.json()
+    setSavingWallet(false)
+    if (data.ok) {
+      setWalletSaved(true)
+      setTimeout(() => setWalletSaved(false), 2000)
+    } else {
+      setWalletError(data.error ?? 'Failed to save')
+    }
+  }
+
   const isPremium = profile?.is_premium ?? false
 
   async function handleUpgrade() {
@@ -81,6 +104,59 @@ export default function SettingsClient({ profile }: SettingsClientProps) {
             >
               Upgrade to Pro
             </button>
+          )}
+        </div>
+      </section>
+
+      {/* Polymarket Wallet */}
+      <section className="bg-[#111114] border border-[#2a2a32] rounded-lg p-5 space-y-4">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-[#6b6b80]">Your Polymarket Wallet</h2>
+        <div className="space-y-3">
+          <p className="text-sm text-[#9999aa]">
+            Connect your Polymarket wallet address to see your own trades alongside whale signals. Your wallet address is public on-chain.
+          </p>
+          <ol className="text-sm text-[#9999aa] list-decimal list-inside space-y-1">
+            <li>Go to <span className="font-mono text-[#e8e8f0]">polymarket.com</span> and open your profile</li>
+            <li>Copy your wallet address (starts with 0x...)</li>
+            <li>Paste it below</li>
+          </ol>
+          <input
+            type="text"
+            value={polyWallet}
+            onChange={e => setPolyWallet(e.target.value)}
+            placeholder="0x..."
+            className="w-full px-3 py-2 bg-[#1a1a1f] border border-[#2a2a32] rounded-md text-sm font-mono text-[#e8e8f0] placeholder-[#4a4a55] focus:outline-none focus:border-green-500/50"
+          />
+          {walletError && <p className="text-xs text-red-400">{walletError}</p>}
+          <div className="flex gap-2">
+            <button
+              onClick={handleSaveWallet}
+              disabled={savingWallet || !polyWallet}
+              className="text-sm px-3 py-1.5 bg-green-600 hover:bg-green-500 disabled:opacity-40 rounded-md font-medium text-white transition-colors"
+            >
+              {walletSaved ? 'Saved!' : savingWallet ? 'Saving...' : 'Save wallet'}
+            </button>
+            {polyWallet && (
+              <button
+                onClick={async () => {
+                  setPolyWallet('')
+                  await fetch('/api/profile/wallet', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ wallet: '' }),
+                  })
+                }}
+                className="text-sm px-3 py-1.5 border border-[#2a2a32] rounded-md text-[#6b6b80] hover:text-red-400 hover:border-red-500/30 transition-colors"
+              >
+                Remove
+              </button>
+            )}
+          </div>
+          {profile?.polymarket_wallet && (
+            <div className="flex items-center gap-2 text-green-400 text-sm">
+              <span className="w-2 h-2 rounded-full bg-green-400 inline-block" />
+              Wallet connected: <span className="font-mono text-[#9999aa]">{profile.polymarket_wallet.slice(0, 8)}...{profile.polymarket_wallet.slice(-4)}</span>
+            </div>
           )}
         </div>
       </section>

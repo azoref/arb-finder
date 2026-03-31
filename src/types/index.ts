@@ -27,6 +27,7 @@ export interface User {
   stripe_customer_id: string | null
   stripe_subscription_id: string | null
   discord_webhook_url: string | null
+  polymarket_wallet: string | null
 }
 
 export interface AlertPreference {
