@@ -8,37 +8,27 @@ import TerminalFollowing from './TerminalFollowing'
 
 type PaneType = 'signals' | 'movers' | 'leaderboard' | 'following'
 
-interface PaneConfig {
-  id: PaneType
-  label: string
-  icon: string
-}
-
-const PANES: PaneConfig[] = [
-  { id: 'signals',     label: 'Signals',     icon: '🐋' },
-  { id: 'movers',      label: 'Hot Markets', icon: '🔥' },
-  { id: 'leaderboard', label: 'Leaderboard', icon: '🏆' },
-  { id: 'following',   label: 'Following',   icon: '★'  },
+const PANES = [
+  { id: 'signals'     as PaneType, label: 'Signals',     icon: '🐋' },
+  { id: 'movers'      as PaneType, label: 'Hot Markets', icon: '🔥' },
+  { id: 'leaderboard' as PaneType, label: 'Leaderboard', icon: '🏆' },
+  { id: 'following'   as PaneType, label: 'Following',   icon: '★'  },
 ]
 
-const DEFAULT_LAYOUT: [PaneType, PaneType, PaneType, PaneType] = ['signals', 'movers', 'leaderboard', 'following']
-
-function PaneHeader({ type, onChange }: { type: PaneType; onChange: (t: PaneType) => void }) {
+function PaneHeader({ type, onChange, accent }: { type: PaneType; onChange: (t: PaneType) => void; accent?: boolean }) {
   const current = PANES.find(p => p.id === type)!
   return (
-    <div className="flex items-center justify-between px-3 py-1.5 border-b border-[#1a1a1f] bg-[#0a0a0d] shrink-0">
-      <div className="flex items-center gap-1.5">
-        <span className="text-[10px]">{current.icon}</span>
-        <span className="text-[10px] font-mono font-semibold text-[#a78bfa] uppercase tracking-widest">{current.label}</span>
+    <div className="flex items-center justify-between px-3 py-2 border-b border-[#1a1a1f] bg-[#09090d] shrink-0">
+      <div className="flex items-center gap-2">
+        <span className="text-sm">{current.icon}</span>
+        <span className={`text-xs font-mono font-bold uppercase tracking-widest ${accent ? 'text-green-400' : 'text-[#7c7c9a]'}`}>{current.label}</span>
       </div>
       <select
         value={type}
         onChange={e => onChange(e.target.value as PaneType)}
-        className="text-[9px] font-mono bg-[#111114] border border-[#2a2a32] text-[#6b6b80] rounded px-1 py-0.5 focus:outline-none focus:border-[#7c3aed]/50 cursor-pointer"
+        className="text-[10px] font-mono bg-[#111118] border border-[#2a2a32] text-[#6b6b80] rounded px-1.5 py-0.5 focus:outline-none focus:border-[#7c3aed]/50 cursor-pointer"
       >
-        {PANES.map(p => (
-          <option key={p.id} value={p.id}>{p.icon} {p.label}</option>
-        ))}
+        {PANES.map(p => <option key={p.id} value={p.id}>{p.icon} {p.label}</option>)}
       </select>
     </div>
   )
@@ -54,13 +44,16 @@ function PaneContent({ type, isPremium, followedWallets }: { type: PaneType; isP
 }
 
 export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium: boolean; isLoggedIn: boolean }) {
-  const [layout, setLayout] = useState<[PaneType, PaneType, PaneType, PaneType]>(DEFAULT_LAYOUT)
+  const [leftPane, setLeftPane]     = useState<PaneType>('signals')
+  const [rightTop, setRightTop]     = useState<PaneType>('movers')
+  const [rightBottom, setRightBottom] = useState<PaneType>('leaderboard')
   const [followedWallets, setFollowedWallets] = useState<Set<string>>(new Set())
   const [now, setNow] = useState('')
 
   useEffect(() => {
-    setNow(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }))
-    const t = setInterval(() => setNow(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })), 1000)
+    const tick = () => setNow(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }))
+    tick()
+    const t = setInterval(tick, 1000)
     return () => clearInterval(t)
   }, [])
 
@@ -71,39 +64,60 @@ export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium
     }).catch(() => {})
   }, [isPremium])
 
-  function setPane(index: number, type: PaneType) {
-    setLayout(prev => {
-      const next = [...prev] as [PaneType, PaneType, PaneType, PaneType]
-      next[index] = type
-      return next
-    })
-  }
-
   return (
-    <div className="flex flex-col h-[calc(100vh-56px)]">
-      {/* Terminal top bar */}
-      <div className="flex items-center gap-3 px-4 py-1.5 bg-[#080810] border-b border-[#1a1a1f] shrink-0">
+    <div className="flex flex-col" style={{ height: 'calc(100vh - 56px)' }}>
+
+      {/* Terminal status bar */}
+      <div className="flex items-center gap-3 px-4 py-1.5 bg-[#06060a] border-b border-[#1a1a1f] shrink-0">
         <div className="flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-[9px] font-mono text-green-400">LIVE</span>
+          <span className="text-[10px] font-mono text-green-400 font-semibold">LIVE</span>
         </div>
-        <span className="text-[9px] font-mono text-[#3a3a45]">POLYMARKET · $10K+ · ON-CHAIN</span>
-        <span className="ml-auto text-[9px] font-mono text-[#3a3a45]">{now}</span>
-        {!isLoggedIn && (
-          <a href="/auth/signup" className="text-[9px] font-mono px-2 py-0.5 rounded bg-green-600 hover:bg-green-500 text-white transition-colors">Sign up free</a>
-        )}
+        <span className="text-[10px] font-mono text-[#2a2a3e]">·</span>
+        <span className="text-[10px] font-mono text-[#4a4a55]">POLYMARKET</span>
+        <span className="text-[10px] font-mono text-[#2a2a3e]">·</span>
+        <span className="text-[10px] font-mono text-[#4a4a55]">$10K+ THRESHOLD</span>
+        <span className="text-[10px] font-mono text-[#2a2a3e]">·</span>
+        <span className="text-[10px] font-mono text-[#4a4a55]">ON-CHAIN VERIFIED</span>
+        <div className="ml-auto flex items-center gap-3">
+          <span className="text-[10px] font-mono text-[#3a3a45] tabular-nums">{now}</span>
+          {!isLoggedIn && (
+            <a href="/auth/signup" className="text-[10px] font-mono px-2.5 py-1 rounded bg-green-600 hover:bg-green-500 text-white font-semibold transition-colors">
+              Sign up free
+            </a>
+          )}
+        </div>
       </div>
 
-      {/* 2x2 grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 flex-1 min-h-0 divide-y divide-[#1a1a1f] sm:divide-y-0">
-        {layout.map((type, i) => (
-          <div key={i} className={`flex flex-col min-h-0 border-[#1a1a1f] ${i % 2 === 0 ? 'sm:border-r' : ''} ${i < 2 ? 'sm:border-b' : ''} border`}>
-            <PaneHeader type={type} onChange={t => setPane(i, t)} />
+      {/* Main layout: left (signals) + right (movers + leaderboard) */}
+      <div className="flex flex-1 min-h-0">
+
+        {/* Left: main signals pane — 60% */}
+        <div className="flex flex-col border-r border-[#1a1a1f]" style={{ width: '60%' }}>
+          <PaneHeader type={leftPane} onChange={setLeftPane} accent />
+          <div className="flex-1 min-h-0 overflow-hidden">
+            <PaneContent type={leftPane} isPremium={isPremium} followedWallets={followedWallets} />
+          </div>
+        </div>
+
+        {/* Right: two stacked panes — 40% */}
+        <div className="flex flex-col" style={{ width: '40%' }}>
+          {/* Top right */}
+          <div className="flex flex-col border-b border-[#1a1a1f]" style={{ height: '50%' }}>
+            <PaneHeader type={rightTop} onChange={setRightTop} />
             <div className="flex-1 min-h-0 overflow-hidden">
-              <PaneContent type={type} isPremium={isPremium} followedWallets={followedWallets} />
+              <PaneContent type={rightTop} isPremium={isPremium} followedWallets={followedWallets} />
             </div>
           </div>
-        ))}
+          {/* Bottom right */}
+          <div className="flex flex-col" style={{ height: '50%' }}>
+            <PaneHeader type={rightBottom} onChange={setRightBottom} />
+            <div className="flex-1 min-h-0 overflow-hidden">
+              <PaneContent type={rightBottom} isPremium={isPremium} followedWallets={followedWallets} />
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   )
