@@ -196,7 +196,7 @@ export default async function LandingPage() {
               <div className="border-l-2 border-green-500/30 pl-5">
                 <h3 className="font-semibold text-[#e8e8f0] mb-2">Sharp money can&apos;t be stopped</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Polymarket is a smart contract. There are no accounts to limit, no managers to call, no restrictions on size. Informed traders — political insiders, crypto funds, sharp bettors — express their full conviction freely.
+                  Polymarket is a smart contract. There are no accounts to limit, no managers to call, no restrictions on size. Informed traders (political insiders, crypto funds, sharp bettors) express their full conviction freely.
                 </p>
               </div>
               <div className="border-l-2 border-yellow-500/30 pl-5">
