@@ -71,6 +71,7 @@ export default async function LeaderboardPage() {
   const { data: rows } = await supabase
     .from('whale_signals')
     .select('wallet, pseudonym, usd_size, side, title, traded_at')
+    .gte('usd_size', 10000)
     .order('traded_at', { ascending: false })
 
   // Aggregate by wallet
