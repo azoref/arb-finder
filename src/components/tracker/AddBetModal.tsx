@@ -107,7 +107,7 @@ export default function AddBetModal({ onClose, onSave }: Props) {
           <div>
             <label className="text-[10px] font-mono text-[#4a4a55] uppercase tracking-widest mb-1 block">Notes</label>
             <input value={form.notes} onChange={e => set('notes', e.target.value)}
-              placeholder="Optional — e.g. which whale signal you followed"
+              placeholder="Optional, e.g. which whale signal you followed"
               className="w-full bg-[#111114] border border-[#2a2a32] rounded-lg px-3 py-2 text-sm text-[#e8e8f0] placeholder-[#3a3a45] focus:outline-none focus:border-green-500/50" />
           </div>
 
