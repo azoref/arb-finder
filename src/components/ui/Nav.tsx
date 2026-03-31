@@ -40,6 +40,9 @@ export default function Nav({ user, isPremium }: NavProps) {
                   </Link>
                 </>
               )}
+              <Link href="/leaderboard" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
+                Leaderboard
+              </Link>
               <Link href="/pricing" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
                 Pricing
               </Link>
