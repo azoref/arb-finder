@@ -5,6 +5,7 @@ import TerminalSignals from './TerminalSignals'
 import TerminalHotMarkets from './TerminalHotMarkets'
 import TerminalLeaderboard from './TerminalLeaderboard'
 import TerminalFollowing from './TerminalFollowing'
+import TerminalQuotron from './TerminalQuotron'
 
 type PaneType = 'signals' | 'movers' | 'leaderboard' | 'following'
 
@@ -88,6 +89,9 @@ export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium
           )}
         </div>
       </div>
+
+      {/* Quotron ticker */}
+      <TerminalQuotron />
 
       {/* Main layout: left (signals) + right (movers + leaderboard) */}
       <div className="flex flex-1 min-h-0">
