@@ -298,11 +298,11 @@ export default async function LandingPage() {
                 live: true,
               },
               {
-                tag: 'COMING SOON',
+                tag: 'LIVE NOW',
                 icon: '🎯',
                 title: 'Signal strength score',
-                body: 'A single 1-10 score per signal combining wallet accuracy, trade size, and market divergence. Know which signals are worth acting on.',
-                live: false,
+                body: 'A 1-10 score on every signal combining trade size and wallet activity. Green means strong conviction. Know which signals are worth acting on.',
+                live: true,
               },
               {
                 tag: 'LIVE NOW',

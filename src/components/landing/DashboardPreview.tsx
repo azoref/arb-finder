@@ -9,6 +9,7 @@ const SIGNALS = [
     polyProb: 67,
     size: '$42K',
     ago: '2m ago',
+    strength: 9,
   },
   {
     pseudonym: 'SharpMoney7',
@@ -20,6 +21,7 @@ const SIGNALS = [
     polyProb: 34,
     size: '$28K',
     ago: '7m ago',
+    strength: 6,
   },
   {
     pseudonym: 'WhalePunter',
@@ -31,6 +33,7 @@ const SIGNALS = [
     polyProb: 58,
     size: '$19K',
     ago: '14m ago',
+    strength: 4,
   },
   {
     pseudonym: 'EdgeHunter',
@@ -42,6 +45,7 @@ const SIGNALS = [
     polyProb: 72,
     size: '$35K',
     ago: '22m ago',
+    strength: 8,
   },
 ]
 
@@ -113,6 +117,13 @@ export default function DashboardPreview() {
                     style={{ color: catColor, background: catColor + '15' }}
                   >
                     {s.category}
+                  </span>
+                  <span className={`text-[8px] font-mono px-1 py-0.5 rounded border shrink-0 ${
+                    s.strength >= 8 ? 'text-green-400 bg-green-500/10 border-green-500/20'
+                    : s.strength >= 5 ? 'text-amber-400 bg-amber-500/10 border-amber-500/20'
+                    : 'text-[#6b7280] bg-[#1c1c2e] border-[#2a2a3e]'
+                  }`}>
+                    ⚡{s.strength}
                   </span>
                   <span className="text-[9px] text-[#3a3a45] font-mono ml-auto shrink-0">{s.ago}</span>
                 </div>
