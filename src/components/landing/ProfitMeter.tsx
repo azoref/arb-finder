@@ -64,7 +64,7 @@ export default function ProfitMeter() {
     <section className="border-t border-[#2a2a32] bg-[#050507]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
         <p className="text-xs text-[#4a4a55] uppercase tracking-widest font-mono mb-8">
-          Whale volume tracked · Polymarket sports markets · all-time
+          Whale volume tracked · Polymarket · all categories · all-time
         </p>
 
         {/* Big number */}
@@ -87,9 +87,9 @@ export default function ProfitMeter() {
 
         <p className="mt-6 text-[#6b6b80] text-sm">
           {signalCount > 0 ? (
-            <>across <span className="text-[#9999aa] font-medium">{signalCount.toLocaleString()} whale signals</span> on Polymarket sports markets</>
+            <>across <span className="text-[#9999aa] font-medium">{signalCount.toLocaleString()} whale signals</span> on Polymarket · all categories</>
           ) : (
-            'tracking smart money on Polymarket sports markets'
+            'tracking smart money on Polymarket · all categories'
           )}
         </p>
 
