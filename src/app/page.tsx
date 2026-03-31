@@ -60,7 +60,7 @@ export default async function LandingPage() {
               </h1>
 
               <p className="text-[#9999aa] text-lg leading-relaxed mb-10 max-w-md">
-                Sportsbooks ban sharp bettors. Polymarket can't. We track the wallets that move the market and alert you the moment they act.
+                The sharpest money in the world trades on Polymarket. Every trade is public, on-chain, and verifiable. We track the wallets that move markets and alert you the moment they act.
               </p>
 
               <div className="flex items-center gap-3 flex-wrap">
