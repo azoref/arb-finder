@@ -84,7 +84,7 @@ export default function TerminalQuotron() {
         ref={trackRef}
         className="flex items-center whitespace-nowrap"
         style={{
-          animation: paused ? 'none' : `quotronScroll ${signals.length * 6}s linear infinite`,
+          animation: paused ? 'none' : `quotronScroll ${signals.length * 14}s linear infinite`,
         }}
       >
         {items.map((s, i) => (
