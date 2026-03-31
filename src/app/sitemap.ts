@@ -23,12 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${APP_URL}/calculator`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
       url: `${APP_URL}/auth/signup`,
       lastModified: new Date(),
       changeFrequency: 'monthly',

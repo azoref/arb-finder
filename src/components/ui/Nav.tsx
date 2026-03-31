@@ -38,9 +38,6 @@ export default function Nav({ user, isPremium }: NavProps) {
                   <Link href="/tracker" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
                     Tracker
                   </Link>
-                  <Link href="/calculator" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
-                    Calculator
-                  </Link>
                 </>
               )}
               <Link href="/pricing" className="text-sm text-[#9999aa] hover:text-[#e8e8f0] transition-colors">
