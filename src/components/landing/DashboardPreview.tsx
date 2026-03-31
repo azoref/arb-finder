@@ -161,7 +161,7 @@ export default function DashboardPreview() {
 
         {/* Bottom bar */}
         <div className="px-4 py-2 bg-[#0d0d10] flex items-center justify-between border-t border-[#1a1a1f]">
-          <span className="text-[9px] text-[#3a3a45] font-mono">POLYMARKET · POLYGON · $500+ THRESHOLD</span>
+          <span className="text-[9px] text-[#3a3a45] font-mono">POLYMARKET · POLYGON · $1K+ THRESHOLD</span>
           <span className="text-[9px] text-[#7c3aed] font-mono font-semibold">ON-CHAIN VERIFIED ✓</span>
         </div>
       </div>

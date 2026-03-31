@@ -153,7 +153,7 @@ export default async function LandingPage() {
             </div>
             <div className="space-y-3">
               {[
-                { emoji: '🐋', label: 'Whale signal feed', sub: 'Every $500+ sports trade on Polymarket, live' },
+                { emoji: '🐋', label: 'Whale signal feed', sub: 'Every $1,000+ sports trade on Polymarket, live' },
                 { emoji: '👤', label: 'Wallet profiles', sub: 'Full on-chain trade history for any wallet' },
                 { emoji: '📊', label: 'Wallet track record', sub: 'Win rate, volume, and ROI for every whale' },
                 { emoji: '⚡', label: 'Instant Discord alerts', sub: 'Signal fires the moment a whale moves' },
@@ -275,7 +275,7 @@ export default async function LandingPage() {
                 tag: 'LIVE NOW',
                 icon: '🐋',
                 title: 'Whale signal feed',
-                body: 'Every $500+ sports trade on Polymarket surfaces in real time. Side, size, wallet, implied probability, and Discord alert.',
+                body: 'Every $1,000+ sports trade on Polymarket surfaces in real time. Side, size, wallet, implied probability, and Discord alert.',
                 live: true,
               },
               {
@@ -369,7 +369,7 @@ export default async function LandingPage() {
           {[
             {
               q: 'What is a whale signal?',
-              a: 'A whale signal is a large trade ($500+) placed on a sports market on Polymarket, the on-chain prediction market. Because Polymarket cannot limit sharp bettors the way sportsbooks can, these trades reflect some of the most informed money in the world.',
+              a: 'A whale signal is a trade of $1,000 or more placed on a sports market on Polymarket. We set the threshold at $1K because it filters out casual noise while still capturing meaningful conviction. Below that level, trades are too small to distinguish informed bettors from recreational activity.',
             },
             {
               q: 'Why is a Polymarket whale trade a signal?',

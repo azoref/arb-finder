@@ -5,11 +5,11 @@ const { postToWebhook, whaleEmbed } = require('./discord')
 // Polymarket whale signal harvester.
 // Called every ~60s by the main worker loop.
 // Fetches the most recent 2000 trades from Polymarket's global trades feed,
-// filters for sports markets with $500+ USD size, and upserts into Supabase.
+// filters for sports markets with $1,000+ USD size, and upserts into Supabase.
 // Deduplication is handled by the unique `tx_hash` constraint.
 
 const DATA_API = 'https://data-api.polymarket.com'
-const WHALE_THRESHOLD_USD = 500
+const WHALE_THRESHOLD_USD = 1000
 
 const SPORTS_INCLUDE = [
   'nba', 'nfl', 'nhl', 'mlb', 'mls', 'ufc', 'pga', 'ncaa', 'wnba',

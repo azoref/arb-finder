@@ -100,7 +100,7 @@ export default function ProfitMeter() {
         )}
 
         <p className="mt-8 text-xs text-[#3a3a45] max-w-md mx-auto">
-          Every $500+ trade on an active sports market on Polymarket. On-chain verified, updated every 60 seconds.
+          Every $1,000+ trade on an active sports market on Polymarket. On-chain verified, updated every 60 seconds.
         </p>
       </div>
     </section>
