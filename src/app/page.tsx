@@ -3,11 +3,11 @@ import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import LiveStatsBar from '@/components/landing/LiveStatsBar'
 import ArbTicker from '@/components/landing/ArbTicker'
-import BookStrip from '@/components/landing/BookStrip'
 import DashboardPreview from '@/components/landing/DashboardPreview'
 import BlinkingCursor from '@/components/landing/BlinkingCursor'
 import DiscordPreview from '@/components/landing/TelegramPreview'
 import ProfitMeter from '@/components/landing/ProfitMeter'
+
 
 export const dynamic = 'force-dynamic'
 
@@ -153,7 +153,7 @@ export default async function LandingPage() {
             </div>
             <div className="space-y-3">
               {[
-                { emoji: '🐋', label: 'Whale signal feed', sub: 'Every $1,000+ sports trade on Polymarket, live' },
+                { emoji: '🐋', label: 'Whale signal feed', sub: 'Every $10K+ trade across all Polymarket categories' },
                 { emoji: '👤', label: 'Wallet profiles', sub: 'Full on-chain trade history for any wallet' },
                 { emoji: '📊', label: 'Wallet track record', sub: 'Win rate, volume, and ROI for every whale' },
                 { emoji: '⚡', label: 'Instant Discord alerts', sub: 'Signal fires the moment a whale moves' },
@@ -253,8 +253,6 @@ export default async function LandingPage() {
       {/* Discord preview */}
       <DiscordPreview />
 
-      {/* Books strip */}
-      <BookStrip />
 
       {/* Roadmap */}
       <section className="border-t border-[#2a2a32]">
@@ -275,7 +273,7 @@ export default async function LandingPage() {
                 tag: 'LIVE NOW',
                 icon: '🐋',
                 title: 'Whale signal feed',
-                body: 'Every $1,000+ sports trade on Polymarket surfaces in real time. Side, size, wallet, implied probability, and Discord alert.',
+                body: 'Every $10,000+ trade across all Polymarket categories surfaces in real time. Politics, sports, crypto. Side, size, wallet, and Discord alert.',
                 live: true,
               },
               {
@@ -369,7 +367,7 @@ export default async function LandingPage() {
           {[
             {
               q: 'What is a whale signal?',
-              a: 'A whale signal is a trade of $1,000 or more placed on a sports market on Polymarket. We set the threshold at $1K because it filters out casual noise while still capturing meaningful conviction. Below that level, trades are too small to distinguish informed bettors from recreational activity.',
+              a: 'A whale signal is a trade of $10,000 or more on any Polymarket market. We set the threshold at $10K because it filters out noise and captures only genuine conviction. At that size, you are looking at wallets that have meaningful information and are willing to back it with real money.',
             },
             {
               q: 'Why is a Polymarket whale trade a signal?',
@@ -385,7 +383,7 @@ export default async function LandingPage() {
             },
             {
               q: 'Is this only for sports?',
-              a: 'Right now yes — we filter for sports markets specifically. Longer term we plan to cover all Polymarket categories including politics, economics, and entertainment as the platform expands.',
+              a: 'All of them. Politics, sports, crypto, economics, entertainment — if a whale is moving size on Polymarket, you will see it. You can filter by category in the dashboard.',
             },
           ].map(({ q, a }) => (
             <details key={q} className="group border border-[#2a2a32] rounded-lg">

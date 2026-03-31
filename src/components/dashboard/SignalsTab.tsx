@@ -15,17 +15,22 @@ interface Signal {
   txHash: string
   impliedProb: number
   polyAmericanOdds: string
-  // Matched sportsbook data (null when no odds_snapshot match)
-  bookName:        string | null
-  bookOdds:        number | null
-  bookImpliedProb: number | null
-  divergencePts:   number | null
 }
 
 interface SignalsData {
   signals: Signal[]
   updatedAt: string
   error?: string
+}
+
+type Category = 'all' | 'politics' | 'crypto' | 'sports' | 'other'
+
+function inferCategory(title: string): Category {
+  const t = (title || '').toLowerCase()
+  if (['election', 'president', 'senate', 'congress', 'governor', 'trump', 'biden', 'harris', 'vote', 'ballot', 'prime minister', 'republican', 'democrat'].some(kw => t.includes(kw))) return 'politics'
+  if (['bitcoin', 'ethereum', 'btc', 'eth', 'crypto', 'solana', 'doge', 'coinbase', 'binance', 'blockchain'].some(kw => t.includes(kw))) return 'crypto'
+  if (['nba', 'nfl', 'nhl', 'mlb', 'mls', 'ufc', 'pga', 'ncaa', 'wnba', 'basketball', 'football', 'soccer', 'baseball', 'hockey', 'tennis', 'golf', 'boxing', 'mma', 'super bowl', 'world cup', 'champions league', 'playoffs', 'finals'].some(kw => t.includes(kw))) return 'sports'
+  return 'other'
 }
 
 function timeAgo(ts: number) {
@@ -46,10 +51,19 @@ function WalletAvatar({ name }: { name: string }) {
   )
 }
 
-export default function SignalsTab() {
+const CATEGORY_LABELS: Record<Category, string> = {
+  all: 'All',
+  politics: 'Politics',
+  crypto: 'Crypto',
+  sports: 'Sports',
+  other: 'Other',
+}
+
+export default function SignalsTab({ isPremium }: { isPremium?: boolean }) {
   const [data, setData] = useState<SignalsData | null>(null)
   const [loading, setLoading] = useState(true)
   const [sideFilter, setSideFilter] = useState<'all' | 'buy' | 'sell'>('all')
+  const [category, setCategory] = useState<Category>('all')
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState<'recent' | 'high' | 'low'>('recent')
 
@@ -62,7 +76,6 @@ export default function SignalsTab() {
 
   const signals = data?.signals ?? []
 
-  // Stats
   const totalVolume = signals.reduce((s, t) => s + t.usdSize, 0)
   const buys = signals.filter(s => s.side === 'BUY')
   const sells = signals.filter(s => s.side === 'SELL')
@@ -71,13 +84,12 @@ export default function SignalsTab() {
   const sellPct = 100 - buyPct
   const buyVol = buys.reduce((s, t) => s + t.usdSize, 0)
   const sellVol = sells.reduce((s, t) => s + t.usdSize, 0)
-
   const sentiment = buyPct > 60 ? 'Bullish' : buyPct < 40 ? 'Bearish' : 'Neutral'
   const sentimentColor = sentiment === 'Bullish' ? '#22c55e' : sentiment === 'Bearish' ? '#ef4444' : '#f59e0b'
 
-  // Filtered + sorted signals
   const filtered = useMemo(() => {
     let result = [...signals]
+    if (category !== 'all') result = result.filter(s => inferCategory(s.title) === category)
     if (sideFilter !== 'all') result = result.filter(s => s.side === sideFilter.toUpperCase())
     if (search) result = result.filter(s =>
       s.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -88,7 +100,7 @@ export default function SignalsTab() {
     else if (sort === 'low') result.sort((a, b) => a.usdSize - b.usdSize)
     else result.sort((a, b) => b.timestamp - a.timestamp)
     return result
-  }, [signals, sideFilter, search, sort])
+  }, [signals, category, sideFilter, search, sort])
 
   if (loading) {
     return (
@@ -108,9 +120,9 @@ export default function SignalsTab() {
             ◎
           </div>
           <div>
-            <p className="text-sm font-semibold text-[#e8e8f0] mb-1">Why on-chain signals matter</p>
+            <p className="text-sm font-semibold text-[#e8e8f0] mb-1">The only market where insiders can&apos;t be limited</p>
             <p className="text-xs text-[#6b6b80] leading-relaxed">
-              Sportsbooks limit sharp bettors. Polymarket cannot. Every trade is a smart contract on a public blockchain: no account limits, no restrictions. The sharpest money in the world flows freely here, which means Polymarket prices are often ahead of sportsbook lines. When a whale moves size, the sportsbook has not caught up yet. That window is the edge.
+              Polymarket is a smart contract on a public blockchain. No accounts, no restrictions. The sharpest traders in the world — sports bettors, political insiders, crypto funds — trade freely at full size. When a wallet with a track record bets $10K+, that trade is a statement. SharpBet surfaces it the moment it happens.
             </p>
           </div>
         </div>
@@ -143,8 +155,6 @@ export default function SignalsTab() {
             {sentiment}
           </span>
         </div>
-
-        {/* Buy/sell split bar */}
         <div className="flex items-center justify-between text-xs mb-1">
           <span className="text-[#22c55e] font-semibold">Buy {buyPct.toFixed(1)}%</span>
           <span className="text-[#ef4444] font-semibold">Sell {sellPct.toFixed(1)}%</span>
@@ -157,12 +167,28 @@ export default function SignalsTab() {
           <span className="text-[#22c55e]">${buyVol.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
           <span className="text-[#ef4444]">${sellVol.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
         </div>
-
         <p className="text-xs text-[#6b7280] mt-3 italic">
           {signals.length === 0
-            ? 'No whale activity detected on active sports markets right now.'
-            : `${buys.length} whale buy${buys.length !== 1 ? 's' : ''} vs ${sells.length} sell${sells.length !== 1 ? 's' : ''} detected across active sports markets.`}
+            ? 'No whale activity detected right now.'
+            : `${buys.length} whale buy${buys.length !== 1 ? 's' : ''} vs ${sells.length} sell${sells.length !== 1 ? 's' : ''} across all Polymarket categories.`}
         </p>
+      </div>
+
+      {/* Category filter */}
+      <div className="flex items-center gap-2 flex-wrap">
+        {(['all', 'politics', 'crypto', 'sports', 'other'] as Category[]).map(cat => (
+          <button
+            key={cat}
+            onClick={() => setCategory(cat)}
+            className={`px-3 py-1 rounded-lg text-xs font-semibold border transition-colors ${
+              category === cat
+                ? 'bg-[#7c3aed]/15 text-[#a78bfa] border-[#7c3aed]/30'
+                : 'bg-[#0f0f17] text-[#6b7280] border-[#1c1c2e] hover:text-white'
+            }`}
+          >
+            {CATEGORY_LABELS[cat]}
+          </button>
+        ))}
       </div>
 
       {/* Trade Feed Header */}
@@ -174,12 +200,12 @@ export default function SignalsTab() {
         <input
           value={search}
           onChange={e => setSearch(e.target.value)}
-          placeholder="Search trades..."
+          placeholder="Search markets..."
           className="bg-[#0f0f17] border border-[#1c1c2e] rounded-lg px-3 py-1.5 text-sm text-white placeholder-[#4a4a55] focus:outline-none focus:border-[#7c3aed]/50 w-48"
         />
       </div>
 
-      {/* Filter + Sort bar */}
+      {/* Side filter + Sort */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center gap-2">
           {[
@@ -205,7 +231,7 @@ export default function SignalsTab() {
           ))}
         </div>
         <div className="flex items-center gap-2 text-xs text-[#6b7280]">
-          <span>Sort by:</span>
+          <span>Sort:</span>
           <select
             value={sort}
             onChange={e => setSort(e.target.value as any)}
@@ -224,139 +250,91 @@ export default function SignalsTab() {
           <div className="text-4xl mb-3">🐋</div>
           <p className="text-[#4a4a55] text-sm font-mono mb-1">No whale signals detected</p>
           <p className="text-[#3a3a45] text-xs max-w-sm">
-            Signals appear when a wallet trades $1,000+ on an active sports market on Polymarket. Check back when games are live.
+            Signals appear when a wallet trades $10,000+ on Polymarket. The threshold filters out noise and captures only meaningful conviction.
           </p>
         </div>
       ) : (
         <div className="space-y-3">
-          {filtered.map((signal, i) => (
-            <div key={`${signal.wallet}-${signal.slug}-${i}`}
-              className="bg-[#0f0f17] border border-[#1c1c2e] rounded-xl overflow-hidden hover:border-[#2a2a3e] transition-colors">
+          {filtered.map((signal, i) => {
+            const cat = inferCategory(signal.title)
+            const catColors: Record<string, string> = {
+              politics: '#f59e0b',
+              crypto: '#06b6d4',
+              sports: '#22c55e',
+              other: '#9999aa',
+            }
+            return (
+              <div key={`${signal.wallet}-${signal.slug}-${i}`}
+                className="bg-[#0f0f17] border border-[#1c1c2e] rounded-xl overflow-hidden hover:border-[#2a2a3e] transition-colors">
 
-              {/* Top section — market info */}
-              <div className="p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-white text-sm leading-snug truncate">{signal.title}</p>
-                    <p className="text-[11px] text-[#6b7280] mt-0.5">{timeAgo(signal.timestamp)}</p>
-                  </div>
-                  <a
-                    href={`https://polymarket.com/event/${signal.slug}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 px-3 py-1.5 rounded-lg bg-[#1c1c2e] hover:bg-[#252535] text-xs text-[#9999aa] hover:text-white transition-colors border border-[#2a2a3e] whitespace-nowrap"
-                  >
-                    Trade ↗
-                  </a>
-                </div>
-
-                {/* Badges */}
-                <div className="flex items-center gap-2 mt-3 flex-wrap">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1c1c2e] text-[#9999aa]">
-                    {signal.outcome}
-                  </span>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/20">
-                    ⊙ ${signal.usdSize.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                  </span>
-                </div>
-
-                {/* Divergence card */}
-                <div className="mt-3 bg-[#08080f] border border-[#1c1c2e] rounded-lg p-3">
-                  <div className="flex items-center justify-between gap-4">
-
-                    {/* Polymarket side */}
-                    <div className="text-center">
-                      <p className="text-[10px] text-[#4a4a55] font-mono uppercase tracking-widest mb-1">Polymarket</p>
-                      <p className="text-lg font-bold text-white">{signal.impliedProb}%</p>
-                      <p className="text-[11px] font-mono text-[#6b7280]">{signal.polyAmericanOdds ?? '—'}</p>
+                <div className="p-4">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded border"
+                          style={{ color: catColors[cat], borderColor: catColors[cat] + '40', background: catColors[cat] + '15' }}>
+                          {cat.toUpperCase()}
+                        </span>
+                      </div>
+                      <p className="font-semibold text-white text-sm leading-snug truncate">{signal.title}</p>
+                      <p className="text-[11px] text-[#6b7280] mt-0.5">{timeAgo(signal.timestamp)}</p>
                     </div>
-
-                    {/* Gap indicator */}
-                    <div className="flex-1 flex flex-col items-center gap-1">
-                      {signal.divergencePts !== null ? (
-                        <>
-                          <div className={`text-sm font-bold px-2 py-0.5 rounded ${
-                            signal.divergencePts > 5
-                              ? 'text-green-400 bg-green-500/10'
-                              : signal.divergencePts < -5
-                              ? 'text-red-400 bg-red-500/10'
-                              : 'text-yellow-400 bg-yellow-500/10'
-                          }`}>
-                            {signal.divergencePts > 0 ? '+' : ''}{signal.divergencePts}pt
-                          </div>
-                          <div className="w-full h-1.5 rounded-full bg-[#1c1c2e] overflow-hidden">
-                            <div
-                              className={`h-full rounded-full ${signal.divergencePts > 0 ? 'bg-green-500' : 'bg-red-500'}`}
-                              style={{ width: `${Math.min(Math.abs(signal.divergencePts) * 2, 100)}%`, marginLeft: signal.divergencePts < 0 ? 'auto' : undefined }}
-                            />
-                          </div>
-                          <p className="text-[10px] text-[#4a4a55]">
-                            {signal.divergencePts > 5 ? 'Poly higher than books' : signal.divergencePts < -5 ? 'Books higher than Poly' : 'Roughly aligned'}
-                          </p>
-                        </>
-                      ) : (
-                        <p className="text-[10px] text-[#3a3a45] text-center font-mono">no book line<br />matched</p>
-                      )}
-                    </div>
-
-                    {/* Sportsbook side */}
-                    <div className="text-center">
-                      <p className="text-[10px] text-[#4a4a55] font-mono uppercase tracking-widest mb-1">
-                        {signal.bookName ?? 'Sportsbook'}
-                      </p>
-                      {signal.bookImpliedProb !== null ? (
-                        <>
-                          <p className="text-lg font-bold text-[#9999aa]">{signal.bookImpliedProb}%</p>
-                          <p className="text-[11px] font-mono text-[#6b7280]">
-                            {signal.bookOdds !== null
-                              ? `${signal.bookOdds > 0 ? '+' : ''}${signal.bookOdds}`
-                              : '—'}
-                          </p>
-                        </>
-                      ) : (
-                        <p className="text-lg font-bold text-[#3a3a45]">—</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom sub-card — trade detail */}
-              <div className="px-4 pb-4">
-                <div className="bg-[#08080f] border border-[#1c1c2e] rounded-lg p-3 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className={`flex items-center gap-1 text-sm font-bold ${
-                      signal.side === 'BUY' ? 'text-[#22c55e]' : 'text-[#ef4444]'
-                    }`}>
-                      {signal.side === 'BUY' ? '↑' : '↓'} {signal.side}
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <WalletAvatar name={signal.pseudonym} />
-                      <Link
-                        href={`/whale/${signal.wallet}`}
-                        className="text-[11px] text-[#a78bfa] hover:text-[#c4b5fd] transition-colors font-mono hover:underline underline-offset-2"
-                      >
-                        {signal.pseudonym}
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-xl font-bold text-white">
-                      ${signal.usdSize.toLocaleString(undefined, { maximumFractionDigits: 0 })}
-                    </p>
                     <a
-                      href={`https://polygonscan.com/tx/${signal.txHash}`}
+                      href={`https://polymarket.com/event/${signal.slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[10px] text-[#3a3a45] hover:text-[#7c3aed] transition-colors font-mono"
+                      className="shrink-0 px-3 py-1.5 rounded-lg bg-[#1c1c2e] hover:bg-[#252535] text-xs text-[#9999aa] hover:text-white transition-colors border border-[#2a2a3e] whitespace-nowrap"
                     >
-                      verify on-chain →
+                      Trade ↗
                     </a>
+                  </div>
+
+                  <div className="flex items-center gap-2 mt-3 flex-wrap">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1c1c2e] text-[#9999aa]">
+                      {signal.outcome}
+                    </span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#7c3aed]/15 text-[#a78bfa] border border-[#7c3aed]/20">
+                      ⊙ {signal.impliedProb}% implied
+                    </span>
+                  </div>
+                </div>
+
+                <div className="px-4 pb-4">
+                  <div className="bg-[#08080f] border border-[#1c1c2e] rounded-lg p-3 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className={`flex items-center gap-1 text-sm font-bold ${
+                        signal.side === 'BUY' ? 'text-[#22c55e]' : 'text-[#ef4444]'
+                      }`}>
+                        {signal.side === 'BUY' ? '↑' : '↓'} {signal.side}
+                      </span>
+                      <div className="flex items-center gap-1.5">
+                        <WalletAvatar name={signal.pseudonym} />
+                        <Link
+                          href={`/whale/${signal.wallet}`}
+                          className="text-[11px] text-[#a78bfa] hover:text-[#c4b5fd] transition-colors font-mono hover:underline underline-offset-2"
+                        >
+                          {signal.pseudonym}
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-xl font-bold text-white">
+                        ${signal.usdSize.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                      </p>
+                      <a
+                        href={`https://polygonscan.com/tx/${signal.txHash}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] text-[#3a3a45] hover:text-[#7c3aed] transition-colors font-mono"
+                      >
+                        verify on-chain →
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       )}
 

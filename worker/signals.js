@@ -5,35 +5,18 @@ const { postToWebhook, whaleEmbed } = require('./discord')
 // Polymarket whale signal harvester.
 // Called every ~60s by the main worker loop.
 // Fetches the most recent 2000 trades from Polymarket's global trades feed,
-// filters for sports markets with $1,000+ USD size, and upserts into Supabase.
+// captures all categories with $10,000+ USD size, and upserts into Supabase.
 // Deduplication is handled by the unique `tx_hash` constraint.
 
 const DATA_API = 'https://data-api.polymarket.com'
-const WHALE_THRESHOLD_USD = 1000
+const WHALE_THRESHOLD_USD = 10000
 
-const SPORTS_INCLUDE = [
-  'nba', 'nfl', 'nhl', 'mlb', 'mls', 'ufc', 'pga', 'ncaa', 'wnba',
-  'basketball', 'football', 'soccer', 'baseball', 'hockey', 'tennis',
-  'golf', 'boxing', 'mma', 'wrestling', 'cricket', 'rugby',
-  'super bowl', 'world series', 'stanley cup', 'champions league',
-  'premier league', 'la liga', 'bundesliga', 'serie a', 'ligue 1',
-  'fifa', 'world cup', 'olympics', 'playoffs', 'finals',
-  'title fight', 'bout', 'match winner', 'game winner',
-  'nba finals', 'nfl playoffs', 'march madness',
-]
-
-const NON_SPORTS_EXCLUDE = [
-  'election', 'president', 'senate', 'congress', 'governor', 'primari',
-  'bitcoin', 'ethereum', ' btc ', ' eth ', 'crypto', 'blockchain',
-  'interest rate', 'recession', 'inflation', 'tariff', 'stock market',
-  'trump', 'biden', 'harris', 'musk', 'elon', 'nobel prize',
-  'up or down',  // 5-min crypto price markets
-]
-
-function isSportsTrade(title) {
+function inferCategory(title) {
   const t = (title || '').toLowerCase()
-  if (NON_SPORTS_EXCLUDE.some(kw => t.includes(kw))) return false
-  return SPORTS_INCLUDE.some(kw => t.includes(kw))
+  if (['election', 'president', 'senate', 'congress', 'governor', 'trump', 'biden', 'harris', 'vote', 'ballot', 'prime minister', 'republican', 'democrat', 'political'].some(kw => t.includes(kw))) return 'politics'
+  if (['bitcoin', 'ethereum', 'btc', 'eth', 'crypto', 'solana', 'doge', 'coinbase', 'binance', 'blockchain'].some(kw => t.includes(kw))) return 'crypto'
+  if (['nba', 'nfl', 'nhl', 'mlb', 'mls', 'ufc', 'pga', 'ncaa', 'wnba', 'basketball', 'football', 'soccer', 'baseball', 'hockey', 'tennis', 'golf', 'boxing', 'mma', 'super bowl', 'world cup', 'champions league', 'playoffs', 'finals', 'match winner', 'game winner'].some(kw => t.includes(kw))) return 'sports'
+  return 'other'
 }
 
 async function pollSignals(supabase) {
@@ -55,14 +38,14 @@ async function pollSignals(supabase) {
       return
     }
 
-    // Filter for sports whale trades
+    // Filter for whale trades across all categories
     const whales = trades.filter(t => {
       const usd = (t.size || 0) * (t.price || 0)
-      return usd >= WHALE_THRESHOLD_USD && isSportsTrade(t.title)
+      return usd >= WHALE_THRESHOLD_USD
     })
 
     if (whales.length === 0) {
-      console.log('[signals] No sports whale trades in current window')
+      console.log('[signals] No whale trades in current window')
       return
     }
 

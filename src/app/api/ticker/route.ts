@@ -9,7 +9,6 @@ export async function GET() {
     const { data } = await supabase
       .from('whale_signals')
       .select('tx_hash, pseudonym, side, outcome, price, usd_size, title, traded_at')
-      .gte('usd_size', 10000)
       .order('traded_at', { ascending: false })
       .limit(25)
 
