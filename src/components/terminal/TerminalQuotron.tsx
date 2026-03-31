@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react' from 'react'
+import { useEffect, useState } from 'react'
 
 interface Signal {
   wallet: string

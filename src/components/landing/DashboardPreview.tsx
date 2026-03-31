@@ -1,161 +1,175 @@
 const SIGNALS = [
-  {
-    pseudonym: 'CryptoKing',
-    color: '#7c3aed',
-    side: 'BUY',
-    category: 'POLITICS',
-    title: 'Will Republicans win the House in 2026?',
-    outcome: 'Yes',
-    polyProb: 67,
-    size: '$42K',
-    ago: '2m ago',
-    strength: 9,
-  },
-  {
-    pseudonym: 'SharpMoney7',
-    color: '#06b6d4',
-    side: 'SELL',
-    category: 'CRYPTO',
-    title: 'Will Bitcoin hit $150K before July 2026?',
-    outcome: 'No',
-    polyProb: 34,
-    size: '$28K',
-    ago: '7m ago',
-    strength: 6,
-  },
-  {
-    pseudonym: 'WhalePunter',
-    color: '#f59e0b',
-    side: 'BUY',
-    category: 'SPORTS',
-    title: 'Will the Celtics win the 2026 NBA Finals?',
-    outcome: 'Yes',
-    polyProb: 58,
-    size: '$19K',
-    ago: '14m ago',
-    strength: 4,
-  },
-  {
-    pseudonym: 'EdgeHunter',
-    color: '#22c55e',
-    side: 'BUY',
-    category: 'POLITICS',
-    title: 'Will the Fed cut rates in May 2026?',
-    outcome: 'Yes',
-    polyProb: 72,
-    size: '$35K',
-    ago: '22m ago',
-    strength: 8,
-  },
+  { pseudonym: 'CryptoKing',  side: 'BUY',  category: 'POL', catColor: '#f59e0b', title: 'Will Republicans win the House in 2026?',  outcome: 'Yes', prob: 67, size: '$42K', ago: '2m ago',  strength: 9 },
+  { pseudonym: 'SharpMoney7', side: 'SELL', category: 'CRY', catColor: '#06b6d4', title: 'Will Bitcoin hit $150K before July 2026?',  outcome: 'No',  prob: 34, size: '$28K', ago: '7m ago',  strength: 6 },
+  { pseudonym: 'WhalePunter', side: 'BUY',  category: 'SPT', catColor: '#22c55e', title: 'Will the Celtics win the 2026 NBA Finals?', outcome: 'Yes', prob: 58, size: '$19K', ago: '14m ago', strength: 4 },
+  { pseudonym: 'EdgeHunter',  side: 'BUY',  category: 'POL', catColor: '#f59e0b', title: 'Will the Fed cut rates in May 2026?',        outcome: 'Yes', prob: 72, size: '$35K', ago: '22m ago', strength: 8 },
 ]
 
-const CAT_COLORS: Record<string, string> = {
-  POLITICS: '#f59e0b',
-  CRYPTO: '#06b6d4',
-  SPORTS: '#22c55e',
-  OTHER: '#9999aa',
-}
+const HOT_MARKETS = [
+  { rank: 1, title: 'Will Trump sign the budget by April 30?',    vol: '$1.2M', buyPct: 71, cat: 'POL', catColor: '#f59e0b' },
+  { rank: 2, title: 'Will Bitcoin hit $150K before July 2026?',   vol: '$840K', buyPct: 34, cat: 'CRY', catColor: '#06b6d4' },
+  { rank: 3, title: 'Will the Celtics win the 2026 NBA Finals?',  vol: '$530K', buyPct: 58, cat: 'SPT', catColor: '#22c55e' },
+]
+
+const LEADERBOARD = [
+  { rank: '🥇', name: 'CryptoKing',  vol: '$4.2M', trades: 38, buyPct: 74, cat: 'POL', catColor: '#f59e0b', initial: 'C', color: '#00c805' },
+  { rank: '🥈', name: 'EdgeHunter',  vol: '$2.8M', trades: 24, buyPct: 68, cat: 'CRY', catColor: '#06b6d4', initial: 'E', color: '#06b6d4' },
+  { rank: '🥉', name: 'SharpMoney7', vol: '$1.9M', trades: 19, buyPct: 45, cat: 'SPT', catColor: '#22c55e', initial: 'S', color: '#f59e0b' },
+]
 
 export default function DashboardPreview() {
   return (
-    <div className="relative w-full max-w-xl">
+    <div className="relative w-full max-w-2xl">
       {/* Glow */}
-      <div className="absolute -inset-4 bg-gradient-to-r from-violet-500/10 via-green-500/5 to-cyan-500/10 rounded-2xl blur-2xl" />
+      <div className="absolute -inset-4 bg-gradient-to-r from-[#00c805]/10 via-transparent to-[#06b6d4]/10 rounded-2xl blur-2xl" />
 
       {/* Browser chrome */}
-      <div className="relative rounded-xl border border-[#2a2a32] bg-[#0a0a0d] overflow-hidden shadow-2xl">
+      <div className="relative rounded-xl border border-[#222222] bg-black overflow-hidden shadow-2xl">
 
         {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-3 bg-[#111114] border-b border-[#1a1a1f]">
+        <div className="flex items-center gap-2 px-4 py-3 bg-[#0a0a0a] border-b border-[#1f1f1f]">
           <div className="flex gap-1.5">
             <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
             <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
             <div className="w-3 h-3 rounded-full bg-[#28c840]" />
           </div>
-          <div className="flex-1 mx-4 bg-[#1a1a1f] rounded-md px-3 py-1 text-[10px] text-[#4a4a55] font-mono text-center">
+          <div className="flex-1 mx-4 bg-[#111111] rounded-md px-3 py-1 text-[10px] text-[#444444] font-mono text-center">
             getsharpbet.com/dashboard
           </div>
-          <div className="flex items-center gap-1.5 text-[10px] font-mono text-green-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+          <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#00c805] font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00c805] animate-pulse" />
             LIVE
           </div>
         </div>
 
-        {/* Tab bar */}
-        <div className="px-4 pt-2.5 pb-0 flex items-center gap-3 border-b border-[#1a1a1f]">
-          <div className="pb-2 border-b-2 border-[#7c3aed] text-[10px] font-mono font-semibold text-[#a78bfa]">
-            🐋 SIGNALS
-          </div>
-          <div className="ml-auto pb-2 text-[10px] font-mono text-[#3a3a45]">
-            4 signals · All categories
-          </div>
+        {/* Status bar */}
+        <div className="flex items-center gap-2 px-4 py-1.5 bg-black border-b border-[#1a1a1a]">
+          <span className="text-[9px] font-mono text-[#333333]">POLYMARKET</span>
+          <span className="text-[9px] font-mono text-[#222222]">·</span>
+          <span className="text-[9px] font-mono text-[#333333]">$10K+ THRESHOLD</span>
+          <span className="text-[9px] font-mono text-[#222222]">·</span>
+          <span className="text-[9px] font-mono text-[#333333]">ON-CHAIN VERIFIED</span>
+          <span className="ml-auto text-[9px] font-mono text-[#222222]">06:24:51 PM</span>
         </div>
 
-        {/* Signal rows */}
-        <div className="divide-y divide-[#0d0d10]">
-          {SIGNALS.map((s, i) => {
-            const isBuy = s.side === 'BUY'
-            const catColor = CAT_COLORS[s.category] ?? '#9999aa'
-            return (
-              <div key={i} className={`px-3 py-2.5 ${i === 0 ? 'bg-violet-500/[0.04]' : ''}`}>
-                {/* Top row */}
-                <div className="flex items-center gap-2 mb-1.5">
-                  <div
-                    className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold text-white shrink-0"
-                    style={{ background: s.color }}
-                  >
-                    {s.pseudonym[0]}
-                  </div>
-                  <span className="text-[10px] font-mono text-[#6b6b80] shrink-0">{s.pseudonym}</span>
-                  <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded shrink-0 ${
-                    isBuy ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'
-                  }`}>
-                    {isBuy ? '↑' : '↓'} {s.side}
-                  </span>
-                  <span
-                    className="text-[8px] font-mono px-1 py-0.5 rounded shrink-0"
-                    style={{ color: catColor, background: catColor + '15' }}
-                  >
-                    {s.category}
-                  </span>
-                  <span className={`text-[8px] font-mono px-1 py-0.5 rounded border shrink-0 ${
-                    s.strength >= 8 ? 'text-green-400 bg-green-500/10 border-green-500/20'
-                    : s.strength >= 5 ? 'text-amber-400 bg-amber-500/10 border-amber-500/20'
-                    : 'text-[#6b7280] bg-[#1c1c2e] border-[#2a2a3e]'
-                  }`}>
-                    ⚡{s.strength}
-                  </span>
-                  <span className="text-[9px] text-[#3a3a45] font-mono ml-auto shrink-0">{s.ago}</span>
-                </div>
+        {/* Main layout */}
+        <div className="flex" style={{ height: '340px' }}>
 
-                {/* Market title */}
-                <p className="text-[10px] text-[#9999aa] font-mono truncate mb-2 pl-7">{s.title}</p>
+          {/* Left 60%: Signals */}
+          <div className="flex flex-col border-r border-[#1f1f1f]" style={{ width: '60%' }}>
+            {/* Pane header */}
+            <div className="flex items-center justify-between px-3 py-2 border-b border-[#1f1f1f] bg-[#0a0a0a]">
+              <div className="flex items-center gap-2">
+                <span className="text-xs">🐋</span>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#00c805]">Signals</span>
+              </div>
+            </div>
+            {/* Filters */}
+            <div className="flex flex-col border-b border-[#1f1f1f] bg-[#0a0a0a]">
+              <div className="flex items-center gap-2 px-3 pt-1.5 pb-1">
+                {['ALL', '▲ BUY', '▼ SELL'].map((f, i) => (
+                  <span key={f} className={`text-[9px] font-mono font-semibold px-2 py-0.5 rounded border ${i === 0 ? 'bg-[#1a1a1a] text-white border-[#333333]' : 'text-[#444444] border-transparent'}`}>{f}</span>
+                ))}
+                <span className="ml-auto text-[9px] font-mono text-[#333333]">4 signals · 24h</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 pb-1.5">
+                {['ALL','POL','CRY','SPT','OTH'].map((c, i) => (
+                  <span key={c} className={`text-[9px] font-mono px-1.5 py-px rounded border ${i === 0 ? 'text-[#00c805] bg-[#00c805]/15 border-[#00c805]/40' : 'text-[#444444] border-transparent'}`}>{c}</span>
+                ))}
+              </div>
+            </div>
+            {/* Signal rows */}
+            <div className="overflow-hidden flex-1 divide-y divide-[#111111]">
+              {SIGNALS.map((s, i) => {
+                const isBuy = s.side === 'BUY'
+                return (
+                  <div key={i} className={`px-3 py-2 ${i % 2 === 0 ? 'bg-black' : 'bg-[#080808]'}`}>
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <span className={`text-[9px] font-mono font-bold px-1 py-px rounded ${isBuy ? 'bg-[#00c805]/15 text-[#00c805]' : 'bg-red-500/15 text-red-400'}`}>
+                        {isBuy ? '▲ BUY' : '▼ SELL'}
+                      </span>
+                      <span className="text-[8px] font-mono px-1 py-px rounded" style={{ color: s.catColor, background: s.catColor + '18' }}>{s.category}</span>
+                      <span className={`text-[8px] font-mono font-semibold ${s.strength >= 8 ? 'text-[#00c805]' : s.strength >= 5 ? 'text-amber-400' : 'text-[#444444]'}`}>⚡{s.strength}</span>
+                      <span className="ml-auto text-[8px] font-mono text-[#333333]">{s.ago}</span>
+                    </div>
+                    <p className="text-[11px] text-white font-medium leading-snug mb-1 truncate">{s.title}</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[9px] font-mono text-[#555555]">{s.pseudonym}</span>
+                      <span className="text-[8px] font-mono text-[#444444]">·</span>
+                      <span className="text-[8px] font-mono text-[#444444]">{s.outcome} · {s.prob}%</span>
+                      <span className="ml-auto text-[11px] font-bold font-mono text-white">{s.size}</span>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
 
-                {/* Prob + size */}
-                <div className="pl-7 flex items-center gap-3">
-                  <div className="text-center">
-                    <p className="text-[8px] text-[#4a4a55] font-mono uppercase tracking-widest">POLY</p>
-                    <p className="text-xs font-bold text-white">{s.polyProb}%</p>
-                  </div>
-                  <div className="flex-1 h-1 rounded-full bg-[#1c1c2e] overflow-hidden">
-                    <div
-                      className={`h-full rounded-full ${isBuy ? 'bg-green-500' : 'bg-red-500'}`}
-                      style={{ width: `${s.polyProb}%` }}
-                    />
-                  </div>
-                  <div className={`text-xs font-bold font-mono ${isBuy ? 'text-green-400' : 'text-red-400'}`}>
-                    {s.size}
-                  </div>
+          {/* Right 40%: Hot Markets + Leaderboard */}
+          <div className="flex flex-col" style={{ width: '40%' }}>
+
+            {/* Hot Markets - top 50% */}
+            <div className="flex flex-col border-b border-[#1f1f1f]" style={{ height: '50%' }}>
+              <div className="flex items-center justify-between px-3 py-2 border-b border-[#1f1f1f] bg-[#0a0a0a]">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs">🔥</span>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#666666]">Hot Markets</span>
                 </div>
               </div>
-            )
-          })}
-        </div>
+              <div className="overflow-hidden flex-1 divide-y divide-[#111111] bg-black">
+                {HOT_MARKETS.map((m) => {
+                  const isBull = m.buyPct >= 65
+                  const isBear = m.buyPct <= 35
+                  return (
+                    <div key={m.rank} className="flex items-start gap-2 px-3 py-2 hover:bg-[#0f0f0f]">
+                      <span className="text-[9px] font-mono text-[#333333] w-4 shrink-0">#{m.rank}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[10px] text-[#cccccc] leading-snug truncate font-medium">{m.title}</p>
+                        <div className="flex items-center gap-1.5 mt-1">
+                          <span className="text-[8px] font-mono px-1 py-px rounded" style={{ color: m.catColor, background: m.catColor + '18' }}>{m.cat}</span>
+                          <div className="flex-1 h-0.5 rounded-full bg-[#1a1a1a]">
+                            <div className="h-full rounded-full" style={{ width: `${m.buyPct}%`, background: isBull ? '#00c805' : isBear ? '#ef4444' : '#f59e0b' }} />
+                          </div>
+                          <span className={`text-[8px] font-mono font-semibold shrink-0 ${isBull ? 'text-[#00c805]' : isBear ? 'text-red-400' : 'text-amber-400'}`}>{m.buyPct}%</span>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-mono font-bold text-white shrink-0">{m.vol}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
 
-        {/* Bottom bar */}
-        <div className="px-4 py-2 bg-[#0d0d10] flex items-center justify-between border-t border-[#1a1a1f]">
-          <span className="text-[9px] text-[#3a3a45] font-mono">POLYMARKET · POLYGON · $10K+ THRESHOLD</span>
-          <span className="text-[9px] text-[#7c3aed] font-mono font-semibold">ON-CHAIN VERIFIED ✓</span>
+            {/* Leaderboard - bottom 50% */}
+            <div className="flex flex-col" style={{ height: '50%' }}>
+              <div className="flex items-center justify-between px-3 py-2 border-b border-[#1f1f1f] bg-[#0a0a0a]">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs">🏆</span>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#666666]">Leaderboard</span>
+                </div>
+              </div>
+              <div className="overflow-hidden flex-1 divide-y divide-[#111111] bg-black">
+                {LEADERBOARD.map((w) => (
+                  <div key={w.name} className="flex items-center gap-2 px-3 py-2 hover:bg-[#0f0f0f]">
+                    <span className="text-[9px] font-mono text-[#333333] w-5 shrink-0 text-center">{w.rank}</span>
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center text-[8px] font-bold text-black shrink-0" style={{ background: w.color }}>
+                      {w.initial}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[11px] text-[#cccccc] truncate font-medium">{w.name}</p>
+                      <div className="flex items-center gap-1.5 mt-0.5">
+                        <span className="text-[8px] font-mono px-1 py-px rounded" style={{ color: w.catColor, background: w.catColor + '18' }}>{w.cat}</span>
+                        <span className="text-[8px] font-mono text-[#444444]">{w.trades} trades</span>
+                        <span className={`text-[8px] font-mono ml-auto ${w.buyPct > 60 ? 'text-[#00c805]' : 'text-amber-400'}`}>{w.buyPct}% buy</span>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-mono font-bold text-white shrink-0">{w.vol}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
