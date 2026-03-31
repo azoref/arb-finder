@@ -42,45 +42,45 @@ export default function TerminalFollowing({ isPremium }: { isPremium?: boolean }
   }, [isPremium])
 
   if (!isPremium) return (
-    <div className="flex flex-col items-center justify-center h-full gap-3 px-4 text-center">
+    <div className="flex flex-col items-center justify-center h-full gap-3 px-4 text-center bg-black">
       <span className="text-2xl">★</span>
-      <p className="text-[11px] text-[#6b6b80]">Follow whale wallets and get alerts when they trade.</p>
-      <Link href="/pricing" className="text-[10px] px-3 py-1.5 rounded bg-violet-600 hover:bg-violet-500 text-white font-medium transition-colors">Upgrade to Pro</Link>
+      <p className="text-[11px] text-[#555555]">Follow whale wallets and get alerts when they trade.</p>
+      <Link href="/pricing" className="text-[10px] px-3 py-1.5 rounded bg-[#00c805] hover:bg-[#00e006] text-black font-bold transition-colors">Upgrade to Pro</Link>
     </div>
   )
 
-  if (loading) return <div className="flex items-center justify-center h-full text-[#3a3a45] font-mono text-xs animate-pulse">Loading...</div>
+  if (loading) return <div className="flex items-center justify-center h-full text-[#444444] font-mono text-xs animate-pulse bg-black">Loading...</div>
 
   if (followed.size === 0) return (
-    <div className="flex flex-col items-center justify-center h-full gap-2 px-4 text-center">
-      <p className="text-[11px] text-[#6b6b80]">You are not following any wallets yet.</p>
-      <Link href="/leaderboard" className="text-[10px] text-[#a78bfa] hover:underline">Browse leaderboard →</Link>
+    <div className="flex flex-col items-center justify-center h-full gap-2 px-4 text-center bg-black">
+      <p className="text-[11px] text-[#555555]">You are not following any wallets yet.</p>
+      <Link href="/leaderboard" className="text-[10px] text-[#00c805] hover:underline">Browse leaderboard →</Link>
     </div>
   )
 
   if (signals.length === 0) return (
-    <div className="flex flex-col items-center justify-center h-full gap-2 px-4 text-center">
-      <p className="text-[11px] text-[#6b6b80]">No recent signals from your {followed.size} followed wallet{followed.size !== 1 ? 's' : ''}.</p>
+    <div className="flex flex-col items-center justify-center h-full gap-2 px-4 text-center bg-black">
+      <p className="text-[11px] text-[#555555]">No recent signals from your {followed.size} followed wallet{followed.size !== 1 ? 's' : ''}.</p>
     </div>
   )
 
   return (
-    <div className="overflow-y-auto h-full divide-y divide-[#0f0f12]">
+    <div className="overflow-y-auto h-full divide-y divide-[#111111] bg-black">
       {signals.map((s, i) => {
         const isBuy = s.side === 'BUY'
         return (
-          <div key={`${s.wallet}-${i}`} className="px-3 py-2 hover:bg-[#0d0d14] transition-colors border-l-2 border-violet-500/50">
+          <div key={`${s.wallet}-${i}`} className="px-3 py-2.5 hover:bg-[#0f0f0f] transition-colors border-l-2 border-[#00c805]/40">
             <div className="flex items-center gap-1.5 mb-0.5">
-              <span className={`text-[9px] font-bold ${isBuy ? 'text-green-400' : 'text-red-400'}`}>{isBuy ? '▲' : '▼'}</span>
+              <span className={`text-[10px] font-bold ${isBuy ? 'text-[#00c805]' : 'text-red-400'}`}>{isBuy ? '▲' : '▼'}</span>
               {s.strengthScore != null && (
-                <span className={`text-[9px] font-mono ${s.strengthScore >= 8 ? 'text-green-400' : s.strengthScore >= 5 ? 'text-amber-400' : 'text-[#4a4a55]'}`}>⚡{s.strengthScore}</span>
+                <span className={`text-[10px] font-mono ${s.strengthScore >= 8 ? 'text-[#00c805]' : s.strengthScore >= 5 ? 'text-amber-400' : 'text-[#444444]'}`}>⚡{s.strengthScore}</span>
               )}
-              <span className="text-[9px] font-mono text-[#3a3a45] ml-auto">{timeAgo(s.timestamp)}</span>
+              <span className="text-[10px] font-mono text-[#333333] ml-auto">{timeAgo(s.timestamp)}</span>
             </div>
-            <p className="text-[11px] text-[#c4c4d4] leading-snug truncate">{s.title}</p>
+            <p className="text-[12px] text-[#cccccc] leading-snug truncate font-medium">{s.title}</p>
             <div className="flex items-center gap-2 mt-0.5">
-              <Link href={`/whale/${s.wallet}`} className="text-[9px] font-mono text-violet-400 hover:text-violet-300 transition-colors truncate">{s.pseudonym}</Link>
-              <span className="text-[9px] font-mono font-bold text-white ml-auto shrink-0">${(s.usdSize / 1000).toFixed(0)}K</span>
+              <Link href={`/whale/${s.wallet}`} className="text-[10px] font-mono text-[#00c805] hover:text-[#00e006] transition-colors truncate">{s.pseudonym}</Link>
+              <span className="text-[10px] font-mono font-bold text-white ml-auto shrink-0">${(s.usdSize / 1000).toFixed(0)}K</span>
             </div>
           </div>
         )

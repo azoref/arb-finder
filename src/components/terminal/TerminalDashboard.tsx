@@ -19,15 +19,15 @@ const PANES = [
 function PaneHeader({ type, onChange, accent }: { type: PaneType; onChange: (t: PaneType) => void; accent?: boolean }) {
   const current = PANES.find(p => p.id === type)!
   return (
-    <div className="flex items-center justify-between px-3 py-2 border-b border-[#1a1a1f] bg-[#09090d] shrink-0">
+    <div className="flex items-center justify-between px-3 py-2 border-b border-[#1f1f1f] bg-[#0a0a0a] shrink-0">
       <div className="flex items-center gap-2">
         <span className="text-sm">{current.icon}</span>
-        <span className={`text-xs font-mono font-bold uppercase tracking-widest ${accent ? 'text-green-400' : 'text-[#7c7c9a]'}`}>{current.label}</span>
+        <span className={`text-xs font-mono font-bold uppercase tracking-widest ${accent ? 'text-[#00c805]' : 'text-[#666666]'}`}>{current.label}</span>
       </div>
       <select
         value={type}
         onChange={e => onChange(e.target.value as PaneType)}
-        className="text-[10px] font-mono bg-[#111118] border border-[#2a2a32] text-[#6b6b80] rounded px-1.5 py-0.5 focus:outline-none focus:border-[#7c3aed]/50 cursor-pointer"
+        className="text-[10px] font-mono bg-[#111111] border border-[#2a2a2a] text-[#555555] rounded px-1.5 py-0.5 focus:outline-none focus:border-[#00c805]/40 cursor-pointer"
       >
         {PANES.map(p => <option key={p.id} value={p.id}>{p.icon} {p.label}</option>)}
       </select>
@@ -45,8 +45,8 @@ function PaneContent({ type, isPremium, followedWallets }: { type: PaneType; isP
 }
 
 export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium: boolean; isLoggedIn: boolean }) {
-  const [leftPane, setLeftPane]     = useState<PaneType>('signals')
-  const [rightTop, setRightTop]     = useState<PaneType>('movers')
+  const [leftPane, setLeftPane]       = useState<PaneType>('signals')
+  const [rightTop, setRightTop]       = useState<PaneType>('movers')
   const [rightBottom, setRightBottom] = useState<PaneType>('leaderboard')
   const [followedWallets, setFollowedWallets] = useState<Set<string>>(new Set())
   const [now, setNow] = useState('')
@@ -66,24 +66,24 @@ export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium
   }, [isPremium])
 
   return (
-    <div className="flex flex-col" style={{ height: 'calc(100vh - 56px)' }}>
+    <div className="flex flex-col bg-black" style={{ height: 'calc(100vh - 56px)' }}>
 
       {/* Terminal status bar */}
-      <div className="flex items-center gap-3 px-4 py-1.5 bg-[#06060a] border-b border-[#1a1a1f] shrink-0">
+      <div className="flex items-center gap-3 px-4 py-1.5 bg-black border-b border-[#1f1f1f] shrink-0">
         <div className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-[10px] font-mono text-green-400 font-semibold">LIVE</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00c805] animate-pulse" />
+          <span className="text-[10px] font-mono text-[#00c805] font-semibold">LIVE</span>
         </div>
-        <span className="text-[10px] font-mono text-[#2a2a3e]">·</span>
-        <span className="text-[10px] font-mono text-[#4a4a55]">POLYMARKET</span>
-        <span className="text-[10px] font-mono text-[#2a2a3e]">·</span>
-        <span className="text-[10px] font-mono text-[#4a4a55]">$10K+ THRESHOLD</span>
-        <span className="text-[10px] font-mono text-[#2a2a3e]">·</span>
-        <span className="text-[10px] font-mono text-[#4a4a55]">ON-CHAIN VERIFIED</span>
+        <span className="text-[10px] font-mono text-[#2a2a2a]">·</span>
+        <span className="text-[10px] font-mono text-[#444444]">POLYMARKET</span>
+        <span className="text-[10px] font-mono text-[#2a2a2a]">·</span>
+        <span className="text-[10px] font-mono text-[#444444]">$10K+ THRESHOLD</span>
+        <span className="text-[10px] font-mono text-[#2a2a2a]">·</span>
+        <span className="text-[10px] font-mono text-[#444444]">ON-CHAIN VERIFIED</span>
         <div className="ml-auto flex items-center gap-3">
-          <span className="text-[10px] font-mono text-[#3a3a45] tabular-nums">{now}</span>
+          <span className="text-[10px] font-mono text-[#333333] tabular-nums">{now}</span>
           {!isLoggedIn && (
-            <a href="/auth/signup" className="text-[10px] font-mono px-2.5 py-1 rounded bg-green-600 hover:bg-green-500 text-white font-semibold transition-colors">
+            <a href="/auth/signup" className="text-[10px] font-mono px-2.5 py-1 rounded bg-[#00c805] hover:bg-[#00e006] text-black font-bold transition-colors">
               Sign up free
             </a>
           )}
@@ -97,7 +97,7 @@ export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium
       <div className="flex flex-1 min-h-0">
 
         {/* Left: main signals pane — 60% */}
-        <div className="flex flex-col border-r border-[#1a1a1f]" style={{ width: '60%' }}>
+        <div className="flex flex-col border-r border-[#1f1f1f]" style={{ width: '60%' }}>
           <PaneHeader type={leftPane} onChange={setLeftPane} accent />
           <div className="flex-1 min-h-0 overflow-hidden">
             <PaneContent type={leftPane} isPremium={isPremium} followedWallets={followedWallets} />
@@ -107,7 +107,7 @@ export default function TerminalDashboard({ isPremium, isLoggedIn }: { isPremium
         {/* Right: two stacked panes — 40% */}
         <div className="flex flex-col" style={{ width: '40%' }}>
           {/* Top right */}
-          <div className="flex flex-col border-b border-[#1a1a1f]" style={{ height: '50%' }}>
+          <div className="flex flex-col border-b border-[#1f1f1f]" style={{ height: '50%' }}>
             <PaneHeader type={rightTop} onChange={setRightTop} />
             <div className="flex-1 min-h-0 overflow-hidden">
               <PaneContent type={rightTop} isPremium={isPremium} followedWallets={followedWallets} />

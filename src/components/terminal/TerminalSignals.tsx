@@ -29,7 +29,7 @@ function inferCategory(title: string) {
   if (['election','president','senate','congress','governor','trump','biden','harris','vote','ballot','republican','democrat','fed','federal reserve'].some(kw => t.includes(kw))) return { short: 'POL', full: 'Politics', color: '#f59e0b' }
   if (['bitcoin','ethereum','btc','eth','crypto','solana','doge','coinbase','binance','blockchain'].some(kw => t.includes(kw))) return { short: 'CRY', full: 'Crypto', color: '#06b6d4' }
   if (['nba','nfl','nhl','mlb','ufc','basketball','football','soccer','baseball','hockey','tennis','golf','mma','super bowl','world cup','playoffs','finals'].some(kw => t.includes(kw))) return { short: 'SPT', full: 'Sports', color: '#22c55e' }
-  return { short: 'OTH', full: 'Other', color: '#9999aa' }
+  return { short: 'OTH', full: 'Other', color: '#666666' }
 }
 
 function formatSize(n: number) {
@@ -41,11 +41,11 @@ function formatSize(n: number) {
 type CategoryFilter = 'all' | 'POL' | 'CRY' | 'SPT' | 'OTH'
 
 const CATEGORIES: { id: CategoryFilter; label: string; color: string }[] = [
-  { id: 'all', label: 'ALL',  color: '#a78bfa' },
+  { id: 'all', label: 'ALL',  color: '#00c805' },
   { id: 'POL', label: 'POL',  color: '#f59e0b' },
   { id: 'CRY', label: 'CRY',  color: '#06b6d4' },
   { id: 'SPT', label: 'SPT',  color: '#22c55e' },
-  { id: 'OTH', label: 'OTH',  color: '#9999aa' },
+  { id: 'OTH', label: 'OTH',  color: '#666666' },
 ]
 
 export default function TerminalSignals({ isPremium, followedWallets }: { isPremium?: boolean; followedWallets?: Set<string> }) {
@@ -70,28 +70,28 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
   }, [signals, side, category])
 
   if (loading) return (
-    <div className="flex items-center justify-center h-full text-[#4a4a55] font-mono text-sm animate-pulse">
+    <div className="flex items-center justify-center h-full text-[#444444] font-mono text-sm animate-pulse bg-black">
       Scanning Polymarket...
     </div>
   )
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-black">
       {/* Filter bar */}
-      <div className="flex flex-col gap-0 border-b border-[#1a1a1f] shrink-0 bg-[#0a0a0e]">
+      <div className="flex flex-col gap-0 border-b border-[#1f1f1f] shrink-0 bg-[#0a0a0a]">
         {/* Row 1: side + count */}
         <div className="flex items-center gap-2 px-3 pt-2 pb-1.5">
           {(['all', 'buy', 'sell'] as const).map(f => (
             <button key={f} onClick={() => setSide(f)}
-              className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded transition-colors ${side === f
-                ? f === 'buy' ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                : f === 'sell' ? 'bg-red-500/20 text-red-400 border border-red-500/30'
-                : 'bg-[#2a2a3e] text-[#a78bfa] border border-[#7c3aed]/30'
-                : 'text-[#4a4a55] hover:text-[#9999aa] border border-transparent'}`}>
+              className={`text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded transition-colors ${side === f
+                ? f === 'buy'  ? 'bg-[#00c805]/15 text-[#00c805] border border-[#00c805]/30'
+                : f === 'sell' ? 'bg-red-500/15 text-red-400 border border-red-500/30'
+                : 'bg-[#1a1a1a] text-white border border-[#333333]'
+                : 'text-[#444444] hover:text-[#888888] border border-transparent'}`}>
               {f === 'all' ? 'ALL' : f === 'buy' ? '▲ BUY' : '▼ SELL'}
             </button>
           ))}
-          <span className="ml-auto text-[10px] font-mono text-[#3a3a45]">{filtered.length} signals · 24h</span>
+          <span className="ml-auto text-[10px] font-mono text-[#333333]">{filtered.length} signals · 24h</span>
         </div>
         {/* Row 2: category toggles */}
         <div className="flex items-center gap-1.5 px-3 pb-2">
@@ -99,11 +99,9 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
             const active = category === c.id
             return (
               <button key={c.id} onClick={() => setCategory(c.id)}
-                style={active && c.id !== 'all' ? { color: c.color, background: c.color + '18', borderColor: c.color + '40' } : {}}
-                className={`text-[10px] font-mono px-2 py-0.5 rounded border transition-colors ${
-                  active
-                    ? c.id === 'all' ? 'bg-[#2a2a3e] text-[#a78bfa] border-[#7c3aed]/30' : 'border'
-                    : 'text-[#4a4a55] hover:text-[#9999aa] border-transparent'
+                style={active ? { color: c.color, background: c.color + '18', borderColor: c.color + '40' } : {}}
+                className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded border transition-colors ${
+                  active ? 'border' : 'text-[#444444] hover:text-[#888888] border-transparent'
                 }`}>
                 {c.label}
               </button>
@@ -117,7 +115,7 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
         {filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-40 gap-2">
             <span className="text-2xl">🐋</span>
-            <p className="text-[#4a4a55] text-sm font-mono">No signals yet</p>
+            <p className="text-[#444444] text-sm font-mono">No signals yet</p>
           </div>
         ) : filtered.map((s, i) => {
           const cat = inferCategory(s.title)
@@ -125,39 +123,39 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
           const isFollowed = followedWallets?.has(s.wallet)
           return (
             <div key={`${s.wallet}-${s.slug}-${i}`}
-              className={`px-4 py-3 border-b border-[#0f0f12] hover:bg-[#0d0d15] transition-colors ${isFollowed ? 'border-l-2 border-l-violet-500' : ''} ${i % 2 === 0 ? '' : 'bg-[#09090d]/50'}`}>
+              className={`px-4 py-3 border-b border-[#111111] hover:bg-[#0f0f0f] transition-colors ${isFollowed ? 'border-l-2 border-l-[#00c805]' : ''} ${i % 2 === 0 ? 'bg-black' : 'bg-[#080808]'}`}>
 
               {/* Row 1: side + category + strength + time + trade link */}
               <div className="flex items-center gap-2 mb-1.5">
-                <span className={`text-xs font-mono font-bold px-1.5 py-0.5 rounded ${isBuy ? 'bg-green-500/15 text-green-400' : 'bg-red-500/15 text-red-400'}`}>
+                <span className={`text-xs font-mono font-bold px-1.5 py-0.5 rounded ${isBuy ? 'bg-[#00c805]/15 text-[#00c805]' : 'bg-red-500/15 text-red-400'}`}>
                   {isBuy ? '▲ BUY' : '▼ SELL'}
                 </span>
                 <span className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ color: cat.color, background: cat.color + '18' }}>
                   {cat.short}
                 </span>
                 {s.strengthScore != null && (
-                  <span className={`text-[10px] font-mono font-semibold ${s.strengthScore >= 8 ? 'text-green-400' : s.strengthScore >= 5 ? 'text-amber-400' : 'text-[#4a4a55]'}`}>
+                  <span className={`text-[10px] font-mono font-semibold ${s.strengthScore >= 8 ? 'text-[#00c805]' : s.strengthScore >= 5 ? 'text-amber-400' : 'text-[#444444]'}`}>
                     ⚡{s.strengthScore}
                   </span>
                 )}
-                {isFollowed && <span className="text-[10px] font-mono text-violet-400">★ FOLLOWING</span>}
-                <span className="ml-auto text-[10px] font-mono text-[#4a4a55]">{timeAgo(s.timestamp)}</span>
+                {isFollowed && <span className="text-[10px] font-mono text-[#00c805]">★ FOLLOWING</span>}
+                <span className="ml-auto text-[10px] font-mono text-[#444444]">{timeAgo(s.timestamp)}</span>
                 <a href={`https://polymarket.com/event/${s.slug}`} target="_blank" rel="noopener noreferrer"
-                  className="text-[10px] font-mono text-[#4a4a55] hover:text-[#a78bfa] transition-colors">
+                  className="text-[10px] font-mono text-[#444444] hover:text-[#00c805] transition-colors">
                   Trade ↗
                 </a>
               </div>
 
               {/* Row 2: market title */}
-              <p className="text-sm text-[#d4d4e8] font-medium leading-snug mb-1.5 truncate">{s.title}</p>
+              <p className="text-sm text-white font-medium leading-snug mb-1.5 truncate">{s.title}</p>
 
               {/* Row 3: wallet + outcome + size */}
               <div className="flex items-center gap-3">
-                <Link href={`/whale/${s.wallet}`} className="text-xs font-mono text-[#7c7c9a] hover:text-[#a78bfa] transition-colors truncate">
+                <Link href={`/whale/${s.wallet}`} className="text-xs font-mono text-[#666666] hover:text-[#00c805] transition-colors truncate">
                   {s.pseudonym}
                 </Link>
-                <span className="text-[10px] font-mono text-[#4a4a55]">·</span>
-                <span className="text-[10px] font-mono text-[#6b6b80]">{s.outcome} · {s.impliedProb}%</span>
+                <span className="text-[10px] font-mono text-[#333333]">·</span>
+                <span className="text-[10px] font-mono text-[#555555]">{s.outcome} · {s.impliedProb}%</span>
                 <span className="ml-auto text-sm font-bold font-mono text-white shrink-0">{formatSize(s.usdSize)}</span>
               </div>
             </div>
