@@ -103,7 +103,7 @@ export default async function LeaderboardPage() {
     })
   }
 
-  const leaderboard: WalletStat[] = [...walletMap.entries()]
+  const allWallets: WalletStat[] = [...walletMap.entries()]
     .map(([wallet, stats]) => ({
       wallet,
       pseudonym: stats.pseudonym,
@@ -115,9 +115,12 @@ export default async function LeaderboardPage() {
       lastActive: stats.lastActive,
     }))
     .sort((a, b) => b.totalVolume - a.totalVolume)
-    .slice(0, 50)
 
-  const totalVolume = leaderboard.reduce((s, w) => s + w.totalVolume, 0)
+  // Compute stats from ALL wallets before slicing
+  const totalVolume = allWallets.reduce((s, w) => s + w.totalVolume, 0)
+  const totalWallets = allWallets.length
+
+  const leaderboard = allWallets.slice(0, 50)
 
   return (
     <div className="min-h-screen">
@@ -140,7 +143,7 @@ export default async function LeaderboardPage() {
         <div className="grid grid-cols-3 gap-4 mb-8">
           {[
             { label: 'Total Volume', value: formatUsd(totalVolume) },
-            { label: 'Wallets Tracked', value: leaderboard.length.toString() },
+            { label: 'Wallets Tracked', value: totalWallets.toString() },
             { label: 'Min Trade Size', value: '$10K+' },
           ].map(({ label, value }) => (
             <div key={label} className="bg-[#0f0f17] border border-[#1c1c2e] rounded-xl p-4 text-center">
