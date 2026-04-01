@@ -58,7 +58,6 @@ export default function ProfitMeter() {
   const animated = useCountUp(whaleVolume ?? 0)
 
   const dollars = Math.floor(animated)
-  const cents = Math.round((animated - dollars) * 100).toString().padStart(2, '0')
 
   return (
     <section className="border-t border-[#2a2a32] bg-[#050507]">
@@ -73,9 +72,6 @@ export default function ProfitMeter() {
             <span className="text-4xl font-bold text-green-400/60 mt-3 font-mono">$</span>
             <span className="text-7xl sm:text-8xl font-bold text-green-400 font-mono tabular-nums tracking-tight">
               {whaleVolume === null ? '——' : dollars.toLocaleString()}
-            </span>
-            <span className="text-3xl font-bold text-green-400/60 mt-4 font-mono">
-              .{whaleVolume === null ? '00' : cents}
             </span>
           </div>
 
