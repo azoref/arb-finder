@@ -45,6 +45,28 @@ function inferCategory(title: string): Category {
   return 'Other'
 }
 
+// ── resolve Polymarket profile from proxy wallet ─────────────────────────────
+
+async function resolvePolymarketProfile(proxy: string): Promise<string | null> {
+  try {
+    // Polymarket Gamma API — look up profile by proxy wallet address
+    const res = await fetch(
+      `https://gamma-api.polymarket.com/profiles?address=${proxy}`,
+      { next: { revalidate: 3600 }, headers: { 'Accept': 'application/json' } }
+    )
+    if (!res.ok) return null
+    const data = await res.json()
+    const profile = Array.isArray(data) ? data[0] : data
+    // Returns { slug, name, ... } — slug is used in polymarket.com/profile/{slug}
+    if (profile?.slug) return `https://polymarket.com/profile/${profile.slug}`
+    if (profile?.username) return `https://polymarket.com/profile/${profile.username}`
+    if (profile?.proxyWallet || profile?.address) return `https://polymarket.com/profile/${proxy}`
+    return null
+  } catch {
+    return null
+  }
+}
+
 // ── page ─────────────────────────────────────────────────────────────────────
 
 export default async function WhalePage({
@@ -74,6 +96,9 @@ export default async function WhalePage({
     .limit(50)
 
   if (!rows || rows.length === 0) notFound()
+
+  // Resolve Polymarket profile (proxy → profile URL)
+  const polymarketUrl = await resolvePolymarketProfile(wallet)
 
   // Aggregate stats
   const totalVolume = rows.reduce((s, r) => s + (r.usd_size ?? 0), 0)
@@ -144,13 +169,23 @@ export default async function WhalePage({
               </div>
               <p className="text-xs font-mono text-[#4a4a55] mt-1 max-w-xs truncate">{wallet}</p>
               <div className="flex items-center gap-3 mt-2">
+                {polymarketUrl && (
+                  <a
+                    href={polymarketUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-[#7c3aed] hover:text-[#a78bfa] transition-colors"
+                  >
+                    View on Polymarket ↗
+                  </a>
+                )}
                 <a
                   href={`https://polygonscan.com/address/${wallet}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-[#4a4a55] hover:text-[#9999aa] transition-colors"
                 >
-                  View on PolygonScan ↗
+                  PolygonScan ↗
                 </a>
               </div>
             </div>
