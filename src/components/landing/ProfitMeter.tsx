@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 
-function useCountUp(target: number, duration = 1800) {
+function useCountUp(target: number, duration = 3200) {
   const [display, setDisplay] = useState(target)
   const prev = useRef(target)
   const frame = useRef<number | null>(null)
