@@ -60,7 +60,7 @@ export default async function LandingPage() {
               </h1>
 
               <p className="text-[#9999aa] text-lg leading-relaxed mb-10 max-w-md">
-                We scan every wallet on Polymarket. Find the ones that consistently win. Alert you the moment they make their next move — so you can act before the market does.
+                We scan every wallet on Polymarket. Find the ones that consistently win. Alert you the moment they make their next move so you can act before the market does.
               </p>
 
               <div className="flex items-center gap-3 flex-wrap">
@@ -85,7 +85,7 @@ export default async function LandingPage() {
               </div>
             </div>
 
-            {/* Right — dashboard preview */}
+            {/* Right dashboard preview */}
             <div className="flex justify-center lg:justify-end w-full overflow-hidden">
               <DashboardPreview />
             </div>
@@ -113,7 +113,7 @@ export default async function LandingPage() {
             {
               num: '01',
               title: 'We scan every wallet',
-              body: 'Polymarket is fully on-chain. Every trade, every wallet, every dollar is public. We track thousands of wallets across all categories — politics, crypto, sports — and rank them by track record.',
+              body: 'Polymarket is fully on-chain. Every trade, every wallet, every dollar is public. We track thousands of wallets across all categories (politics, crypto, sports) and rank them by track record.',
             },
             {
               num: '02',
@@ -123,7 +123,7 @@ export default async function LandingPage() {
             {
               num: '03',
               title: 'You copy the move',
-              body: 'The moment a top wallet places a $10K+ trade, you see it — who, what market, what side, how much. Their track record is right there. You decide in seconds.',
+              body: 'The moment a top wallet places a $10K+ trade, you see it: who, what market, what side, how much. Their track record is right there. You decide in seconds.',
             },
           ].map(({ num, title, body }) => (
             <div key={num} className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 hover:border-[#3a3a45] transition-colors">
@@ -145,7 +145,7 @@ export default async function LandingPage() {
                 <span className="text-green-400">You have one screen.</span>
               </h2>
               <p className="text-[#6b6b80] leading-relaxed mb-6">
-                The sharpest funds in the world copy-trade on public markets every day. Polymarket makes it even simpler — every trade is on-chain, every wallet is public, and sharp traders can't be limited or banned.
+                The sharpest funds in the world copy-trade on public markets every day. Polymarket makes it even simpler: every trade is on-chain, every wallet is public, and sharp traders can't be limited or banned.
               </p>
               <p className="text-[#6b6b80] leading-relaxed">
                 SharpBet finds the wallets doing it right and shows you their next move the moment it happens. No 400 engineers required.
@@ -155,7 +155,7 @@ export default async function LandingPage() {
               {[
                 { emoji: '🐋', label: 'Whale signal feed', sub: 'Every $10K+ trade across all Polymarket categories, live' },
                 { emoji: '👤', label: 'Wallet profiles', sub: 'Full on-chain trade history, win rate, and volume' },
-                { emoji: '🏆', label: 'Wallet leaderboard', sub: 'Ranked by track record — find the ones that never lose' },
+                { emoji: '🏆', label: 'Wallet leaderboard', sub: 'Ranked by track record. Find the ones that never lose.' },
                 { emoji: '⚡', label: 'Instant alerts', sub: 'Signal fires the moment a top wallet places a trade' },
               ].map(({ emoji, label, sub }) => (
                 <div key={label} className="flex items-center gap-4 p-4 bg-[#0d0d10] border border-[#1e1e24] rounded-lg">
@@ -196,7 +196,7 @@ export default async function LandingPage() {
               <div className="border-l-2 border-green-500/30 pl-5">
                 <h3 className="font-semibold text-[#e8e8f0] mb-2">On Polymarket, nobody can stop you</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">
-                  Polymarket is a smart contract. No accounts to limit. No managers to call. Political insiders, crypto funds, and sharp bettors trade their full conviction freely — and every trade is public on-chain.
+                  Polymarket is a smart contract. No accounts to limit. No managers to call. Political insiders, crypto funds, and sharp bettors trade their full conviction freely. Every trade is public on-chain.
                 </p>
               </div>
               <div className="border-l-2 border-yellow-500/30 pl-5">
@@ -218,7 +218,7 @@ export default async function LandingPage() {
                 {
                   step: '01',
                   title: 'A top wallet moves $50K',
-                  body: 'A wallet in our top 50 leaderboard — 71% win rate, $2.4M in volume — buys YES on a political market at 58%. On-chain. Public. Verifiable.',
+                  body: 'A wallet in our top 50 leaderboard (71% win rate, $2.4M in volume) buys YES on a political market at 58%. On-chain. Public. Verifiable.',
                 },
                 {
                   step: '02',

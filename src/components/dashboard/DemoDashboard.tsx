@@ -88,7 +88,7 @@ export default function DemoDashboard() {
       </div>
 
       {/* Quotron (static demo) */}
-      <div className="relative flex items-center h-7 bg-[#050505] border-b border-[#1a1a1a] overflow-hidden shrink-0 select-none">
+      <div className="relative flex items-center h-7 bg-[#050505] border-b border-[#1a1a1a] overflow-hidden shrink-0 select-none pointer-events-none">
         <div className="absolute left-0 top-0 h-full w-10 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #050505, transparent)' }} />
         <div className="flex items-center whitespace-nowrap" style={{ animation: 'quotronScroll 90s linear infinite' }}>
           {[...DEMO_SIGNALS, ...DEMO_SIGNALS].map((s, i) => (

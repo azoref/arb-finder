@@ -68,7 +68,7 @@ export default function TerminalQuotron() {
 
   return (
     <div
-      className="relative flex items-center h-7 bg-[#050505] border-b border-[#1a1a1a] overflow-hidden shrink-0 select-none"
+      className="relative flex items-center h-7 bg-[#050505] border-b border-[#1a1a1a] overflow-hidden shrink-0 select-none pointer-events-none"
     >
       {/* Left fade */}
       <div className="absolute left-0 top-0 h-full w-10 z-10 pointer-events-none"
