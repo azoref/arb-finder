@@ -60,14 +60,14 @@ export default function ArbTicker() {
   if (display.length === 0) return null
 
   return (
-    <div className="relative overflow-hidden border-y border-[#1e1e24] bg-[#080808] py-2.5 group">
+    <div className="relative overflow-hidden border-y border-[#1e1e24] bg-[#080808] py-2.5 pointer-events-none select-none">
       {/* Fades */}
       <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-[#080808] to-transparent pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-[#080808] to-transparent pointer-events-none" />
 
       <div
-        className="flex gap-4 animate-ticker group-hover:[animation-play-state:paused]"
-        style={{ width: 'max-content' }}
+        className="arb-ticker-track flex gap-4 animate-ticker"
+        style={{ width: 'max-content', animationPlayState: 'running' }}
       >
         {display.map((t, i) => (
           <div
@@ -130,6 +130,12 @@ export default function ArbTicker() {
         }
         .animate-ticker {
           animation: ticker 140s linear infinite;
+        }
+        .arb-ticker-track,
+        .arb-ticker-track:hover,
+        .arb-ticker-track *,
+        .arb-ticker-track *:hover {
+          animation-play-state: running !important;
         }
       `}</style>
     </div>
