@@ -5,7 +5,7 @@ import { createClient as createServiceClient } from '@supabase/supabase-js'
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 
-export const revalidate = 60
+export const revalidate = 0
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -101,13 +101,21 @@ export default async function WhalePage({
   const polymarketUrl = await resolvePolymarketProfile(wallet)
 
   // Aggregate stats
-  const totalVolume = rows.reduce((s, r) => s + (r.usd_size ?? 0), 0)
-  const buys        = rows.filter(r => r.side === 'BUY')
-  const sells       = rows.filter(r => r.side === 'SELL')
-  const avgSize     = totalVolume / rows.length
-  const pseudonym   = rows[0]?.pseudonym ?? `${wallet.slice(0, 6)}...${wallet.slice(-4)}`
-  const buyPct      = Math.round((buys.length / rows.length) * 100)
-  const avatarColor = walletColor(pseudonym)
+  const totalVolume   = rows.reduce((s, r) => s + (r.usd_size ?? 0), 0)
+  const buys          = rows.filter(r => r.side === 'BUY')
+  const sells         = rows.filter(r => r.side === 'SELL')
+  const avgSize       = totalVolume / rows.length
+  const pseudonym     = rows[0]?.pseudonym ?? `${wallet.slice(0, 6)}...${wallet.slice(-4)}`
+  const buyPct        = Math.round((buys.length / rows.length) * 100)
+  const avatarColor   = walletColor(pseudonym)
+
+  // Win rate (BUY trades only — SELL is closing a position, not a directional call)
+  const resolvedBuys  = rows.filter(r => r.side === 'BUY' && r.is_win !== null && r.is_win !== undefined)
+  const winCount      = resolvedBuys.filter(r => r.is_win === true).length
+  const lossCount     = resolvedBuys.filter(r => r.is_win === false).length
+  const winRate       = resolvedBuys.length >= 3
+    ? Math.round((winCount / resolvedBuys.length) * 100)
+    : null
 
   // Category breakdown
   const catCounts: Record<Category, number> = { Politics: 0, Crypto: 0, Sports: 0, Other: 0 }
@@ -196,11 +204,30 @@ export default async function WhalePage({
 
         {/* KPI row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+          {/* Win Rate — hero KPI */}
+          <div className="bg-[#0f0f17] border border-[#1c1c2e] rounded-xl p-4">
+            <p className="text-[11px] text-[#6b7280] mb-1">Win Rate</p>
+            {winRate !== null ? (
+              <>
+                <p className="text-2xl font-bold" style={{ color: winRate >= 65 ? '#00c805' : winRate >= 50 ? '#f59e0b' : '#ef4444' }}>
+                  {winRate}%
+                </p>
+                <p className="text-[10px] font-mono text-[#4a4a55] mt-0.5">{winCount}W · {lossCount}L · {resolvedBuys.length} resolved</p>
+              </>
+            ) : (
+              <>
+                <p className="text-2xl font-bold text-[#333333]">—</p>
+                <p className="text-[10px] font-mono text-[#3a3a45] mt-0.5">
+                  {resolvedBuys.length > 0 ? `${resolvedBuys.length} resolved (need 3+)` : 'no resolved trades yet'}
+                </p>
+              </>
+            )}
+          </div>
+
           {[
             { label: 'Total Volume', value: formatUsd(totalVolume), color: '#06b6d4' },
             { label: 'Trade Count',  value: rows.length.toString(), color: '#7c3aed' },
             { label: 'Avg Trade',    value: formatUsd(avgSize),     color: '#f59e0b' },
-            { label: 'Buy Rate',     value: `${buyPct}%`,           color: buyPct > 60 ? '#22c55e' : buyPct < 40 ? '#ef4444' : '#f59e0b' },
           ].map(({ label, value, color }) => (
             <div key={label} className="bg-[#0f0f17] border border-[#1c1c2e] rounded-xl p-4">
               <p className="text-[11px] text-[#6b7280] mb-1">{label}</p>
@@ -247,6 +274,16 @@ export default async function WhalePage({
                     <span className="px-2 py-0.5 rounded text-[10px] bg-[#1c1c2e] text-[#9999aa]">
                       {Math.round((r.price ?? 0) * 100)}% implied
                     </span>
+                    {r.is_win === true && (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#00c805]/10 text-[#00c805]">
+                        ✓ WIN
+                      </span>
+                    )}
+                    {r.is_win === false && (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/10 text-red-400">
+                        ✗ LOSS
+                      </span>
+                    )}
                     <a
                       href={`https://polygonscan.com/tx/${r.tx_hash}`}
                       target="_blank"
