@@ -76,9 +76,10 @@ export default function TerminalQuotron() {
 
       {/* Scrolling track */}
       <div
-        className="flex items-center whitespace-nowrap"
+        className="quotron-track flex items-center whitespace-nowrap"
         style={{
           animation: `quotronScroll ${signals.length * 14}s linear infinite`,
+          animationPlayState: 'running',
         }}
       >
         {items.map((s, i) => (
@@ -94,6 +95,12 @@ export default function TerminalQuotron() {
         @keyframes quotronScroll {
           0%   { transform: translateX(0); }
           100% { transform: translateX(-50%); }
+        }
+        .quotron-track,
+        .quotron-track:hover,
+        .quotron-track *,
+        .quotron-track *:hover {
+          animation-play-state: running !important;
         }
       `}</style>
     </div>
