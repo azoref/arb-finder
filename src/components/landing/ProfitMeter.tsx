@@ -69,8 +69,8 @@ export default function ProfitMeter() {
         {/* Big number */}
         <div className="relative inline-block">
           <div className="flex items-start justify-center gap-1">
-            <span className="text-4xl font-bold text-green-400/60 mt-3 font-mono">$</span>
-            <span className="text-7xl sm:text-8xl font-bold text-green-400 font-mono tabular-nums tracking-tight">
+            <span className="text-3xl sm:text-4xl font-bold text-green-400/60 mt-2 sm:mt-3 font-mono">$</span>
+            <span className="text-5xl sm:text-6xl lg:text-7xl font-bold text-green-400 font-mono tabular-nums tracking-tight">
               {whaleVolume === null ? '——' : dollars.toLocaleString()}
             </span>
           </div>
