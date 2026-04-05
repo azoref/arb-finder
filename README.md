@@ -1,6 +1,6 @@
 # ArbFinder
 
-Real-time NBA arbitrage opportunity finder. Cross-sportsbook arbs detected every 60s, delivered to a dark-mode dashboard and Telegram.
+Real-time Polymarket whale tracker. Win rate leaderboards, live $10K+ trade signals, wallet profiles, and follow alerts for the wallets that never lose.
 
 ## Stack
 
