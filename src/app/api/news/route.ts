@@ -39,19 +39,38 @@ function parseRSS(xml: string, source: string): NewsItem[] {
     const title = extractText(block, 'title')
     if (!title || title.length < 10) continue
 
-    // Extract URL — try <link> then <guid isPermaLink="true">
+    // Extract URL — try multiple formats
     let url = ''
-    const linkMatch = /<link>([^<]+)<\/link>/.exec(block) ||
-                      /<link\s+[^>]*>([^<]+)<\/link>/.exec(block)
-    if (linkMatch) url = linkMatch[1].trim()
+
+    // Standard RSS <link>url</link>
+    const rssLink = /<link>([^<\s][^<]*)<\/link>/i.exec(block)
+    if (rssLink?.[1]?.startsWith('http')) url = rssLink[1].trim()
+
+    // Atom <link href="url" .../>
     if (!url) {
-      const guidMatch = /<guid[^>]*isPermaLink="true"[^>]*>([^<]+)<\/guid>/.exec(block)
-      if (guidMatch) url = guidMatch[1].trim()
+      const atomHref = /<link[^>]+href=["']([^"']+)["'][^>]*\/?>/i.exec(block)
+      if (atomHref?.[1]?.startsWith('http')) url = atomHref[1].trim()
     }
+
+    // Feedburner override
     if (!url) {
-      const anyGuid = /<guid[^>]*>([^<]+)<\/guid>/.exec(block)
-      if (anyGuid) url = anyGuid[1].trim()
+      const fb = /<feedburner:origLink>([^<]+)<\/feedburner:origLink>/i.exec(block)
+      if (fb?.[1]?.startsWith('http')) url = fb[1].trim()
     }
+
+    // GUID with isPermaLink="true"
+    if (!url) {
+      const pg = /<guid[^>]*isPermaLink="true"[^>]*>([^<]+)<\/guid>/i.exec(block)
+      if (pg?.[1]?.startsWith('http')) url = pg[1].trim()
+    }
+
+    // Any GUID that looks like a URL
+    if (!url) {
+      const ag = /<guid[^>]*>([^<]+)<\/guid>/i.exec(block)
+      if (ag?.[1]?.startsWith('http')) url = ag[1].trim()
+    }
+
+    if (!url) continue // skip items with no resolvable URL
 
     const pubDateStr = extractText(block, 'pubDate')
     let publishedAt = new Date().toISOString()

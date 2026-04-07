@@ -78,7 +78,7 @@ export default function TerminalNews() {
             <span className="text-2xl">📰</span>
             <p className="text-[#444444] text-sm font-mono">No stories</p>
           </div>
-        ) : filtered.map((item, i) => (
+        ) : filtered.filter(i => i.url?.startsWith('http')).map((item, i) => (
           <a
             key={`${item.url}-${i}`}
             href={item.url}
