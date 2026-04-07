@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState, useMemo } from 'react'
 import Link from 'next/link'
+import { inferCategoryWithMeta, type Category } from '@/lib/categories'
 
 interface Signal {
   wallet: string
@@ -25,13 +26,6 @@ function timeAgo(ts: number) {
   return `${Math.floor(diff / 3600)}h ago`
 }
 
-function inferCategory(title: string) {
-  const t = (title || '').toLowerCase()
-  if (['election','president','senate','congress','governor','trump','biden','harris','vote','ballot','republican','democrat','fed','federal reserve'].some(kw => t.includes(kw))) return { short: 'POL', full: 'Politics', color: '#f59e0b' }
-  if (['bitcoin','ethereum','btc','eth','crypto','solana','doge','coinbase','binance','blockchain'].some(kw => t.includes(kw))) return { short: 'CRY', full: 'Crypto', color: '#06b6d4' }
-  if (['nba','nfl','nhl','mlb','ufc','basketball','football','soccer','baseball','hockey','tennis','golf','mma','super bowl','world cup','playoffs','finals'].some(kw => t.includes(kw))) return { short: 'SPT', full: 'Sports', color: '#22c55e' }
-  return { short: 'OTH', full: 'Other', color: '#666666' }
-}
 
 function formatSize(n: number) {
   if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`
@@ -66,7 +60,7 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
   const filtered = useMemo(() => {
     let r = [...signals]
     if (side !== 'all') r = r.filter(s => s.side === side.toUpperCase())
-    if (category !== 'all') r = r.filter(s => inferCategory(s.title).short === category)
+    if (category !== 'all') r = r.filter(s => inferCategoryWithMeta(s.title).short === category)
     return r
   }, [signals, side, category])
 
@@ -119,7 +113,7 @@ export default function TerminalSignals({ isPremium, followedWallets }: { isPrem
             <p className="text-[#444444] text-sm font-mono">No signals yet</p>
           </div>
         ) : filtered.map((s, i) => {
-          const cat = inferCategory(s.title)
+          const cat = inferCategoryWithMeta(s.title)
           const isBuy = s.side === 'BUY'
           const isFollowed = followedWallets?.has(s.wallet)
           return (

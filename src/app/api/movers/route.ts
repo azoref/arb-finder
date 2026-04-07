@@ -1,17 +1,8 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { inferCategory, type Category } from '@/lib/categories'
 
 export const revalidate = 60
-
-type Category = 'Politics' | 'Crypto' | 'Sports' | 'Other'
-
-function inferCategory(title: string): Category {
-  const t = (title || '').toLowerCase()
-  if (['election','president','senate','congress','governor','trump','biden','harris','vote','ballot','prime minister','republican','democrat','fed','federal reserve','interest rate'].some(kw => t.includes(kw))) return 'Politics'
-  if (['bitcoin','ethereum','btc','eth','crypto','solana','doge','coinbase','binance','blockchain'].some(kw => t.includes(kw))) return 'Crypto'
-  if (['nba','nfl','nhl','mlb','mls','ufc','pga','ncaa','wnba','basketball','football','soccer','baseball','hockey','tennis','golf','boxing','mma','super bowl','world cup','champions league','playoffs','finals'].some(kw => t.includes(kw))) return 'Sports'
-  return 'Other'
-}
 
 export async function GET() {
   try {

@@ -28,22 +28,7 @@ function walletColor(name: string) {
   return palette[name.charCodeAt(0) % palette.length]
 }
 
-type Category = 'Politics' | 'Crypto' | 'Sports' | 'Other'
-
-const CAT_COLORS: Record<Category, string> = {
-  Politics: '#f59e0b',
-  Crypto:   '#06b6d4',
-  Sports:   '#22c55e',
-  Other:    '#9999aa',
-}
-
-function inferCategory(title: string): Category {
-  const t = (title || '').toLowerCase()
-  if (['election','president','senate','congress','governor','trump','biden','harris','vote','ballot','prime minister','republican','democrat','fed','federal reserve','interest rate'].some(kw => t.includes(kw))) return 'Politics'
-  if (['bitcoin','ethereum','btc','eth','crypto','solana','doge','coinbase','binance','blockchain'].some(kw => t.includes(kw))) return 'Crypto'
-  if (['nba','nfl','nhl','mlb','mls','ufc','pga','ncaa','wnba','basketball','football','soccer','baseball','hockey','tennis','golf','boxing','mma','super bowl','world cup','champions league','playoffs','finals'].some(kw => t.includes(kw))) return 'Sports'
-  return 'Other'
-}
+import { inferCategory, CAT_COLORS, type Category } from '@/lib/categories'
 
 // ── resolve Polymarket profile from proxy wallet ─────────────────────────────
 

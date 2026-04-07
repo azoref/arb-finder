@@ -25,14 +25,12 @@ interface SignalsData {
   error?: string
 }
 
+import { inferCategory as _inferCat } from '@/lib/categories'
+
 type Category = 'all' | 'politics' | 'crypto' | 'sports' | 'other'
 
 function inferCategory(title: string): Category {
-  const t = (title || '').toLowerCase()
-  if (['election', 'president', 'senate', 'congress', 'governor', 'trump', 'biden', 'harris', 'vote', 'ballot', 'prime minister', 'republican', 'democrat'].some(kw => t.includes(kw))) return 'politics'
-  if (['bitcoin', 'ethereum', 'btc', 'eth', 'crypto', 'solana', 'doge', 'coinbase', 'binance', 'blockchain'].some(kw => t.includes(kw))) return 'crypto'
-  if (['nba', 'nfl', 'nhl', 'mlb', 'mls', 'ufc', 'pga', 'ncaa', 'wnba', 'basketball', 'football', 'soccer', 'baseball', 'hockey', 'tennis', 'golf', 'boxing', 'mma', 'super bowl', 'world cup', 'champions league', 'playoffs', 'finals'].some(kw => t.includes(kw))) return 'sports'
-  return 'other'
+  return _inferCat(title).toLowerCase() as Category
 }
 
 function timeAgo(ts: number) {
