@@ -30,8 +30,6 @@ function walletColor(name: string) {
   return palette[name.charCodeAt(0) % palette.length]
 }
 
-}
-
 interface WalletStat {
   wallet: string
   pseudonym: string
