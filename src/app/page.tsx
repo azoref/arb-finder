@@ -25,7 +25,7 @@ export default async function LandingPage() {
     <div className="min-h-screen">
       <Nav user={user} isPremium={profile?.is_premium} />
 
-      {/* Hero — full viewport, dark, minimal */}
+      {/* Hero - full viewport, dark, minimal */}
       <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
 
         {/* Background glows */}
@@ -52,9 +52,32 @@ export default async function LandingPage() {
           </h1>
 
           {/* Subtext */}
-          <p className="text-[#555566] text-lg leading-relaxed mb-14 max-w-lg mx-auto">
-            A closed group of wallets moves before markets react. We found them. SharpBet trades with them — automatically.
+          <p className="text-[#555566] text-lg leading-relaxed mb-10 max-w-lg mx-auto">
+            A closed group of wallets moves before markets react. We found them. SharpBet trades with them automatically.
           </p>
+
+          {/* Data points */}
+          <div className="flex items-center justify-center gap-10 mb-14 flex-wrap">
+            <div className="text-center">
+              <p className="text-2xl font-bold text-white font-mono">86M</p>
+              <p className="text-[10px] text-[#3a3a45] tracking-widest uppercase mt-1">Trades analyzed</p>
+            </div>
+            <div className="w-px h-8 bg-[#2a2a32]" />
+            <div className="text-center">
+              <p className="text-2xl font-bold text-white font-mono">50K+</p>
+              <p className="text-[10px] text-[#3a3a45] tracking-widest uppercase mt-1">Markets tracked</p>
+            </div>
+            <div className="w-px h-8 bg-[#2a2a32]" />
+            <div className="text-center">
+              <p className="text-2xl font-bold text-green-400 font-mono">200</p>
+              <p className="text-[10px] text-[#3a3a45] tracking-widest uppercase mt-1">Wallets watchlisted</p>
+            </div>
+            <div className="w-px h-8 bg-[#2a2a32]" />
+            <div className="text-center">
+              <p className="text-2xl font-bold text-white font-mono">24/7</p>
+              <p className="text-[10px] text-[#3a3a45] tracking-widest uppercase mt-1">Automated</p>
+            </div>
+          </div>
 
           {/* CTAs */}
           <div className="flex items-center justify-center gap-4 flex-wrap">
@@ -71,11 +94,6 @@ export default async function LandingPage() {
               View live signals
             </Link>
           </div>
-
-          {/* Subtle stat line */}
-          <p className="mt-16 text-xs font-mono text-[#2a2a35] tracking-widest">
-            86,000,000 TRADES ANALYZED &nbsp;·&nbsp; 200 WALLETS WATCHLISTED &nbsp;·&nbsp; FULLY AUTOMATED
-          </p>
         </div>
 
         {/* Scroll indicator */}
