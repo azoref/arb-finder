@@ -253,14 +253,15 @@ export default async function LandingPage() {
             </div>
 
             <div className="bg-[#080808] border border-green-500/10 rounded-xl p-6">
-              <p className="text-[10px] font-mono text-green-500/40 tracking-widest mb-4 uppercase">SharpBet</p>
-              <div className="space-y-2 text-sm">
-                <p className="text-[#e8e8f0]">Claude <span className="text-[#777788]">$20/month</span></p>
-                <p className="text-[#e8e8f0]">poly_data repo <span className="text-[#777788]">free</span></p>
-                <p className="text-[#e8e8f0]">Polymarket API <span className="text-[#777788]">free</span></p>
-                <p className="text-[#e8e8f0]">VPS <span className="text-[#777788]">$5/month</span></p>
-                <p className="text-green-400 font-mono font-bold mt-4">$29/month total</p>
+              <p className="text-[10px] font-mono text-green-500/50 tracking-widest mb-4 uppercase">SharpBet</p>
+              <div className="space-y-3 text-sm">
+                <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> Automated bot, runs 24/7</p>
+                <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> 86M trades analyzed</p>
+                <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> 200 sharp wallets tracked live</p>
+                <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> Paper trading from day one</p>
+                <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> No setup. No manual work.</p>
               </div>
+              <p className="text-green-400 font-mono font-bold mt-5">$29/month</p>
             </div>
           </div>
         </div>
