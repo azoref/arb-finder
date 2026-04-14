@@ -18,10 +18,10 @@ const FREE_FEATURES = [
 
 const PRO_FEATURES = [
   { label: 'Automated paper trading bot', note: 'mirrors top wallets automatically', highlight: true },
-  { label: 'Live paper portfolio and P&L', note: 'tracks every simulated position', highlight: true },
+  { label: 'Live paper portfolio and P&L', note: 'real P&L as markets resolve', highlight: true },
   { label: 'Full wallet scoring', note: '86M trades analyzed', highlight: true },
+  { label: 'Real money trading', note: 'unlocks after paper track record', highlight: true },
   { label: 'Instant Discord alerts', note: 'fires within 60s of on-chain trade', highlight: false },
-  { label: 'Priority access to real trading', note: 'when live trading launches', highlight: false },
   { label: 'Signal sorting and filters', note: '', highlight: false },
   { label: 'Early access to new features', note: '', highlight: false },
 ]
@@ -32,7 +32,7 @@ const COMPARISON = [
   { feature: 'Paper trading bot', free: false, pro: true },
   { feature: 'Portfolio and P&L', free: false, pro: true },
   { feature: 'Discord alerts', free: false, pro: true },
-  { feature: 'Real trading access', free: false, pro: 'Priority' },
+  { feature: 'Real money trading', free: false, pro: 'After paper' },
 ]
 
 const FAQS = [
@@ -89,13 +89,13 @@ export default async function PricingPage() {
             PRICING
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-5">
-            The bot trades for you.<br />
+            Paper first.<br />
             <span className="bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
-              Start on paper.
+              Real money when you are ready.
             </span>
           </h1>
           <p className="text-[#6b6b80] text-lg max-w-xl mx-auto leading-relaxed">
-            Free gives you the full signal feed. Pro activates the automated paper trading bot that mirrors top-scored wallets on your behalf, so you can see the returns before risking a dollar.
+            Free gives you the full signal feed. Pro activates the automated bot that mirrors the top 200 wallets as paper trades. Once the track record is there, real money trading unlocks.
           </p>
         </div>
       </section>
@@ -183,35 +183,31 @@ export default async function PricingPage() {
       <section className="border-t border-[#1a1a1f] bg-[#080808]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
           <div className="text-center mb-12">
-            <h2 className="text-2xl font-semibold mb-3">The Pro edge, explained</h2>
+            <h2 className="text-2xl font-semibold mb-3">How it works</h2>
             <p className="text-[#6b6b80] text-sm max-w-lg mx-auto">
-              Three features that make Pro meaningfully different from Free.
+              Paper trading first. Real money when the data says go.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-5">
-            {[
+            [
               {
-                icon: '🤖',
-                tag: 'PAPER TRADING BOT',
-                title: 'Automated copy trading',
-                body: 'When a top-scored wallet makes a move, SharpBet mirrors it as a paper trade automatically. You see the position, the entry price, and real P&L as markets resolve. Zero effort required.',
+                tag: 'STEP 1 · PAPER',
+                title: 'Bot runs on paper first',
+                body: 'From day one, the bot mirrors every move the top 200 wallets make as a simulated trade. You see real P&L as markets resolve. No money at risk. Just proof.',
               },
               {
-                icon: '📊',
-                tag: 'PORTFOLIO',
-                title: 'Live P&L dashboard',
-                body: 'Every paper position tracked in real time. Open trades, resolved bets, win rate, and total return. See exactly what the bot is doing and how it is performing.',
+                tag: 'STEP 2 · TRACK RECORD',
+                title: 'Watch the returns build',
+                body: 'Your paper portfolio tracks every position in real time. Win rate, total return, open trades. The data tells you whether the edge is real before you commit a dollar.',
               },
               {
-                icon: '🔔',
-                tag: 'DISCORD ALERTS',
-                title: 'Instant trade alerts',
-                body: 'The moment a top wallet trades, a rich embed hits your Discord channel. Wallet score, market, size, and entry price. Under 60 seconds from on-chain trade to your phone.',
+                tag: 'STEP 3 · REAL MONEY',
+                title: 'Go live when ready',
+                body: 'Once you have seen enough, real money trading unlocks. Same bot. Same wallets. Same logic. You set your position size and risk limits.',
               },
-            ].map(({ icon, tag, title, body }) => (
+            .map(({ tag, title, body }) => (
               <div key={title} className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 hover:border-green-500/20 transition-colors">
-                <div className="text-2xl mb-3">{icon}</div>
                 <div className="text-[10px] font-mono text-green-500/50 tracking-widest mb-2">{tag}</div>
                 <h3 className="font-semibold text-[#e8e8f0] mb-2">{title}</h3>
                 <p className="text-sm text-[#6b6b80] leading-relaxed">{body}</p>
