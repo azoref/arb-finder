@@ -179,7 +179,7 @@ export default function DemoDashboard() {
             })}
             {/* Signup nudge at bottom of feed */}
             <div className="m-4 p-4 rounded-xl border border-[#00c805]/20 bg-[#00c805]/5 flex items-center justify-between gap-4">
-              <p className="text-sm text-[#888888]">Viewing <span className="text-white font-semibold">demo data</span> — sign up to see live on-chain signals.</p>
+              <p className="text-sm text-[#888888]">Viewing <span className="text-white font-semibold">demo data</span> · sign up to see live on-chain signals.</p>
               <Link href="/auth/signup" className="shrink-0 px-4 py-1.5 bg-[#00c805] hover:bg-[#00e006] rounded-lg font-bold text-sm text-black transition-colors">
                 Get started free
               </Link>
@@ -327,7 +327,7 @@ export default function DemoDashboard() {
                 )
               })}
               <div className="m-4 p-4 rounded-xl border border-[#00c805]/20 bg-[#00c805]/5 flex flex-col gap-3">
-                <p className="text-sm text-[#888888]">Viewing <span className="text-white font-semibold">demo data</span> — sign up for live signals.</p>
+                <p className="text-sm text-[#888888]">Viewing <span className="text-white font-semibold">demo data</span> · sign up for live signals.</p>
                 <Link href="/auth/signup" className="w-full text-center py-2 bg-[#00c805] hover:bg-[#00e006] rounded-lg font-bold text-sm text-black transition-colors">Get started free</Link>
               </div>
             </div>

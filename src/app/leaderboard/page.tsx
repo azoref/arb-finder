@@ -8,7 +8,7 @@ import { inferCategory, CAT_COLORS, type Category } from '@/lib/categories'
 export const revalidate = 120
 
 export const metadata: Metadata = {
-  title: 'Whale Leaderboard — SharpBet',
+  title: 'Whale Leaderboard · SharpBet',
   description: 'Top Polymarket whale wallets ranked by volume. On-chain verified smart money across politics, crypto, sports, and more.',
 }
 

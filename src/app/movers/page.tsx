@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 export const revalidate = 60
 
 export const metadata: Metadata = {
-  title: 'Market Movers — SharpBet',
+  title: 'Market Movers · SharpBet',
   description: 'Polymarket markets with the most whale activity right now. Track where smart money is flowing across politics, crypto, sports, and more.',
 }
 
