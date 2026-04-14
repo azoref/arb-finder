@@ -61,7 +61,7 @@ export default async function LandingPage() {
             </Link>
             <Link
               href="/demo"
-              className="px-8 py-4 border border-[#1a1a22] hover:border-[#2a2a35] rounded-full text-sm font-medium text-[#444455] hover:text-[#888899] transition-all"
+              className="px-8 py-4 border border-[#1a1a22] hover:border-[#2a2a35] rounded-full text-sm font-medium text-[#777788] hover:text-[#aaaacc] transition-all"
             >
               View live signals
             </Link>
@@ -76,7 +76,7 @@ export default async function LandingPage() {
             ].map(({ val, label, green }) => (
               <div key={label} className="text-center">
                 <p className={`text-xl font-bold font-mono ${green ? 'text-green-400' : 'text-white'}`}>{val}</p>
-                <p className="text-[10px] text-[#2a2a35] tracking-widest uppercase mt-1">{label}</p>
+                <p className="text-[10px] text-[#666677] tracking-widest uppercase mt-1">{label}</p>
               </div>
             ))}
           </div>
@@ -90,7 +90,7 @@ export default async function LandingPage() {
       {/* Terminal preview */}
       <section className="border-t border-[#111116] bg-[#030305] py-16 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="text-[10px] font-mono text-[#333344] tracking-widest mb-6 uppercase text-center">Live right now</div>
+          <div className="text-[10px] font-mono text-[#666677] tracking-widest mb-6 uppercase text-center">Live right now</div>
           <TerminalPreview />
         </div>
       </section>
@@ -101,12 +101,12 @@ export default async function LandingPage() {
       {/* The insight */}
       <section className="border-t border-[#111116]">
         <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="text-[10px] font-mono text-[#333344] tracking-widest mb-10 uppercase">The insight</div>
+          <div className="text-[10px] font-mono text-[#666677] tracking-widest mb-10 uppercase">The insight</div>
           <h2 className="text-3xl font-bold mb-4 max-w-xl">
             Same exact entries.<br />
             <span className="text-green-400">The exits make it a different game.</span>
           </h2>
-          <p className="text-[#555566] text-sm mb-16 max-w-lg">
+          <p className="text-[#9999aa] text-sm mb-16 max-w-lg">
             The disposition coefficient changed everything. It does not measure how you enter. It measures how you exit.
           </p>
 
@@ -116,25 +116,25 @@ export default async function LandingPage() {
               <div className="space-y-4">
                 <div>
                   <p className="text-3xl font-bold font-mono text-green-400">86%</p>
-                  <p className="text-xs text-[#555566] mt-1">of winner value captured</p>
+                  <p className="text-xs text-[#9999aa] mt-1">of winner value captured</p>
                 </div>
                 <div>
                   <p className="text-3xl font-bold font-mono text-white">12%</p>
-                  <p className="text-xs text-[#555566] mt-1">losers cut at</p>
+                  <p className="text-xs text-[#9999aa] mt-1">losers cut at</p>
                 </div>
               </div>
             </div>
 
             <div className="bg-[#0a0a0d] border border-[#1a1a22] rounded-xl p-6">
-              <div className="text-[10px] font-mono text-[#333344] tracking-widest mb-4 uppercase">Everyone else</div>
+              <div className="text-[10px] font-mono text-[#666677] tracking-widest mb-4 uppercase">Everyone else</div>
               <div className="space-y-4">
                 <div>
-                  <p className="text-3xl font-bold font-mono text-[#444455]">58%</p>
-                  <p className="text-xs text-[#333344] mt-1">of winner value captured</p>
+                  <p className="text-3xl font-bold font-mono text-[#888899]">58%</p>
+                  <p className="text-xs text-[#777788] mt-1">of winner value captured</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold font-mono text-[#444455]">41%</p>
-                  <p className="text-xs text-[#333344] mt-1">losers held to</p>
+                  <p className="text-3xl font-bold font-mono text-[#888899]">41%</p>
+                  <p className="text-xs text-[#777788] mt-1">losers held to</p>
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@ export default async function LandingPage() {
       {/* The four factors */}
       <section className="border-t border-[#111116] bg-[#030305]">
         <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="text-[10px] font-mono text-[#333344] tracking-widest mb-10 uppercase">The four factors</div>
+          <div className="text-[10px] font-mono text-[#666677] tracking-widest mb-10 uppercase">The four factors</div>
           <h2 className="text-3xl font-bold mb-16 max-w-xl">
             No opinions. No news.<br />
             <span className="text-green-400">Four numbers that align or do not.</span>
@@ -187,11 +187,11 @@ export default async function LandingPage() {
                   <p className="text-[10px] font-mono text-green-500/40 tracking-widest uppercase">{code}</p>
                   <div className="text-right">
                     <p className="font-mono text-lg font-bold text-green-400">{stat}</p>
-                    <p className="text-[9px] text-[#333344] max-w-[120px] text-right leading-tight">{statLabel}</p>
+                    <p className="text-[9px] text-[#777788] max-w-[120px] text-right leading-tight">{statLabel}</p>
                   </div>
                 </div>
                 <h3 className="font-semibold text-[#e8e8f0] mb-2">{name}</h3>
-                <p className="text-xs text-[#444455] leading-relaxed">{body}</p>
+                <p className="text-xs text-[#888899] leading-relaxed">{body}</p>
               </div>
             ))}
           </div>
@@ -201,7 +201,7 @@ export default async function LandingPage() {
       {/* How it works */}
       <section className="border-t border-[#111116]">
         <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="text-[10px] font-mono text-[#333344] tracking-widest mb-10 uppercase">How SharpBet works</div>
+          <div className="text-[10px] font-mono text-[#666677] tracking-widest mb-10 uppercase">How SharpBet works</div>
           <h2 className="text-3xl font-bold mb-16">Automated. Continuous. No input needed.</h2>
 
           <div className="grid sm:grid-cols-3 gap-6">
@@ -225,7 +225,7 @@ export default async function LandingPage() {
               <div key={num} className="border-t border-[#111116] pt-6">
                 <div className="font-mono text-4xl text-[#1a1a22] font-bold mb-6">{num}</div>
                 <h3 className="font-semibold text-[#e8e8f0] mb-3">{title}</h3>
-                <p className="text-sm text-[#444455] leading-relaxed">{body}</p>
+                <p className="text-sm text-[#888899] leading-relaxed">{body}</p>
               </div>
             ))}
           </div>
@@ -235,15 +235,15 @@ export default async function LandingPage() {
       {/* The setup */}
       <section className="border-t border-[#111116] bg-[#030305]">
         <div className="max-w-3xl mx-auto px-6 py-24 text-center">
-          <div className="text-[10px] font-mono text-[#333344] tracking-widest mb-10 uppercase">The setup</div>
+          <div className="text-[10px] font-mono text-[#666677] tracking-widest mb-10 uppercase">The setup</div>
           <h2 className="text-3xl font-bold mb-12">
             Their fund. Your fund.
           </h2>
 
           <div className="grid sm:grid-cols-2 gap-6 text-left">
             <div className="bg-[#080808] border border-[#111116] rounded-xl p-6">
-              <p className="text-[10px] font-mono text-[#333344] tracking-widest mb-4 uppercase">Quant fund</p>
-              <div className="space-y-2 text-sm text-[#444455]">
+              <p className="text-[10px] font-mono text-[#666677] tracking-widest mb-4 uppercase">Quant fund</p>
+              <div className="space-y-2 text-sm text-[#888899]">
                 <p>Floor of PhDs</p>
                 <p>$800M AUM</p>
                 <p>Bloomberg terminals</p>
@@ -255,10 +255,10 @@ export default async function LandingPage() {
             <div className="bg-[#080808] border border-green-500/10 rounded-xl p-6">
               <p className="text-[10px] font-mono text-green-500/40 tracking-widest mb-4 uppercase">SharpBet</p>
               <div className="space-y-2 text-sm">
-                <p className="text-[#e8e8f0]">Claude <span className="text-[#333344]">$20/month</span></p>
-                <p className="text-[#e8e8f0]">poly_data repo <span className="text-[#333344]">free</span></p>
-                <p className="text-[#e8e8f0]">Polymarket API <span className="text-[#333344]">free</span></p>
-                <p className="text-[#e8e8f0]">VPS <span className="text-[#333344]">$5/month</span></p>
+                <p className="text-[#e8e8f0]">Claude <span className="text-[#777788]">$20/month</span></p>
+                <p className="text-[#e8e8f0]">poly_data repo <span className="text-[#777788]">free</span></p>
+                <p className="text-[#e8e8f0]">Polymarket API <span className="text-[#777788]">free</span></p>
+                <p className="text-[#e8e8f0]">VPS <span className="text-[#777788]">$5/month</span></p>
                 <p className="text-green-400 font-mono font-bold mt-4">$29/month total</p>
               </div>
             </div>
@@ -272,8 +272,8 @@ export default async function LandingPage() {
           <h2 className="text-4xl font-bold mb-4">
             Start on paper.<br />Go live when you are ready.
           </h2>
-          <p className="text-[#444455] mb-3 text-sm">The bot mirrors the top 200 wallets on Polymarket. Automatically.</p>
-          <p className="text-[#2a2a35] text-xs mb-10 font-mono">$29/month · no team · no office · no Bloomberg</p>
+          <p className="text-[#9999aa] mb-3 text-sm">The bot mirrors the top 200 wallets on Polymarket. Automatically.</p>
+          <p className="text-[#666677] text-xs mb-10 font-mono">$29/month · no team · no office · no Bloomberg</p>
 
           <Link
             href="/auth/signup"
@@ -286,7 +286,7 @@ export default async function LandingPage() {
 
       {/* Footer */}
       <footer className="border-t border-[#111116] py-8">
-        <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#2a2a35]">
+        <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#555566]">
           <p>2025 SharpBet</p>
           <p className="text-center">For informational purposes only. Not financial advice.</p>
           <div className="flex gap-4">
