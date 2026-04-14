@@ -223,7 +223,7 @@ export default async function LandingPage() {
               },
             ].map(({ num, title, body }) => (
               <div key={num} className="border-t border-[#111116] pt-6">
-                <div className="font-mono text-4xl text-[#1a1a22] font-bold mb-6">{num}</div>
+                <div className="font-mono text-4xl text-[#444455] font-bold mb-6">{num}</div>
                 <h3 className="font-semibold text-[#e8e8f0] mb-3">{title}</h3>
                 <p className="text-sm text-[#888899] leading-relaxed">{body}</p>
               </div>
