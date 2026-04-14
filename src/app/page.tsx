@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import Nav from '@/components/ui/Nav'
 import ArbTicker from '@/components/landing/ArbTicker'
+import TerminalPreview from '@/components/landing/TerminalPreview'
 
 export const dynamic = 'force-dynamic'
 
@@ -84,6 +85,14 @@ export default async function LandingPage() {
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
           <div className="w-px h-12 bg-gradient-to-b from-transparent to-[#1a1a22]" />
+        </div>
+      </section>
+
+      {/* Terminal preview */}
+      <section className="border-t border-[#111116] bg-[#030305] py-16 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-[10px] font-mono text-[#333344] tracking-widest mb-6 uppercase text-center">Live right now</div>
+          <TerminalPreview />
         </div>
       </section>
 
