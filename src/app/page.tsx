@@ -41,16 +41,15 @@ export default async function LandingPage() {
           </div>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.08] mb-6">
-            A quant fund told us<br />
-            <span className="text-green-400">their secret model.</span>
+            We analyzed 86 million trades.<br />
+            <span className="text-green-400">The bot does the rest.</span>
           </h1>
 
           <p className="text-[#444455] text-base leading-relaxed mb-4 max-w-md mx-auto">
-            We rebuilt it. We pointed it at 86 million Polymarket trades. We automated it.
+            We scored every wallet on Polymarket. Four factors. The top 200 get watched 24/7. Every trade mirrored automatically.
           </p>
           <p className="text-[#333344] text-sm mb-12 max-w-sm mx-auto">
-            Their setup: $800M AUM. Floor of PhDs. Bloomberg terminals.
-            Ours: $25/month. No team. No office.
+            No Bloomberg terminal. No team. No manual work.
           </p>
 
           <div className="flex items-center justify-center gap-4 flex-wrap mb-14">
@@ -98,33 +97,6 @@ export default async function LandingPage() {
 
       {/* Ticker */}
       <ArbTicker />
-
-      {/* The origin */}
-      <section className="border-t border-[#111116] bg-[#030305]">
-        <div className="max-w-3xl mx-auto px-6 py-24">
-          <div className="text-[10px] font-mono text-[#333344] tracking-widest mb-10 uppercase">The origin</div>
-
-          <div className="space-y-5 text-[#555566] leading-relaxed text-sm">
-            <p>A Citadel intern mentioned something at a party he probably should not have.</p>
-            <p className="text-[#777788]">
-              He said their fund scores every Polymarket contract on four factors. When all four align, they enter. When any breaks, they exit. That is it.
-            </p>
-            <p>The four factors:</p>
-            <div className="border-l border-green-500/20 pl-5 space-y-2 my-6">
-              <p className="text-[#e8e8f0] font-mono text-sm">cross-market divergence</p>
-              <p className="text-[#e8e8f0] font-mono text-sm">disposition coefficient</p>
-              <p className="text-[#e8e8f0] font-mono text-sm">capital velocity</p>
-              <p className="text-[#e8e8f0] font-mono text-sm">pair network correlation</p>
-            </div>
-            <p>We went home. Opened Claude. Said: build a terminal that runs all four on prediction markets.</p>
-            <p>Claude asked one question: where is the data?</p>
-            <p className="text-[#777788]">
-              We pointed it at one repo. 86 million trades. Every wallet. Every entry. Every outcome.
-            </p>
-            <p className="text-[#444455] text-xs mt-8 font-mono">He texted later. Delete everything I told you. Too late.</p>
-          </div>
-        </div>
-      </section>
 
       {/* The insight */}
       <section className="border-t border-[#111116]">
@@ -298,9 +270,9 @@ export default async function LandingPage() {
       <section className="border-t border-[#111116]">
         <div className="max-w-2xl mx-auto px-6 py-24 text-center">
           <h2 className="text-4xl font-bold mb-4">
-            Too late to delete it.
+            Start on paper.<br />Go live when you are ready.
           </h2>
-          <p className="text-[#444455] mb-3 text-sm">Start on paper. See the returns. Go live when you are ready.</p>
+          <p className="text-[#444455] mb-3 text-sm">The bot mirrors the top 200 wallets on Polymarket. Automatically.</p>
           <p className="text-[#2a2a35] text-xs mb-10 font-mono">$25/month · no team · no office · no Bloomberg</p>
 
           <Link
