@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 
 export const metadata = {
   title: 'Pricing | SharpBet',
-  description: 'Free access to whale signals on Polymarket. Upgrade to SharpBet Pro for real-time feeds, wallet profiles, category filters, and instant Discord alerts.',
+  description: 'Free access to whale signals on Polymarket. Upgrade to SharpBet Pro for $29/month and get the automated paper trading bot that mirrors top-scored wallets automatically.',
 }
 
 export const dynamic = 'force-dynamic'
@@ -312,9 +312,9 @@ export default async function PricingPage() {
             For informational purposes only. Not financial advice. Prediction market prices are not guaranteed to reflect future outcomes.
           </p>
           <div className="flex gap-4">
-            <Link href="/tracker" className="hover:text-[#6b6b80]">Journal</Link>
-            <Link href="/demo" className="hover:text-[#6b6b80]">Demo</Link>
-            <Link href="/dashboard" className="hover:text-[#6b6b80]">Dashboard</Link>
+            <Link href="/leaderboard" className="hover:text-[#6b6b80]">Leaderboard</Link>
+            <Link href="/movers" className="hover:text-[#6b6b80]">Movers</Link>
+            <Link href="/demo" className="hover:text-[#6b6b80]">Terminal</Link>
           </div>
         </div>
       </footer>

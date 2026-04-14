@@ -72,7 +72,7 @@ export default async function LandingPage() {
               { val: '86M', label: 'Trades analyzed' },
               { val: '70%', label: 'Win rate', green: true },
               { val: '200', label: 'Wallets watched' },
-              { val: '$25/mo', label: 'Total cost' },
+              { val: '$29/mo', label: 'Total cost' },
             ].map(({ val, label, green }) => (
               <div key={label} className="text-center">
                 <p className={`text-xl font-bold font-mono ${green ? 'text-green-400' : 'text-white'}`}>{val}</p>
@@ -259,7 +259,7 @@ export default async function LandingPage() {
                 <p className="text-[#e8e8f0]">poly_data repo <span className="text-[#333344]">free</span></p>
                 <p className="text-[#e8e8f0]">Polymarket API <span className="text-[#333344]">free</span></p>
                 <p className="text-[#e8e8f0]">VPS <span className="text-[#333344]">$5/month</span></p>
-                <p className="text-green-400 font-mono font-bold mt-4">$25/month total</p>
+                <p className="text-green-400 font-mono font-bold mt-4">$29/month total</p>
               </div>
             </div>
           </div>
@@ -273,7 +273,7 @@ export default async function LandingPage() {
             Start on paper.<br />Go live when you are ready.
           </h2>
           <p className="text-[#444455] mb-3 text-sm">The bot mirrors the top 200 wallets on Polymarket. Automatically.</p>
-          <p className="text-[#2a2a35] text-xs mb-10 font-mono">$25/month · no team · no office · no Bloomberg</p>
+          <p className="text-[#2a2a35] text-xs mb-10 font-mono">$29/month · no team · no office · no Bloomberg</p>
 
           <Link
             href="/auth/signup"
