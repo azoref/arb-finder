@@ -190,7 +190,7 @@ export default async function PricingPage() {
           </div>
 
           <div className="grid sm:grid-cols-3 gap-5">
-            [
+            {[
               {
                 tag: 'STEP 1 · PAPER',
                 title: 'Bot runs on paper first',
@@ -206,7 +206,7 @@ export default async function PricingPage() {
                 title: 'Go live when ready',
                 body: 'Once you have seen enough, real money trading unlocks. Same bot. Same wallets. Same logic. You set your position size and risk limits.',
               },
-            .map(({ tag, title, body }) => (
+            ].map(({ tag, title, body }) => (
               <div key={title} className="bg-[#0d0d10] border border-[#2a2a32] rounded-xl p-6 hover:border-green-500/20 transition-colors">
                 <div className="text-[10px] font-mono text-green-500/50 tracking-widest mb-2">{tag}</div>
                 <h3 className="font-semibold text-[#e8e8f0] mb-2">{title}</h3>
