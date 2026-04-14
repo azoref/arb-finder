@@ -258,7 +258,7 @@ export default async function LandingPage() {
                 <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> Automated bot, runs 24/7</p>
                 <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> 86M trades analyzed</p>
                 <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> 200 sharp wallets tracked live</p>
-                <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> Paper trading from day one</p>
+                <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> Starts on paper. Moves to real money.</p>
                 <p className="text-[#e8e8f0] flex items-center gap-2"><span className="text-green-500/60">✓</span> No setup. No manual work.</p>
               </div>
               <p className="text-green-400 font-mono font-bold mt-5">$29/month</p>
@@ -271,10 +271,10 @@ export default async function LandingPage() {
       <section className="border-t border-[#111116]">
         <div className="max-w-2xl mx-auto px-6 py-24 text-center">
           <h2 className="text-4xl font-bold mb-4">
-            Start on paper.<br />Go live when you are ready.
+            Start on paper.<br />Graduate to real money.
           </h2>
-          <p className="text-[#9999aa] mb-3 text-sm">The bot mirrors the top 200 wallets on Polymarket. Automatically.</p>
-          <p className="text-[#666677] text-xs mb-10 font-mono">$29/month · no team · no office · no Bloomberg</p>
+          <p className="text-[#9999aa] mb-3 text-sm">The bot mirrors the top 200 wallets automatically. Paper first so you can see the returns before a dollar is at risk. Real trading unlocks once the track record is there.</p>
+          <p className="text-[#666677] text-xs mb-10 font-mono">$29/month · paper trading now · real money coming</p>
 
           <Link
             href="/auth/signup"
