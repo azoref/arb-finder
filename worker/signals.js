@@ -76,19 +76,31 @@ async function pollSignals(supabase) {
     }
 
     // Map to DB schema
-    const rawRecords = whales.map(t => ({
-      tx_hash:    t.transactionHash,
-      wallet:     t.proxyWallet || '',
-      pseudonym:  t.pseudonym || t.name || `${(t.proxyWallet || '').slice(0,6)}...${(t.proxyWallet || '').slice(-4)}`,
-      side:       (t.side || 'BUY').toUpperCase() === 'SELL' ? 'SELL' : 'BUY',
-      outcome:    t.outcome || '',
-      price:      t.price || 0,
-      usd_size:   Math.round((t.size || 0) * (t.price || 0)),
-      title:      t.title || '',
-      slug:       t.slug || '',
-      event_slug: t.eventSlug || t.slug || '',
-      traded_at:  new Date((t.timestamp || Date.now() / 1000) * 1000).toISOString(),
-    })).filter(r => r.tx_hash) // skip records without a tx hash
+    const rawRecords = whales.map(t => {
+      // endDate can come as ISO string or unix seconds depending on API version
+      let market_closes_at = null
+      const raw = t.endDate || t.end_date || t.endDateIso || null
+      if (raw) {
+        const d = isNaN(Number(raw))
+          ? new Date(raw)
+          : new Date(Number(raw) * 1000)
+        if (!isNaN(d.getTime())) market_closes_at = d.toISOString()
+      }
+      return {
+        tx_hash:          t.transactionHash,
+        wallet:           t.proxyWallet || '',
+        pseudonym:        t.pseudonym || t.name || `${(t.proxyWallet || '').slice(0,6)}...${(t.proxyWallet || '').slice(-4)}`,
+        side:             (t.side || 'BUY').toUpperCase() === 'SELL' ? 'SELL' : 'BUY',
+        outcome:          t.outcome || '',
+        price:            t.price || 0,
+        usd_size:         Math.round((t.size || 0) * (t.price || 0)),
+        title:            t.title || '',
+        slug:             t.slug || '',
+        event_slug:       t.eventSlug || t.slug || '',
+        traded_at:        new Date((t.timestamp || Date.now() / 1000) * 1000).toISOString(),
+        market_closes_at,
+      }
+    }).filter(r => r.tx_hash) // skip records without a tx hash
 
     if (rawRecords.length === 0) return
 

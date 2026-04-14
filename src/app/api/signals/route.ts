@@ -79,6 +79,7 @@ export async function GET() {
         .select('*')
         .gte('detected_at', since)
         .gte('usd_size', 10000)
+        .or(`market_closes_at.is.null,market_closes_at.gt.${new Date().toISOString()}`)
         .order('usd_size', { ascending: false })
         .limit(30),
       supabase
